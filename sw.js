@@ -1,5 +1,5 @@
 // File Badlo service worker — bump C on every release
-const C='fb-v5';
+const C='fb-v6';
 const FILES=['./','index.html','manifest.json','icon.svg','jspdf.umd.min.js','pdf.min.js','pdf.worker.min.js','docx.umd.js','mammoth.browser.min.js','xlsx.full.min.js','quill.min.js','quill.snow.css','pdf-lib.min.js','marked.min.js','html2canvas.min.js','tesseract.min.js'];
 // Large OCR files (worker, wasm core, traineddata) are cached on first use
 const LAZY=['tesseract-worker.min.js','tesseract-core-simd-lstm.wasm.js','tesseract-core-lstm.wasm.js','eng.traineddata.gz','hin.traineddata.gz'];

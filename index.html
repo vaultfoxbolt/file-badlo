@@ -1,114 +1,112 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>File Badlo</title><meta name="theme-color" content="#4f46e5">
+<title>File Badlo</title><meta name="theme-color" content="#1f3a4a">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="quill.snow.css">
 <style>
-:root{--p:#4f46e5;--pl:#eef2ff;--bg:#f5f6fb;--tx:#111827;--mu:#6b7280}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:system-ui,"Noto Sans Devanagari",sans-serif;background:var(--bg);color:var(--tx);padding-bottom:84px}
-header{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;padding:16px 18px 18px;border-radius:0 0 22px 22px;box-shadow:0 4px 16px #4f46e533}
-header h1{margin:0;font-size:22px;display:flex;align-items:center;gap:8px}header p{margin:4px 0 0;font-size:13px;opacity:.9}
-#ver{font-size:12px;background:#fff3;padding:2px 8px;border-radius:9px}
-#back{display:none;border:0;background:#fff3;color:#fff;border-radius:50%;width:34px;height:34px;font-size:18px}
-main{padding:14px;max-width:800px;margin:auto}section{display:none}section.on{display:block;animation:fi .28s ease}
-@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-h2{font-size:17px;margin:6px 2px 10px}h2 small{font-weight:400;color:var(--mu);font-size:13px}
-.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px #0000000f,0 4px 14px #0000000a}
-.btn{display:inline-block;min-height:48px;padding:12px 16px;margin:4px;border:0;border-radius:12px;background:var(--p);color:#fff;font-size:16px;font-weight:600;transition:transform .12s}
-.btn:active{transform:scale(.96)}.btn.alt{background:#e0e7ff;color:#3730a3}.btn.red{background:#fee2e2;color:#b91c1c}
-.btn:disabled{opacity:.5}.grid{display:flex;flex-wrap:wrap}
-input[type=file]{width:100%;padding:16px;border:2px dashed #a5b4fc;border-radius:12px;background:var(--pl);font-size:15px}
-input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;border:1px solid #ccc;border-radius:10px;width:100%;margin:4px 0}
-#status{position:fixed;bottom:84px;left:12px;right:12px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;font-size:14px;display:none;z-index:60;animation:fi .2s}
+:root{--nv:#1f3a4a;--bl:#1e88e5;--p:#1e88e5;--pl:#e3f2fd;--bg:#f2f4f6;--tx:#2b2b2b;--mu:#757575}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:Roboto,system-ui,"Noto Sans Devanagari",sans-serif;background:var(--bg);color:var(--tx);padding-bottom:96px}
+.ab{position:sticky;top:0;z-index:40;background:var(--nv);color:#fff;height:58px;display:flex;align-items:center;padding:0 4px;box-shadow:0 2px 6px #0003}
+.ab button{border:0;background:none;color:#fff;width:46px;height:46px;font-size:22px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center}.ab button:active{background:#fff2}
+.ab h1{flex:1;margin:0 4px;font-size:20px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ver{font-size:11px;background:#fff3;padding:2px 7px;border-radius:9px;vertical-align:middle;margin-left:4px}
+#q{flex:1;display:none;height:38px;border:0;border-radius:8px;padding:0 10px;font-size:16px;margin:0 4px}.ab.srch h1{display:none}.ab.srch #q{display:block}
+.pdfi{font-size:10px!important;font-weight:800;letter-spacing:-.3px}.pdfi b{border:2px solid #fff;border-radius:3px;padding:3px 2px;display:block}
+main{padding:10px 12px;max-width:800px;margin:auto}section{display:none}section.on{display:block;animation:fi .25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{font-size:15px;margin:6px 4px 10px;color:var(--mu);font-weight:500}h2 small{font-weight:400;font-size:12px}
+.card{background:#fff;border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px #0000001a,0 2px 8px #0000000d}
+.btn{display:inline-block;min-height:46px;padding:11px 16px;margin:4px;border:0;border-radius:8px;background:var(--nv);color:#fff;font-size:16px;font-weight:600;transition:transform .12s}
+.btn:active{transform:scale(.96)}.btn.alt{background:#e3f2fd;color:#0d47a1}.btn.red{background:#fee2e2;color:#b91c1c}.btn:disabled{opacity:.5}.grid{display:flex;flex-wrap:wrap}
+input[type=file]{width:100%;padding:16px;border:2px dashed #90caf9;border-radius:10px;background:var(--pl);font-size:15px}
+input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;border:1px solid #ccc;border-radius:8px;width:100%;margin:4px 0}
+#status{position:fixed;bottom:20px;left:12px;right:12px;background:#323232;color:#fff;padding:12px 14px;border-radius:8px;font-size:14px;display:none;z-index:300;animation:fi .2s}
 #editor{height:55vh;background:#fff;font-size:16px}.pages{display:flex;flex-wrap:wrap;gap:8px}
 .pg{background:#fff;border:1px solid #ddd;border-radius:10px;padding:4px;text-align:center;width:120px;position:relative;user-select:none;-webkit-user-select:none;transition:box-shadow .2s,opacity .25s;touch-action:manipulation}.pg canvas{width:100%;pointer-events:none}
-.pg.arm{outline:3px solid #a5b4fc}.pg.lift{z-index:20;box-shadow:0 12px 28px #0005;transition:box-shadow .2s;cursor:grabbing}.pg.gone{opacity:0;transform:scale(.6)!important;transition:opacity .25s,transform .25s}
-.pg{width:150px}.pg .hd{display:block;width:100%;min-height:52px;border-radius:8px;background:var(--p);color:#fff;font-size:15px;font-weight:700;line-height:1.1;touch-action:none;cursor:grab;margin-bottom:3px}
-.pg button{min-width:34px;min-height:36px;margin:1px;border:0;border-radius:6px;background:#e0e7ff;font-size:16px}
+.pg.arm{outline:3px solid #90caf9}.pg.lift{z-index:20;box-shadow:0 12px 28px #0005;transition:box-shadow .2s;cursor:grabbing}.pg.gone{opacity:0;transform:scale(.6)!important;transition:opacity .25s,transform .25s}
+.pg{width:150px}.pg .hd{display:block;width:100%;min-height:52px;border-radius:8px;background:var(--nv);color:#fff;font-size:15px;font-weight:700;line-height:1.1;touch-action:none;cursor:grab;margin-bottom:3px}
+.pg button{min-width:34px;min-height:36px;margin:1px;border:0;border-radius:6px;background:#e3f2fd;font-size:16px}
 .note{font-size:13px;color:#555}.h{display:block;font-weight:400;font-size:12px;color:var(--mu)}
-/* tiles */
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.tile{background:#fff;border:0;border-radius:16px;padding:14px 6px;text-align:center;box-shadow:0 1px 3px #0000000f,0 4px 14px #0000000a;font-size:13px;font-weight:600;color:var(--tx);transition:transform .15s}
-.tile:active{transform:scale(.94)}.tile i{display:flex;align-items:center;justify-content:center;width:48px;height:48px;margin:0 auto 8px;border-radius:14px;font-size:24px;font-style:normal}
-.tile small{display:block;font-weight:400;color:var(--mu);font-size:11px;margin-top:2px}
-.hero{display:flex;align-items:center;gap:14px;background:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 4px 18px #4f46e51f;border:0;width:100%;text-align:left;font-size:15px;color:var(--tx)}
-.hero i{font-style:normal;font-size:30px;width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center}
-.recent{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.doc{background:#fff;border-radius:12px;padding:6px;box-shadow:0 1px 4px #0001;font-size:11px;text-align:center;overflow:hidden}
-.doc img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px;background:#eee}.doc b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.doc .ac button{border:0;background:#e0e7ff;border-radius:6px;margin:2px;min-width:30px;min-height:30px}
-/* bottom nav */
-nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:#fff;display:flex;box-shadow:0 -2px 12px #0000001a;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
-nav button{flex:1;border:0;background:none;font-size:12px;font-weight:600;color:var(--mu);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
-nav button span{font-size:22px;transition:transform .2s}nav button.on{color:var(--p)}nav button.on span{transform:translateY(-2px) scale(1.1)}
-nav small{font-weight:400;font-size:10px}
-nav .fab{flex:none;width:66px;height:66px;margin:-26px 6px 0;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;box-shadow:0 6px 18px #4f46e577;font-size:11px}
-nav .fab span{font-size:26px}nav .fab.on{color:#fff}
-/* scanner */
-.sp{width:140px;background:#fff;border-radius:12px;padding:5px;box-shadow:0 1px 4px #0002;text-align:center;font-size:12px;animation:fi .25s}
-.sp img{width:100%;border-radius:8px;display:block;background:#eee}.sp button{border:0;background:#e0e7ff;border-radius:6px;margin:1px;min-width:30px;min-height:32px;font-size:14px}
-.sp select{font-size:12px;padding:4px;margin:3px 0}
-.ov{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column}.ov.on{display:flex}
-.ov video,.ov .stage{flex:1;min-height:0;width:100%;object-fit:contain}.ov .bar{display:flex;justify-content:space-around;align-items:center;padding:14px;background:#111}
-.shut{width:72px;height:72px;border-radius:50%;border:5px solid #fff;background:#fff4}.ov .bar .btn{margin:0}
-.stage{position:relative;display:flex;align-items:center;justify-content:center;touch-action:none}.stage canvas{max-width:100%;max-height:100%}
-.hdl{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:3px solid #fff;background:#4f46e5aa;touch-action:none;box-shadow:0 0 0 2px #4f46e5}
-#scount{color:#fff;font-size:14px}
-.ctop{position:absolute;top:0;left:0;right:0;display:flex;gap:8px;padding:12px;justify-content:flex-end;z-index:2}
-.ctop button{border:0;border-radius:22px;padding:9px 14px;background:#0008;color:#fff;font-size:14px;font-weight:600}.ctop button.on{background:#facc15;color:#111}
-.ctop button:disabled{opacity:.45}#camNote{position:absolute;top:56px;right:12px;color:#ddd;font-size:11px;background:#0007;padding:4px 8px;border-radius:8px;z-index:2;display:none}
-#steady{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);background:#000a;color:#fff;padding:12px 18px;border-radius:14px;font-size:16px;font-weight:700;display:none;z-index:2;text-align:center}
-#steady.ok{background:#16a34acc}.vwrap{position:relative;flex:1;min-height:0;display:flex}
-#fring{position:absolute;width:70px;height:70px;margin:-35px 0 0 -35px;border:2px solid #facc15;border-radius:50%;display:none;z-index:2;pointer-events:none;animation:fi .3s}
-.sp{cursor:pointer;border:3px solid transparent}.sp.sel{border-color:var(--p)}
-.acts{list-style:none;margin:10px 0 0;padding:0;border-radius:14px;overflow:hidden;border:1px solid #eef}
-.acts li{border-bottom:1px solid #eef}.acts li:last-child{border:0}
-.acts button,.acts label{display:flex;align-items:center;gap:14px;width:100%;min-height:56px;padding:10px 14px;border:0;background:#fff;font-size:16px;font-weight:600;color:var(--tx);text-align:left}
-.acts button:active{background:var(--pl)}.acts i{font-style:normal;font-size:28px;width:44px;height:44px;border-radius:12px;background:var(--pl);display:flex;align-items:center;justify-content:center;flex:none}
-.acts small{display:block;font-weight:400;color:var(--mu);font-size:12px}.acts .dn i{background:#fee2e2}.acts .ex i{background:#dcfce7}
-.acts select{width:auto;margin-left:auto;font-size:15px}.acts .hdr{background:#f8fafc;font-size:12px;color:var(--mu);padding:8px 14px;font-weight:700;letter-spacing:.04em}
+/* list cards (home docs + detail pages) */
+.lc{display:flex;align-items:center;gap:14px;background:#fff;border-radius:10px;padding:12px 6px 12px 14px;margin-bottom:10px;box-shadow:0 1px 3px #0000001f,0 2px 8px #0000000d;user-select:none;-webkit-user-select:none;touch-action:pan-y;position:relative;animation:fi .25s}
+.lc img{width:84px;height:66px;object-fit:cover;border-radius:3px;background:#eee;box-shadow:0 1px 4px #0003;flex:none;pointer-events:none}
+.lc.pr img{width:84px;height:94px}
+.lc .tx{flex:1;min-width:0;color:#555}.lc .nm{font-size:18px;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lc .tm{font-size:15px;color:#666;margin:3px 0}
+.lc .bd{display:flex;gap:6px;align-items:center;font-size:13px;color:#666}.bx{border:1.5px solid #888;border-radius:3px;padding:0 4px;font-size:12px;line-height:17px}.dci{color:var(--bl);font-size:17px}
+.lc .mo{border:0;background:none;font-size:22px;color:#555;width:44px;height:44px;border-radius:50%;letter-spacing:-2px;flex:none}.lc .mo:active{background:#0001}
+.lc.arm{outline:2px solid #90caf9}.lc.lift{z-index:30;box-shadow:0 14px 30px #0004;transform:scale(1.03)}.lc .big{font-size:22px;color:#444}
+.empty{text-align:center;color:var(--mu);padding:50px 20px;font-size:15px}.empty div{font-size:56px;opacity:.5}
+/* FAB pill */
+.fab{position:fixed;right:16px;bottom:22px;z-index:45;display:flex;background:var(--bl);border-radius:30px;box-shadow:0 4px 14px #1e88e566,0 2px 4px #0003;overflow:hidden}
+.fab button{border:0;background:none;color:#fff;width:68px;height:58px;font-size:24px;display:flex;align-items:center;justify-content:center}.fab button:active{background:#fff3}
+.fab i{width:1px;background:#fff8;margin:14px 0}
+/* drawer */
+#drawer{position:fixed;inset:0;z-index:200;display:none}#drawer.on{display:block}#drawer .bg{position:absolute;inset:0;background:#0006;animation:fo .2s}
+#drawer .pn{position:absolute;left:0;top:0;bottom:0;width:80%;max-width:310px;background:#fff;overflow:auto;animation:sl .22s ease}
+@keyframes sl{from{transform:translateX(-100%)}to{transform:none}}@keyframes fo{from{opacity:0}}
+#drawer .top{background:var(--nv);color:#fff;padding:26px 18px 18px}#drawer .top b{font-size:20px}
+/* sheet / list rows (medium icons) */
+.sheet{position:fixed;inset:0;z-index:250;display:none;background:#0006;align-items:flex-end;justify-content:center}.sheet.on{display:flex;animation:fo .15s}
+.sheet .in{background:#fff;width:100%;max-width:600px;border-radius:16px 16px 0 0;max-height:82vh;overflow:auto;animation:up .22s ease;padding-bottom:8px}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}.sheet .tt{padding:14px 18px 6px;font-weight:600;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acts{list-style:none;margin:0;padding:0}
+.acts button{display:flex;align-items:center;gap:16px;width:100%;min-height:54px;padding:8px 18px;border:0;background:#fff;font-size:16px;font-weight:500;color:var(--tx);text-align:left}
+.acts button:active{background:var(--pl)}.acts i{font-style:normal;font-size:26px;width:42px;height:42px;border-radius:12px;background:var(--pl);display:flex;align-items:center;justify-content:center;flex:none}
+.acts small{display:block;font-weight:400;color:var(--mu);font-size:12px}.acts .dn i{background:#fee2e2}.acts .ex i{background:#dcfce7}.acts .on i{outline:2px solid var(--bl)}
+/* camera */
+.ov{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column;color:#fff}.ov.on{display:flex}
+.ctop{display:flex;justify-content:space-around;align-items:center;height:60px;flex:none}
+.ctop button{border:0;background:none;color:#fff;font-size:22px;width:48px;height:48px;border-radius:50%;position:relative}.ctop button.on{color:#ffd54f}.ctop button:disabled{opacity:.35}
+.ctop button.off::after{content:'';position:absolute;left:12px;right:12px;top:23px;height:2px;background:#fff;transform:rotate(-45deg)}
+.vwrap{position:relative;flex:1;min-height:0;display:flex;overflow:hidden}.vwrap video{flex:1;width:100%;min-height:0;object-fit:cover}
+#cgrid{position:absolute;inset:0;pointer-events:none;display:none;background:linear-gradient(90deg,transparent 33.1%,#fff6 33.3%,transparent 33.5%,transparent 66.5%,#fff6 66.7%,transparent 66.9%),linear-gradient(transparent 33.1%,#fff6 33.3%,transparent 33.5%,transparent 66.5%,#fff6 66.7%,transparent 66.9%)}#cgrid.on{display:block}
+#guide{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:2px dashed #fff;border-radius:8px;box-shadow:0 0 0 2000px #0005;pointer-events:none;display:none}
+#camNote{position:absolute;top:8px;left:8px;right:8px;text-align:center;color:#eee;font-size:12px;background:#0008;padding:5px 8px;border-radius:8px;display:none}
+#hint{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:14px;text-shadow:0 1px 3px #000}
+#steady{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);background:#000a;color:#fff;padding:12px 18px;border-radius:14px;font-size:16px;font-weight:700;display:none;text-align:center}#steady.ok{background:#1e88e5cc}
+#fring{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border:2px solid #4fc3f7;border-radius:50%;display:none;pointer-events:none;animation:fi .3s}
+.modes{display:flex;overflow-x:auto;gap:4px;padding:0 30%;scrollbar-width:none;flex:none;border-top:3px solid transparent}.modes::-webkit-scrollbar{display:none}
+.modes button{border:0;background:none;color:#fff;font-size:16px;padding:12px 14px;white-space:nowrap;border-top:3px solid transparent}.modes button.on{color:#42a5f5;border-top-color:#1e88e5;font-size:18px}
+.cbot{display:flex;align-items:center;justify-content:space-around;height:120px;flex:none}
+.cbot .sm{border:0;background:none;color:#fff;font-size:12px;width:70px;display:flex;flex-direction:column;align-items:center;gap:3px}.cbot .sm span{font-size:24px}.cbot .sm.on{color:#42a5f5}
+.shut{width:82px;height:82px;border-radius:50%;border:4px solid #0d47a1;background:var(--bl);color:#fff;font-size:30px;box-shadow:0 0 0 3px #1e88e555}.shut:active{transform:scale(.93)}
+#scount:empty{display:none}#scount{position:absolute;top:-6px;right:-6px;background:#e53935;border-radius:10px;font-size:12px;padding:1px 6px}
+/* dialogs */
+.dlg{position:fixed;inset:0;z-index:150;background:#0007;display:none;align-items:center;justify-content:center;padding:18px}.dlg.on{display:flex;animation:fo .15s}
+.dlg .in{background:#fff;color:#333;width:100%;max-width:420px;max-height:86vh;overflow:auto;animation:fi .2s}
+.dlg .hd2{background:var(--nv);color:#fff;padding:16px 18px;font-size:20px;display:flex;justify-content:space-between;align-items:center}.dlg .hd2 button{border:0;background:none;color:#fff;font-size:22px}
+.idopt{padding:16px 22px;border-bottom:2px solid #1e88e5}.idopt:last-child{border:0}.idopt h3{margin:0 0 8px;font-weight:400;color:#666;font-size:20px}
+.idopt .r{display:flex;gap:12px;align-items:flex-start}.idopt .ic{width:70px;height:90px;border:1px solid #ddd;border-radius:4px;box-shadow:0 1px 3px #0002;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:28px;flex:none}
+.idopt p{margin:0;color:#666;font-size:15px;flex:1}.dbtn{background:var(--nv);color:#fff;border:0;border-radius:4px;padding:11px 24px;font-size:16px;font-weight:600;letter-spacing:.04em;float:right;margin-top:-10px}
+.psz{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px}.psz button{border:1.5px solid #ccc;border-radius:4px;background:#fff;padding:12px 8px;display:flex;align-items:center;gap:6px;text-align:center;color:#555;box-shadow:0 1px 3px #0002}
+.psz button.on{border:3px solid var(--bl)}.psz b{font-weight:400;font-size:20px;display:block}.psz span{flex:1;font-size:12px}.psz i{font-style:normal;font-size:30px}
+.dfoot{display:flex;justify-content:space-between;padding:10px 12px;border-top:1px solid #eee}
+/* crop */
+.stage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;touch-action:none}.stage canvas{max-width:100%;max-height:100%}
+.hdl{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:3px solid #fff;background:#1e88e5aa;touch-action:none;box-shadow:0 0 0 2px #1e88e5}
+.bar{display:flex;justify-content:space-around;align-items:center;padding:14px;background:#111}.bar .btn{margin:0}
 #otext{min-height:180px;font-family:inherit}
+.recent{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.doc{background:#fff;border-radius:10px;padding:6px;box-shadow:0 1px 4px #0001;font-size:11px;text-align:center;overflow:hidden}
+.doc img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;background:#eee}.doc b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc .ac button{border:0;background:#e3f2fd;border-radius:6px;margin:2px;min-width:30px;min-height:30px}
 </style></head><body>
-<header><h1><button id="back" aria-label="back">←</button>📁 File Badlo <small id="ver">v5</small></h1><p>Scan, convert & edit — sab kuch aapke phone par, koi upload nahi</p></header>
+<header class="ab" id="ab"><button id="abL" aria-label="menu">☰</button><h1 id="abT">File Badlo <small id="ver">v6</small></h1><input id="q" type="search" placeholder="Search / खोजें">
+<button id="abS" aria-label="search">🔍</button><button id="abP" class="pdfi" aria-label="export pdf" style="display:none"><b>PDF</b></button><button id="abM" aria-label="more">⋮</button></header>
 <main>
-<section id="home" class="on">
-<button class="hero" data-go="scan"><i>📷</i><div><b>Scan Document</b><span class="h">दस्तावेज़ स्कैन करें → PDF / JPG</span></div></button>
-<h2>Tools <small>/ टूल्स</small></h2>
-<div class="tiles">
-<button class="tile" data-go="scan"><i style="background:#ede9fe">📷</i>Scanner<small>स्कैनर</small></button>
-<button class="tile" data-go="conv"><i style="background:#dbeafe">🔄</i>Convert<small>बदलें</small></button>
-<button class="tile" data-go="pdf"><i style="background:#fee2e2">📑</i>PDF Tools<small>PDF टूल्स</small></button>
-<button class="tile" data-go="ocr"><i style="background:#dcfce7">🔤</i>OCR Text<small>टेक्स्ट निकालें</small></button>
-<button class="tile" data-go="edit"><i style="background:#fef3c7">✍️</i>Editor<small>लिखें/एडिट</small></button>
-<button class="tile" data-go="files"><i style="background:#e0f2fe">🗂️</i>My Files<small>मेरी फ़ाइलें</small></button>
-</div>
-<h2 style="margin-top:18px">Recent scans <small>/ हाल के स्कैन</small></h2><div id="recentH" class="recent"></div>
-</section>
-<section id="tools"><h2>All tools <small>/ सभी टूल्स</small></h2><div class="tiles">
-<button class="tile" data-go="scan"><i style="background:#ede9fe">📷</i>Scan<small>स्कैन</small></button>
-<button class="tile" data-go="conv"><i style="background:#dbeafe">🖼️</i>Image→PDF<small>फोटो→PDF</small></button>
-<button class="tile" data-go="conv"><i style="background:#dbeafe">📄</i>PDF→JPG<small>PDF→फोटो</small></button>
-<button class="tile" data-go="conv"><i style="background:#dbeafe">📝</i>Word↔PDF<small>DOCX/PDF</small></button>
-<button class="tile" data-go="conv"><i style="background:#dbeafe">📊</i>Excel/CSV<small>शीट बदलें</small></button>
-<button class="tile" data-go="pdf"><i style="background:#fee2e2">➕</i>Merge PDF<small>जोड़ें</small></button>
-<button class="tile" data-go="pdf"><i style="background:#fee2e2">↕️</i>Reorder<small>पेज क्रम</small></button>
-<button class="tile" data-go="pdf"><i style="background:#fee2e2">🖊️</i>Add text<small>PDF पर लिखें</small></button>
-<button class="tile" data-go="ocr"><i style="background:#dcfce7">🔤</i>OCR<small>टेक्स्ट निकालें</small></button>
-<button class="tile" data-go="edit"><i style="background:#fef3c7">✍️</i>Editor<small>एडिटर</small></button>
-</div></section>
-<section id="conv"><h2>🔄 Convert <small>/ बदलें</small></h2><div class="card"><b>1. Pick file(s)</b><span class="h">फ़ाइल चुनें (एक या ज़्यादा)</span>
+<section id="home" class="on"><h2 id="dcount">Documents (0) <small>/ दस्तावेज़</small></h2><div id="dlist"></div></section>
+<section id="scan"><div id="plist"></div><div class="note" style="text-align:center;margin:6px">Long-press a page & drag to reorder / पेज को दबाकर रखें और खींचें</div></section>
+<section id="conv"><h2>🔄 Convert / बदलें</h2><div class="card"><b>1. Pick file(s)</b><span class="h">फ़ाइल चुनें (एक या ज़्यादा)</span>
 <input type="file" id="cf" multiple></div>
 <div class="card"><b>2. Convert to</b><span class="h">किस format में बदलना है?</span><div id="copts" class="grid note">Pick a file first. / पहले फ़ाइल चुनें।</div></div>
 <div class="card note"><b>Supported / समर्थित:</b><br>Images (PNG/JPG/WEBP/GIF/BMP) → PNG, JPG, WEBP, PDF<br>PDF → PNG, JPG (per page), TXT<br>TXT / MD / HTML → PDF, DOCX, HTML, TXT<br>DOCX → PDF, HTML, TXT, DOCX(clean)<br>CSV / XLSX / XLS / ODS / JSON → XLSX, CSV, JSON, HTML, PDF<br>Not supported: video, audio, PPT. / वीडियो-ऑडियो नहीं।</div></section>
-
-<section id="edit"><h2>✍️ Editor <small>/ एडिटर</small></h2><div class="card"><b>Open a file</b> <span class="h">.txt .md .html .docx खोलें, या नया लिखें</span>
+<section id="edit"><h2>✍️ Editor / एडिटर</h2><div class="card"><b>Open a file</b> <span class="h">.txt .md .html .docx खोलें, या नया लिखें</span>
 <input type="file" id="ef" accept=".txt,.md,.html,.htm,.docx"></div>
 <div id="editor"></div>
 <div class="card"><b>Save as</b><span class="h">इस format में सेव करें</span>
 <input type="text" id="ename" value="document" placeholder="file name"><div class="grid">
 <button class="btn" data-s="docx">DOCX</button><button class="btn" data-s="pdf">PDF</button><button class="btn alt" data-s="html">HTML</button><button class="btn alt" data-s="txt">TXT</button><button class="btn red" id="eclear">New / नया</button></div></div></section>
-
-<section id="pdf"><h2>📑 PDF Tools <small>/ PDF टूल्स</small></h2>
+<section id="pdf"><h2>📑 PDF Tools / PDF टूल्स</h2>
 <div class="card"><b>Merge PDFs</b><span class="h">कई PDF को एक में जोड़ें (चुनने के क्रम में)</span>
 <input type="file" id="mf" accept="application/pdf" multiple><button class="btn" id="mbtn">Merge / जोड़ें</button></div>
 <div class="card"><b>Reorder / delete pages</b><span class="h">⠿ पकड़कर खींचें (drag) या ◀ ▶ दबाएँ, 🗑 से हटाएँ</span>
@@ -118,34 +116,7 @@ nav .fab span{font-size:26px}nav .fab.on{color:#fff}
 <input type="text" id="atext" placeholder="Text / लिखें"><label class="note">Page no.<input type="number" id="apage" value="1" min="1"></label>
 <label class="note">From left % / बाएँ से %<input type="number" id="ax" value="10"></label><label class="note">From top % / ऊपर से %<input type="number" id="ay" value="10"></label>
 <label class="note">Size<input type="number" id="asize" value="20"></label><label class="note">Color<select id="acol"><option value="#000">Black</option><option value="#d00">Red</option><option value="#00c">Blue</option></select></label>
-<button class="btn" id="abtn">Add & save / जोड़ें</button></div>
-</section>
-
-<section id="scan"><h2>📷 Document Scanner <small>/ दस्तावेज़ स्कैनर</small></h2>
-<div class="card"><div class="grid"><button class="btn" id="camBtn">📷 Camera / कैमरा</button><button class="btn alt" id="galBtn">🖼️ Gallery / गैलरी</button></div>
-<input type="file" id="sf" accept="image/*" multiple style="display:none"><input type="file" id="sfc" accept="image/*" capture="environment" style="display:none">
-<span class="h">Edges auto-detect होते हैं; ✂️ से कोने ठीक करें। Filters, rotate, क्रम बदलें।</span></div>
-<div class="card"><b>Pages <span id="scnt">(0)</span></b><span class="h">पेज पर टैप करके चुनें, फिर नीचे से action चुनें</span>
-<div id="spages" class="pages" style="margin-top:8px"></div>
-<ul class="acts" id="sacts">
-<li class="hdr">SELECTED PAGE / चुना गया पेज <span id="selno"></span></li>
-<li><button data-act="crop"><i>✂️</i><div>Crop &amp; straighten<small>कोने ठीक करें / काटें</small></div></button></li>
-<li><label><i>🎨</i><div>Filter<small>फ़िल्टर</small></div><select id="sfilt"><option value="orig">Original</option><option value="gray">Grayscale</option><option value="bw">B&amp;W</option><option value="magic">Magic Color</option></select></label></li>
-<li><button data-act="rot"><i>⟳</i><div>Rotate<small>घुमाएँ (90°)</small></div></button></li>
-<li><button data-act="up"><i>⬆️</i><div>Move earlier<small>पहले करें</small></div></button></li>
-<li><button data-act="down"><i>⬇️</i><div>Move later<small>बाद में करें</small></div></button></li>
-<li class="dn"><button data-act="del"><i>🗑️</i><div>Delete page<small>पेज हटाएँ</small></div></button></li>
-<li class="hdr">WHOLE DOCUMENT / पूरा दस्तावेज़</li>
-<li><button data-act="add"><i>➕</i><div>Add more pages<small>और पेज स्कैन करें</small></div></button></li>
-<li><label><i>🪄</i><div>Filter for all<small>सब पेज पर</small></div><select id="sall"><option value="">—</option><option value="orig">Original</option><option value="gray">Grayscale</option><option value="bw">B&amp;W</option><option value="magic">Magic Color</option></select></label></li>
-<li><button id="socr"><i>🔤</i><div>Extract text (OCR)<small>टेक्स्ट निकालें</small></div></button></li>
-<li class="ex"><button id="spdf"><i>📄</i><div>Export PDF<small>PDF सेव करें</small></div></button></li>
-<li class="ex"><button id="sjpg"><i>🖼️</i><div>Export JPG<small>फोटो सेव करें</small></div></button></li>
-<li class="dn"><button id="sclr"><i>🧹</i><div>Clear all<small>सब साफ़ करें</small></div></button></li>
-</ul>
-<label class="note">File name / नाम<input type="text" id="sname" value="scan" placeholder="file name"></label></div>
-</section>
-
+<button class="btn" id="abtn">Add & save / जोड़ें</button></div></section>
 <section id="ocr"><h2>🔤 OCR — Text निकालें</h2>
 <div class="card"><b>Pick image or PDF</b><span class="h">फोटो या PDF चुनें — टेक्स्ट फ़ोन पर ही पढ़ा जाता है (offline)</span>
 <input type="file" id="ocf" accept="image/*,application/pdf" multiple>
@@ -153,14 +124,25 @@ nav .fab span{font-size:26px}nav .fab.on{color:#fff}
 <button class="btn" id="obtnr">Extract text / टेक्स्ट निकालें</button></div>
 <div class="card"><b>Text</b><textarea id="otext" placeholder="Text yahan aayega…"></textarea>
 <div class="grid"><button class="btn" id="ocopy">📋 Copy / कॉपी</button><button class="btn alt" id="otxt">⬇ TXT</button></div></div></section>
-
-<section id="files"><h2>🗂️ My Files <small>/ मेरी फ़ाइलें</small></h2><span class="h" style="margin:0 2px 8px">Scanner से बनी फ़ाइलें यहाँ (इसी फ़ोन में) सेव रहती हैं।</span><div id="recentF" class="recent"></div></section>
+<section id="files"><h2>⬇ Exported files / सेव की गई फ़ाइलें</h2><div id="recentF" class="recent"></div></section>
 </main>
-<nav><button data-t="home" class="on"><span>🏠</span>Home<small>होम</small></button><button data-t="tools"><span>🧰</span>Tools<small>टूल्स</small></button>
-<button data-t="scan" class="fab"><span>📷</span>Scan</button><button data-t="files"><span>🗂️</span>Files<small>फ़ाइलें</small></button></nav>
-<div id="cam" class="ov"><div class="vwrap"><video id="vid" playsinline muted autoplay></video>
-<div class="ctop"><button id="focusBtn" disabled>🎯 Focus: Auto</button><button id="torchBtn" style="display:none">🔦 Flash</button></div><div id="camNote"></div>
-<div id="steady">✋ Hold steady<br><small>स्थिर रखें</small></div><div id="fring"></div></div><div class="bar"><button class="btn red" id="camX">✕</button><button class="shut" id="snap" aria-label="capture"></button><span id="scount">0</span><button class="btn" id="camOk">Done ✓</button></div></div>
+<div class="fab" id="fab"><button id="fabCam" aria-label="scan with camera">📷</button><i></i><button id="fabGal" aria-label="import from gallery">🖼️</button></div>
+<input type="file" id="sf" accept="image/*" multiple style="display:none"><input type="file" id="sfc" accept="image/*" capture="environment" style="display:none">
+<div id="drawer"><div class="bg"></div><div class="pn"><div class="top"><b>📁 File Badlo</b> <small style="opacity:.8">v6</small><div class="h" style="color:#cfd8dc">Scan · Convert · Edit — offline</div></div>
+<ul class="acts"><li><button data-go="home"><i>🏠</i><div>Documents<small>दस्तावेज़</small></div></button></li>
+<li><button data-go="conv"><i>🔄</i><div>Converter<small>फ़ाइल बदलें</small></div></button></li>
+<li><button data-go="pdf"><i>📑</i><div>PDF Tools<small>जोड़ें / क्रम / लिखें</small></div></button></li>
+<li><button data-go="ocr"><i>🔤</i><div>OCR Text<small>टेक्स्ट निकालें</small></div></button></li>
+<li><button data-go="edit"><i>✍️</i><div>Editor<small>लिखें / एडिट</small></div></button></li>
+<li><button data-go="files"><i>⬇️</i><div>Exported files<small>सेव की गई फ़ाइलें</small></div></button></li></ul></div></div>
+<div class="sheet" id="sheet"><div class="in"><div class="tt" id="shT"></div><ul class="acts" id="shL"></ul></div></div>
+<div class="dlg" id="dlg"><div class="in" id="dlgIn"></div></div>
+<div id="cam" class="ov">
+<div class="ctop"><button id="camX" aria-label="back">←</button><button id="torchBtn" class="off" aria-label="flash">⚡</button><button id="gridBtn" aria-label="grid">▦</button><button id="focusBtn" aria-label="focus">🎯</button><button id="setBtn" aria-label="settings">⚙️</button></div>
+<div class="vwrap"><video id="vid" playsinline muted autoplay></video><div id="cgrid"></div><div id="guide"></div><div id="camNote"></div><div id="hint"></div>
+<div id="steady">✋ Hold steady<br><small>स्थिर रखें</small></div><div id="fring"></div></div>
+<div class="modes" id="modes"><button data-m="photo">Photo</button><button data-m="id">ID Card</button><button data-m="doc" class="on">Document</button><button data-m="book">Book</button><button data-m="sign">Signature</button></div>
+<div class="cbot"><button class="sm on" id="autoBtn"><span>⏱️</span>AUTO</button><button class="shut" id="snap" aria-label="capture">📷</button><button class="sm" id="camGal" style="position:relative"><span>🖼️</span>Gallery</button><button class="sm" id="camOk" style="position:relative"><span>✅</span>Done<b id="scount"></b></button></div></div>
 <div id="crop" class="ov"><div class="stage" id="stage"><canvas id="ccv"></canvas></div><div class="bar"><button class="btn red" id="cropX">✕</button><button class="btn alt" id="cropAuto">Auto</button><button class="btn alt" id="cropFull">Full</button><button class="btn" id="cropOk">Apply ✓</button></div></div>
 <div id="status"></div>
 <script src="jspdf.umd.min.js"></script><script src="pdf.min.js"></script><script src="docx.umd.js"></script>
@@ -307,47 +289,60 @@ $('#abtn').onclick=async()=>{const f=$('#af').files[0],t=$('#atext').value;if(!f
   lines.forEach((l,i)=>g.fillText(l,4,i*sz*4*1.3));const img=await d.embedPng(c.toDataURL('image/png'));const w=c.width/4,h=c.height/4;
   p.drawImage(img,{x:W*(+$('#ax').value)/100,y:H-H*(+$('#ay').value)/100-h,width:w,height:h});
   dl(new Blob([await d.save()],{type:'application/pdf'}),base(f.name)+'_text.pdf')}catch(e){st('❌ '+e.message,6000)}};
-// ---- Navigation (v4)
-const SUB=['conv','edit','pdf','ocr'];
-function go(t){document.querySelectorAll('main>section').forEach(x=>x.classList.toggle('on',x.id==t));
-  const nt=SUB.includes(t)?'tools':t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==nt));
-  $('#back').style.display=t=='home'?'none':'inline-block';scrollTo(0,0);if(t=='files'||t=='home')showRecent()}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.t));
-document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
-$('#back').onclick=()=>go('home');
-// ---- Recent files (IndexedDB)
-const idb=new Promise((r,j)=>{const q=indexedDB.open('fb',1);q.onupgradeneeded=()=>q.result.createObjectStore('docs',{keyPath:'id',autoIncrement:true});q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});
-async function tx(m,fn){const d=await idb;return new Promise((r,j)=>{const t=d.transaction('docs',m),s=t.objectStore('docs'),q=fn(s);t.oncomplete=()=>r(q&&q.result);t.onerror=()=>j(t.error)})}
+// ===== v6: Doc Scanner style app =====
+const cv=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
+const LS=localStorage;
+function rel(t){const s=(Date.now()-t)/1000;if(s<60)return 'Just now';if(s<3600){const m=s/60|0;return m+(m>1?' minutes':' minute')+' ago'}
+  if(s<86400){const h=s/3600|0;return h+(h>1?' hours':' hour')+' ago'}const d=s/86400|0;if(d==1)return 'Yesterday';if(d<7)return d+' days ago';if(d<30){const w=d/7|0;return w+(w>1?' weeks':' week')+' ago'}
+  return new Date(t).toLocaleDateString()}
+const kb=n=>n>=1e6?(n/1e6).toFixed(1)+' MB':Math.max(1,Math.round(n/1000))+' kB';
+const pages_=n=>n+(n==1?' page':' pages');
+// ---- DB: 'docs' = exported files, 'scans' = scan documents
+const idb=new Promise((r,j)=>{const q=indexedDB.open('fb',2);q.onupgradeneeded=()=>{const d=q.result;if(!d.objectStoreNames.contains('docs'))d.createObjectStore('docs',{keyPath:'id',autoIncrement:true});
+  if(!d.objectStoreNames.contains('scans'))d.createObjectStore('scans',{keyPath:'id',autoIncrement:true})};q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});
+async function tx(m,fn,st_='docs'){const d=await idb;return new Promise((r,j)=>{const t=d.transaction(st_,m),s=t.objectStore(st_),q=fn(s);t.oncomplete=()=>r(q&&q.result);t.onerror=()=>j(t.error)})}
 const saveDoc=(name,blob,thumb)=>tx('readwrite',s=>s.add({name,blob,thumb,t:Date.now()})).catch(()=>{});
 async function showRecent(){let all=[];try{all=(await tx('readonly',s=>s.getAll())||[]).reverse()}catch(e){}
-  const mk=(lim)=>all.length?all.slice(0,lim).map(d=>`<div class="doc"><img src="${d.thumb||''}" alt=""><b>${esc(d.name)}</b><span class="h">${new Date(d.t).toLocaleDateString()}</span><div class="ac"><button data-o="${d.id}">⬇</button><button data-del="${d.id}">🗑</button></div></div>`).join(''):'<div class="note" style="grid-column:1/-1">No scans yet. 📷 दबाकर स्कैन करें।</div>';
-  $('#recentH').innerHTML=mk(6);$('#recentF').innerHTML=mk(999);
+  $('#recentF').innerHTML=all.length?all.map(d=>`<div class="doc"><img src="${d.thumb||''}" alt=""><b>${esc(d.name)}</b><span class="h">${rel(d.t)}</span><div class="ac"><button data-o="${d.id}">⬇</button><button data-del="${d.id}">🗑</button></div></div>`).join(''):'<div class="note" style="grid-column:1/-1">No exported files yet.</div>';
   document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{const d=all.find(x=>x.id==b.dataset.o);dl(d.blob,d.name)});
   document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{if(confirm('Delete? / हटाएँ?')){await tx('readwrite',s=>s.delete(+b.dataset.del));showRecent()}})}
-showRecent();
-// ---- Scanner
-let spages=[];// {src:canvas, q:[[x,y]x4], rot, f, out:canvas}
-const cv=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
-function srcCanvas(img){const s=Math.min(1,2400/Math.max(img.naturalWidth||img.videoWidth||img.width,img.naturalHeight||img.videoHeight||img.height));
-  const w=Math.round((img.naturalWidth||img.videoWidth||img.width)*s),h=Math.round((img.naturalHeight||img.videoHeight||img.height)*s),c=cv(w,h);c.getContext('2d').drawImage(img,0,0,w,h);return c}
-// auto edge detect: Otsu threshold on downscaled gray, largest bright blob, extreme corners
+// ---- navigation / app bar
+let view='home';
+function go(t){view=t;document.querySelectorAll('main>section').forEach(x=>x.classList.toggle('on',x.id==t));$('#drawer').classList.remove('on');
+  const home=t=='home';$('#abL').textContent=home?'☰':'←';$('#abP').style.display=t=='scan'?'':'none';$('#abS').style.display=(home||t=='scan')?'':'none';$('#abM').style.display=(home||t=='scan')?'':'none';
+  $('#fab').style.display=(home||t=='scan')?'':'none';$('#ab').classList.remove('srch');$('#q').value='';
+  $('#abT').innerHTML=home?'File Badlo <small id="ver">v6</small>':t=='scan'?esc(cur?cur.name:'Scan'):({conv:'Converter',pdf:'PDF Tools',ocr:'OCR Text',edit:'Editor',files:'Exported files'})[t];
+  scrollTo(0,0);if(home)listDocs();if(t=='files')showRecent();if(t=='scan')drawScan()}
+$('#abL').onclick=()=>{if(view=='home')$('#drawer').classList.add('on');else{if(view=='scan')saveCur();go('home')}};
+$('#drawer .bg').onclick=()=>$('#drawer').classList.remove('on');
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+$('#abS').onclick=()=>{if(view=='scan')return docOcr();const a=$('#ab');a.classList.toggle('srch');if(a.classList.contains('srch'))$('#q').focus();else{$('#q').value='';listDocs()}};
+$('#q').oninput=()=>listDocs();
+// ---- bottom sheet with list rows (medium icons)
+function sheet(title,items){$('#shT').textContent=title;const L=$('#shL');L.innerHTML='';
+  items.forEach(([ic,en,hi,fn,cls])=>{const li=document.createElement('li');if(cls)li.className=cls;li.innerHTML=`<button><i>${ic}</i><div>${en}<small>${hi}</small></div></button>`;
+    li.firstChild.onclick=()=>{closeSheet();fn()};L.appendChild(li)});$('#sheet').classList.add('on')}
+const closeSheet=()=>$('#sheet').classList.remove('on');$('#sheet').onclick=e=>{if(e.target.id=='sheet')closeSheet()};
+// ---- image processing
+function srcCanvas(img){const W=img.naturalWidth||img.videoWidth||img.width,H=img.naturalHeight||img.videoHeight||img.height,s=Math.min(1,2400/Math.max(W,H));
+  const c=cv(Math.round(W*s),Math.round(H*s));c.getContext('2d').drawImage(img,0,0,c.width,c.height);return c}
+const fullQ=c=>[[0,0],[c.width,0],[c.width,c.height],[0,c.height]];
 function detect(src){const S=200/Math.max(src.width,src.height),w=Math.max(1,Math.round(src.width*S)),h=Math.max(1,Math.round(src.height*S)),c=cv(w,h),g=c.getContext('2d');g.drawImage(src,0,0,w,h);
   const d=g.getImageData(0,0,w,h).data,G=new Uint8Array(w*h),hist=new Array(256).fill(0);for(let i=0;i<w*h;i++){G[i]=(d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11)|0;hist[G[i]]++}
   let sum=0;for(let i=0;i<256;i++)sum+=i*hist[i];let sB=0,wB=0,best=0,T=128;for(let i=0;i<256;i++){wB+=hist[i];if(!wB)continue;const wF=w*h-wB;if(!wF)break;sB+=i*hist[i];const mB=sB/wB,mF=(sum-sB)/wF,v=wB*wF*(mB-mF)**2;if(v>best){best=v;T=i}}
   const lab=new Int32Array(w*h).fill(-1);let bestN=0,bestL=-1,stack=[];
   for(let i=0;i<w*h;i++){if(G[i]<=T||lab[i]>=0)continue;let n=0;stack.push(i);lab[i]=i;while(stack.length){const p=stack.pop();n++;const x=p%w,y=(p/w)|0;
     for(const q of [x>0?p-1:-1,x<w-1?p+1:-1,y>0?p-w:-1,y<h-1?p+w:-1])if(q>=0&&lab[q]<0&&G[q]>T){lab[q]=i;stack.push(q)}}if(n>bestN){bestN=n;bestL=i}}
-  const full=[[0,0],[src.width,0],[src.width,src.height],[0,src.height]];if(bestN<w*h*.15||bestN>w*h*.97)return full;
-  let c4=[[1e9,0,0],[-1e9,0,0],[-1e9,0,0],[1e9,0,0]];// tl min x+y, tr max x-y, br max x+y, bl min x-y
+  if(bestN<w*h*.15||bestN>w*h*.97)return fullQ(src);
+  let c4=[[1e9,0,0],[-1e9,0,0],[-1e9,0,0],[1e9,0,0]];
   for(let i=0;i<w*h;i++){if(lab[i]!==bestL)continue;const x=i%w,y=(i/w)|0;
     if(x+y<c4[0][0])c4[0]=[x+y,x,y];if(x-y>c4[1][0])c4[1]=[x-y,x,y];if(x+y>c4[2][0])c4[2]=[x+y,x,y];if(x-y<c4[3][0])c4[3]=[x-y,x,y]}
   return c4.map(([,x,y])=>[Math.min(src.width,(x+.5)/S),Math.min(src.height,(y+.5)/S)])}
-// homography: maps unit square (0,0),(1,0),(1,1),(0,1) to quad
 function sq2quad(q){const [[x0,y0],[x1,y1],[x2,y2],[x3,y3]]=q,dx1=x1-x2,dx2=x3-x2,dy1=y1-y2,dy2=y3-y2,sx=x0-x1+x2-x3,sy=y0-y1+y2-y3;
   let g=0,h=0;if(sx||sy){const den=dx1*dy2-dx2*dy1;g=(sx*dy2-dx2*sy)/den;h=(dx1*sy-sx*dy1)/den}
   return [x1-x0+g*x1,x3-x0+h*x3,x0,y1-y0+g*y1,y3-y0+h*y3,y0,g,h]}
 function warp(src,q){const L=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);let W=Math.round(Math.max(L(q[0],q[1]),L(q[3],q[2]))),H=Math.round(Math.max(L(q[0],q[3]),L(q[1],q[2])));
-  const s=Math.min(1,2000/Math.max(W,H));W=Math.max(1,Math.round(W*s));H=Math.max(1,Math.round(H*s));
+  const s=Math.min(1,2400/Math.max(W,H));W=Math.max(1,Math.round(W*s));H=Math.max(1,Math.round(H*s));
   const [a,b,c,d,e,f,g,h]=sq2quad(q),sw=src.width,sh=src.height,sd=src.getContext('2d').getImageData(0,0,sw,sh).data,o=cv(W,H),og=o.getContext('2d'),od=og.createImageData(W,H),D=od.data;
   for(let y=0;y<H;y++){const v=(y+.5)/H;for(let x=0;x<W;x++){const u=(x+.5)/W,z=g*u+h*v+1;let X=(a*u+b*v+c)/z-.5,Y=(d*u+e*v+f)/z-.5;
     X=Math.max(0,Math.min(sw-1.001,X));Y=Math.max(0,Math.min(sh-1.001,Y));const x0=X|0,y0=Y|0,fx=X-x0,fy=Y-y0,i=(y0*sw+x0)*4,j=i+sw*4,k=(y*W+x)*4;
@@ -355,8 +350,7 @@ function warp(src,q){const L=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);let W=Math.r
   og.putImageData(od,0,0);return o}
 function filt(c,f){if(f=='orig')return c;const g=c.getContext('2d'),im=g.getImageData(0,0,c.width,c.height),d=im.data,n=d.length;
   if(f=='gray')for(let i=0;i<n;i+=4){const v=d[i]*.3+d[i+1]*.59+d[i+2]*.11;d[i]=d[i+1]=d[i+2]=v}
-  else if(f=='bw'){// adaptive threshold using local mean via integral image
-    const w=c.width,h=c.height,G=new Float32Array(w*h),I=new Float64Array((w+1)*(h+1));for(let i=0;i<w*h;i++)G[i]=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;
+  else if(f=='bw'){const w=c.width,h=c.height,G=new Float32Array(w*h),I=new Float64Array((w+1)*(h+1));for(let i=0;i<w*h;i++)G[i]=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;
     for(let y=0;y<h;y++){let r=0;for(let x=0;x<w;x++){r+=G[y*w+x];I[(y+1)*(w+1)+x+1]=I[y*(w+1)+x+1]+r}}const R=Math.max(8,Math.round(Math.min(w,h)/16));
     for(let y=0;y<h;y++)for(let x=0;x<w;x++){const x1=Math.max(0,x-R),x2=Math.min(w,x+R),y1=Math.max(0,y-R),y2=Math.min(h,y+R),m=(I[y2*(w+1)+x2]-I[y1*(w+1)+x2]-I[y2*(w+1)+x1]+I[y1*(w+1)+x1])/((x2-x1)*(y2-y1));
       const v=G[y*w+x]<m*.88?0:255,k=(y*w+x)*4;d[k]=d[k+1]=d[k+2]=v}}
@@ -365,74 +359,181 @@ function filt(c,f){if(f=='orig')return c;const g=c.getContext('2d'),im=g.getImag
     for(let i=0;i<n;i+=4){const m=(d[i]+d[i+1]+d[i+2])/3;for(let ch=0;ch<3;ch++){let v=d[i+ch]+(d[i+ch]-m)*.5;v=(v-lo)*sc;d[i+ch]=v<0?0:v>255?255:v}}}
   g.putImageData(im,0,0);return c}
 function rotC(c,r){if(!(r%360))return c;const s=r%180?cv(c.height,c.width):cv(c.width,c.height),g=s.getContext('2d');g.translate(s.width/2,s.height/2);g.rotate(r*Math.PI/180);g.drawImage(c,-c.width/2,-c.height/2);return s}
-function render(p){p.out=rotC(filt(warp(p.src,p.q),p.f),p.rot);p.thumb=(()=>{const s=180/Math.max(p.out.width,p.out.height),t=cv(Math.round(p.out.width*s),Math.round(p.out.height*s));t.getContext('2d').drawImage(p.out,0,0,t.width,t.height);return t.toDataURL('image/jpeg',.7)})()}
-async function addPage(img){const src=srcCanvas(img),p={src,q:detect(src),rot:0,f:'magic'};render(p);spages.push(p);drawScan();return p}
-let ssel=0,stream=null;
-function drawScan(){const b=$('#spages');b.innerHTML='';$('#scnt').textContent=`(${spages.length})`;if(ssel>=spages.length)ssel=Math.max(0,spages.length-1);
-  spages.forEach((p,i)=>{const d=document.createElement('div');d.className='sp'+(i==ssel?' sel':'');d.innerHTML=`<img src="${p.thumb}"><div>#${i+1} · ${({orig:'Original',gray:'Gray',bw:'B&W',magic:'Magic'})[p.f]}</div>`;
-    d.onclick=()=>{ssel=i;drawScan()};b.appendChild(d)});
-  $('#sacts').style.display=spages.length?'':'none';$('#selno').textContent=spages.length?`#${ssel+1}`:'';if(spages[ssel])$('#sfilt').value=spages[ssel].f}
-$('#sfilt').onchange=e=>{const p=spages[ssel];if(!p)return;p.f=e.target.value;render(p);drawScan()};
-document.querySelectorAll('[data-act]').forEach(btn=>btn.onclick=()=>{const a=btn.dataset.act,i=ssel,p=spages[i];if(a=='add')return $('#camBtn').click();if(!p)return;
-  if(a=='up'&&i>0){[spages[i-1],spages[i]]=[spages[i],spages[i-1]];ssel--}else if(a=='down'&&i<spages.length-1){[spages[i+1],spages[i]]=[spages[i],spages[i+1]];ssel++}
-  else if(a=='del'){if(!confirm('Delete page? / पेज हटाएँ?'))return;spages.splice(i,1)}else if(a=='rot'){p.rot=(p.rot+90)%360;render(p)}else if(a=='crop')return openCrop(p);drawScan()});
-$('#galBtn').onclick=()=>$('#sf').click();
-async function addFiles(fs){st('Processing… / प्रोसेस हो रहा है…',0);try{for(const f of fs)await addPage(await loadImg(f));st(`✅ ${fs.length} page(s) added`)}catch(e){st('❌ '+e.message,6000)}}
+function mkThumb(c){const s=200/Math.max(c.width,c.height),t=cv(Math.round(c.width*s),Math.round(c.height*s));t.getContext('2d').drawImage(c,0,0,t.width,t.height);return t.toDataURL('image/jpeg',.7)}
+// page: {src canvas, srcURL, q, rot, f, t, out canvas, outURL, size, thumb}
+function render(p){const isFull=JSON.stringify(p.q)==JSON.stringify(fullQ(p.src));let w=isFull?(()=>{const c=cv(p.src.width,p.src.height);c.getContext('2d').drawImage(p.src,0,0);return c})():warp(p.src,p.q);
+  p.out=rotC(filt(w,p.f),p.rot);p.outURL=p.out.toDataURL('image/jpeg',.88);p.size=Math.round((p.outURL.length-23)*3/4);p.thumb=mkThumb(p.out)}
+const urlCanvas=u=>new Promise((r,j)=>{const i=new Image();i.onload=()=>{const c=cv(i.naturalWidth,i.naturalHeight);c.getContext('2d').drawImage(i,0,0);r(c)};i.onerror=j;i.src=u});
+async function ensureSrc(p){if(!p.src)p.src=await urlCanvas(p.srcURL)}
+async function rerender(p){await ensureSrc(p);render(p);await saveCur();drawScan()}
+// ---- scan documents
+let cur=null,spages=[];
+const newName=()=>'DocScanner '+new Date().toLocaleString('en-IN',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
+function newDoc(){cur={name:newName(),t:Date.now()};spages=[]}
+async function saveCur(){if(!cur)return;if(!spages.length){if(cur.id){await tx('readwrite',s=>s.delete(cur.id),'scans');delete cur.id}return}
+  for(const p of spages)if(!p.srcURL)p.srcURL=p.src.toDataURL('image/jpeg',.92);
+  const rec={name:cur.name,t:cur.t,mt:Date.now(),pages:spages.map(p=>({srcURL:p.srcURL,outURL:p.outURL,q:p.q,rot:p.rot,f:p.f,t:p.t,size:p.size,thumb:p.thumb}))};if(cur.id)rec.id=cur.id;
+  cur.id=await tx('readwrite',s=>s.put(rec),'scans')}
+async function openDoc(id){const r=await tx('readonly',s=>s.get(id),'scans');if(!r)return;cur={id:r.id,name:r.name,t:r.t};
+  spages=await Promise.all(r.pages.map(async p=>({...p,out:await urlCanvas(p.outURL)})));go('scan')}
+async function listDocs(){let all=[];try{all=await tx('readonly',s=>s.getAll(),'scans')||[]}catch(e){}all.sort((a,b)=>(b.mt||b.t)-(a.mt||a.t));
+  const q=$('#q').value.trim().toLowerCase(),L=$('#dlist');$('#dcount').innerHTML=`Documents (${all.length}) <small>/ दस्तावेज़</small>`;
+  const show=all.filter(d=>!q||d.name.toLowerCase().includes(q));L.innerHTML=show.length?'':`<div class="empty"><div>📄</div>${q?'No match / कुछ नहीं मिला':'No documents yet.<br>Tap 📷 to scan / स्कैन करने के लिए 📷 दबाएँ'}</div>`;
+  show.forEach(d=>{const e=document.createElement('div');e.className='lc';
+    e.innerHTML=`<img src="${d.pages[0]?.thumb||''}" alt=""><div class="tx"><div class="nm">${esc(d.name)}</div><div class="tm">${rel(d.mt||d.t)}</div><div class="bd"><span class="bx">${d.pages.length}</span><span class="dci">🗒️</span><span>${pages_(d.pages.length)}</span></div></div><button class="mo" aria-label="more">•••</button>`;
+    e.onclick=ev=>{if(!ev.target.closest('.mo'))openDoc(d.id)};
+    e.querySelector('.mo').onclick=()=>sheet(d.name,[['✏️','Rename','नाम बदलें',async()=>{const n=prompt('Rename / नया नाम',d.name);if(n&&n.trim()){d.name=n.trim();await tx('readwrite',s=>s.put(d),'scans');listDocs()}}],
+      ['🔤','OCR (extract text)','टेक्स्ट निकालें',async()=>{await openDoc(d.id);docOcr()}],
+      ['📄','Export PDF','PDF सेव करें',async()=>{await openDoc(d.id);exportPdf()},'ex'],['🖼️','Export JPG','फोटो सेव करें',async()=>{await openDoc(d.id);exportJpg()},'ex'],
+      ['🗑️','Delete','हटाएँ',async()=>{if(confirm('Delete document? / दस्तावेज़ हटाएँ?')){await tx('readwrite',s=>s.delete(d.id),'scans');listDocs()}},'dn']]);L.appendChild(e)})}
+function drawScan(){const L=$('#plist');L.innerHTML='';if(cur)$('#abT').textContent=cur.name;
+  if(!spages.length)L.innerHTML='<div class="empty"><div>📷</div>No pages. Tap 📷 or 🖼️ / पेज जोड़ें</div>';
+  spages.forEach((p,i)=>{const e=document.createElement('div');e.className='lc pr';e.dataset.i=i;
+    e.innerHTML=`<img src="${p.thumb}" alt=""><div class="tx"><div class="big">${i+1}</div><div class="tm">${rel(p.t)}</div><div class="bd"><span>${kb(p.size||0)}</span><span class="bx">${({orig:'Original',gray:'Gray',bw:'B&W',magic:'Magic'})[p.f]}</span></div></div><button class="mo" aria-label="more">•••</button>`;
+    e.querySelector('.mo').onclick=()=>pageMenu(i);e.addEventListener('pointerdown',ev=>pdStart(ev,e));e.addEventListener('contextmenu',ev=>ev.preventDefault());L.appendChild(e)})}
+function pageMenu(i){const p=spages[i];sheet(`Page ${i+1} · ${kb(p.size)} · ${new Date(p.t).toLocaleString()}`,[
+  ['✂️','Crop & straighten','कोने ठीक करें / काटें',async()=>{await ensureSrc(p);openCrop(p)}],
+  ['🎨','Filter','फ़िल्टर',()=>sheet('Filter / फ़िल्टर',[['🖼️','Original','असली',()=>{p.f='orig';rerender(p)},p.f=='orig'?'on':''],['🌫️','Grayscale','ग्रे',()=>{p.f='gray';rerender(p)},p.f=='gray'?'on':''],
+    ['⬛','B&W','काला-सफ़ेद',()=>{p.f='bw';rerender(p)},p.f=='bw'?'on':''],['🪄','Magic Color','मैजिक कलर',()=>{p.f='magic';rerender(p)},p.f=='magic'?'on':'']])],
+  ['⟳','Rotate','घुमाएँ (90°)',()=>{p.rot=(p.rot+90)%360;rerender(p)}],
+  ['🔤','OCR this page','इस पेज का टेक्स्ट',()=>{go('ocr');runOcr([p.out])}],
+  ['↕️','Move','क्रम बदलें',()=>sheet('Move / क्रम बदलें',[['⬆️','Move up','ऊपर',()=>mv(i,i-1)],['⬇️','Move down','नीचे',()=>mv(i,i+1)],['⏫','Move to first','सबसे पहले',()=>mv(i,0)],['⏬','Move to last','सबसे आखिर',()=>mv(i,spages.length-1)]])],
+  ['🗑️','Delete page','पेज हटाएँ',()=>{if(confirm('Delete page? / पेज हटाएँ?')){spages.splice(i,1);saveCur();drawScan()}},'dn']])}
+function mv(a,b){if(b<0||b>=spages.length||a==b)return;const [x]=spages.splice(a,1);spages.splice(b,0,x);saveCur();drawScan()}
+$('#abM').onclick=()=>{if(view=='home')return sheet('Menu',[['🔄','Converter','फ़ाइल बदलें',()=>go('conv')],['📑','PDF Tools','PDF टूल्स',()=>go('pdf')],['🔤','OCR','टेक्स्ट निकालें',()=>go('ocr')],['✍️','Editor','एडिटर',()=>go('edit')],['⬇️','Exported files','सेव की गई फ़ाइलें',()=>go('files')]]);
+  sheet(cur.name,[['✏️','Rename','नाम बदलें',()=>{const n=prompt('Rename / नया नाम',cur.name);if(n&&n.trim()){cur.name=n.trim();saveCur();drawScan()}}],
+    ['➕','Add pages (camera)','और पेज स्कैन करें',()=>openCam()],['🖼️','Import from gallery','गैलरी से जोड़ें',()=>$('#sf').click()],
+    ['🪄','Filter for all pages','सब पेज पर फ़िल्टर',()=>sheet('Filter all',[['🖼️','Original','',()=>allF('orig')],['🌫️','Grayscale','',()=>allF('gray')],['⬛','B&W','',()=>allF('bw')],['🪄','Magic Color','',()=>allF('magic')]])],
+    ['🔤','OCR all pages','सब पेज का टेक्स्ट',docOcr],['📄','Export PDF','PDF सेव करें',exportPdf,'ex'],['🖼️','Export JPG','फोटो सेव करें',exportJpg,'ex'],
+    ['🗑️','Delete document','दस्तावेज़ हटाएँ',async()=>{if(confirm('Delete document? / हटाएँ?')){spages=[];await saveCur();cur=null;go('home')}},'dn']])};
+async function allF(f){st('Applying… / लगा रहे हैं…',0);for(const p of spages){p.f=f;await ensureSrc(p);render(p)}await saveCur();drawScan();st('✅ Done')}
+$('#abP').onclick=()=>exportPdf();
+// long-press drag reorder for page cards
+let pdrag=null;addEventListener('touchmove',e=>{if(pdrag&&pdrag.on)e.preventDefault()},{passive:false});
+function pdStart(e,el){if(e.target.closest('.mo')||pdrag)return;const x=e.clientX,y=e.clientY,id=e.pointerId;el.classList.add('arm');
+  pdrag={el,id,y0:y,on:false};
+  const cancel=()=>{clearTimeout(pdrag&&pdrag.tm);el.classList.remove('arm');removeEventListener('pointermove',mvH);removeEventListener('pointerup',up);removeEventListener('pointercancel',up)};
+  const mvH=ev=>{if(ev.pointerId!==id||!pdrag)return;if(!pdrag.on){if(Math.hypot(ev.clientX-x,ev.clientY-y)>10){cancel();pdrag=null}return}
+    ev.preventDefault();const dy=ev.clientY-pdrag.y0;el.style.transform=`translateY(${dy}px) scale(1.03)`;
+    const sib=dy<0?el.previousElementSibling:el.nextElementSibling;if(sib&&sib.classList.contains('lc')){const r=sib.getBoundingClientRect(),m=r.top+r.height/2;
+      if((dy<0&&ev.clientY<m)||(dy>0&&ev.clientY>m)){const before=el.getBoundingClientRect().top;dy<0?el.parentNode.insertBefore(el,sib):el.parentNode.insertBefore(sib,el);
+        const after=el.getBoundingClientRect().top;pdrag.y0+=after-before;el.style.transform=`translateY(${ev.clientY-pdrag.y0}px) scale(1.03)`;
+        sib.style.transition='none';sib.style.transform=`translateY(${dy<0?-(r.height+10):r.height+10}px)`;sib.offsetWidth;sib.style.transition='transform .2s';sib.style.transform=''}}
+    const H=innerHeight;if(ev.clientY<90)scrollBy(0,-8);else if(ev.clientY>H-60)scrollBy(0,8)};
+  const up=ev=>{if(ev.pointerId!==id)return;const was=pdrag&&pdrag.on;cancel();pdrag=null;if(!was)return;el.classList.remove('lift');el.style.transform='';
+    const order=[...$('#plist').children].map(c=>+c.dataset.i);spages=order.map(i=>spages[i]);saveCur();drawScan()};
+  pdrag.tm=setTimeout(()=>{if(!pdrag)return;pdrag.on=true;el.classList.remove('arm');el.classList.add('lift');navigator.vibrate&&navigator.vibrate(30)},350);
+  addEventListener('pointermove',mvH,{passive:false});addEventListener('pointerup',up);addEventListener('pointercancel',up)}
+// ---- capture modes
+let mode='doc',idSides=1,idFront=null,photoSize=null;
+const PSIZES=[['2 x 2','INCHES',600,2,2,'in'],['35 x 45','MILLIMETERS',300,35,45,'mm'],['2 x 2.5','CENTIMETERS',300,2,2.5,'cm'],['600 x 600','PIXELS',0,600,600,'px'],['51 x 51','MILLIMETERS (US Visa)',300,51,51,'mm'],['3.5 x 4.5','CENTIMETERS',300,3.5,4.5,'cm']];
+const toPx=(v,u,dpi)=>Math.round(u=='px'?v:u=='in'?v*dpi:u=='cm'?v/2.54*dpi:v/25.4*dpi);
+function setGuide(){const g=$('#guide');let r=null;if(mode=='id')r=85.6/54;else if(mode=='photo'&&photoSize)r=photoSize[3]/photoSize[4];
+  if(!r){g.style.display='none';return}const b=$('.vwrap').getBoundingClientRect();let w=b.width*.82,h=w/r;if(h>b.height*.75){h=b.height*.75;w=h*r}g.style.cssText+=`;display:block;width:${w}px;height:${h}px`}
+function hint(){$('#hint').textContent=mode=='id'?(idSides==2?(idFront?'Back side / पीछे की तरफ़':'Front side / आगे की तरफ़'):'ID card / आईडी कार्ड'):mode=='photo'?(photoSize?`Photo ${photoSize[0]} ${photoSize[5]}`:''):mode=='book'?'Book: 2 pages / किताब — दो पेज':mode=='sign'?'Signature / हस्ताक्षर':'Document / दस्तावेज़'}
+function dlg(html){$('#dlgIn').innerHTML=html;$('#dlg').classList.add('on')}const closeDlg=()=>$('#dlg').classList.remove('on');
+function idDialog(){dlg(`<div class="hd2">ID Card<button id="dx">✕</button></div>
+<div class="idopt"><h3>Single side ID card</h3><div class="r"><div class="ic">🪪</div><p>Make a one side ID card ready for print.<br><small>एक तरफ़ का कार्ड, प्रिंट के लिए</small></p></div><button class="dbtn" data-sd="1">Select</button><div style="clear:both"></div></div>
+<div class="idopt"><h3>Two side ID card</h3><div class="r"><div class="ic">🪪<br>▭</div><p>Make a 2 side ID card ready for print (front + back on one A4).<br><small>आगे-पीछे दोनों, एक A4 पर</small></p></div><button class="dbtn" data-sd="2">Select</button><div style="clear:both"></div></div>`);
+  $('#dx').onclick=()=>{closeDlg();setMode('doc')};document.querySelectorAll('[data-sd]').forEach(b=>b.onclick=()=>{idSides=+b.dataset.sd;idFront=null;closeDlg();hint();setGuide()})}
+function photoDialog(){let sel=photoSize?PSIZES.indexOf(photoSize):0;dlg(`<div class="hd2" style="justify-content:center;font-size:34px;gap:28px">🛂 🪪 📄</div><div style="text-align:center;font-size:22px;padding:12px 0 0">ID Photo Editor</div>
+<div style="padding:4px 18px"><b style="font-size:18px">Select Photo Size</b><div class="h">फोटो साइज़ चुनें</div></div>
+<div class="psz">${PSIZES.map((s,i)=>`<button data-ps="${i}" class="${i==sel?'on':''}"><span><b>${s[0]}</b>${s[1]}${s[2]?`<br>DPI = ${s[2]}`:''}</span><i>👤</i></button>`).join('')}</div>
+<div class="dfoot"><button class="dbtn" style="float:none;margin:0" id="dx">Close</button><button class="dbtn" style="float:none;margin:0" id="dok">Select</button></div>`);
+  document.querySelectorAll('[data-ps]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-ps]').forEach(x=>x.classList.remove('on'));b.classList.add('on');sel=+b.dataset.ps});
+  $('#dx').onclick=()=>{closeDlg();if(!photoSize)setMode('doc')};$('#dok').onclick=()=>{photoSize=PSIZES[sel];closeDlg();hint();setGuide()}}
+function setMode(m,ask=true){mode=m;document.querySelectorAll('#modes button').forEach(b=>b.classList.toggle('on',b.dataset.m==m));
+  const b=document.querySelector(`#modes [data-m=${m}]`);b&&b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});idFront=null;
+  if(ask&&m=='id')idDialog();if(ask&&m=='photo')photoDialog();hint();setGuide()}
+document.querySelectorAll('#modes button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+function centerCrop(c,r){let w=c.width,h=w/r;if(h>c.height){h=c.height;w=h*r}const o=cv(Math.round(w),Math.round(h));o.getContext('2d').drawImage(c,(c.width-w)/2,(c.height-h)/2,w,h,0,0,o.width,o.height);return o}
+function cardFrom(src){const q=detect(src);let c=JSON.stringify(q)==JSON.stringify(fullQ(src))?centerCrop(src,85.6/54):warp(src,q);if(c.height>c.width)c=rotC(c,90);return c}
+function a4(cards){const A=cv(2480,3508),g=A.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,A.width,A.height);const W=1011,H=638;// 85.6x54mm @300dpi
+  cards.forEach((c,i)=>{const x=(A.width-W)/2,y=300+i*(H+150);g.drawImage(c,x,y,W,H);g.strokeStyle='#bbb';g.lineWidth=2;g.strokeRect(x,y,W,H)});return A}
+const defF=()=>LS.fbFilter||'magic';
+function mkPage(src,q,f){const p={src,q:q||fullQ(src),rot:0,f,t:Date.now()};render(p);return p}
+// returns array of new pages (or [] while waiting for ID back side)
+function processCapture(src){
+  if(mode=='photo'){const s=photoSize||PSIZES[0];let c=centerCrop(src,s[3]/s[4]);const W=toPx(s[3],s[5],s[2]),H=toPx(s[4],s[5],s[2]),o=cv(W,H);o.getContext('2d').drawImage(c,0,0,W,H);return [mkPage(o,null,'orig')]}
+  if(mode=='id'){const card=cardFrom(src);if(idSides==2&&!idFront){idFront=card;hint();st('✅ Front done — now flip the card / अब कार्ड पलटें');return []}
+    const cards=idSides==2?[idFront,card]:[card];idFront=null;hint();return [mkPage(a4(cards),null,'orig')]}
+  if(mode=='book'){const q=detect(src),w=warp(src,q),h=Math.round(w.width/2),L=cv(h,w.height),R=cv(w.width-h,w.height);L.getContext('2d').drawImage(w,0,0);R.getContext('2d').drawImage(w,-h,0);
+    return [mkPage(L,null,defF()),mkPage(R,null,defF())]}
+  if(mode=='sign')return [mkPage(src,detect(src),'bw')];
+  return [mkPage(src,detect(src),defF())]}
+async function addCanvas(src){const ps=processCapture(src);spages.push(...ps);$('#scount').textContent=spages.length||'';return ps}
+async function addFiles(fs){if(!cur)newDoc();st('Processing… / प्रोसेस हो रहा है…',0);try{for(const f of fs)await addCanvas(srcCanvas(await loadImg(f)));await saveCur();st(`✅ ${fs.length} image(s) added`)}catch(e){console.error(e);st('❌ '+e.message,6000)}
+  if(!$('#cam').classList.contains('on'))go('scan');else drawScan()}
 $('#sf').onchange=()=>{addFiles([...$('#sf').files]);$('#sf').value=''};$('#sfc').onchange=()=>{addFiles([...$('#sfc').files]);$('#sfc').value=''};
-let track=null,caps={},torchOn=false,focusCont=true,motion=0;
+$('#fabCam').onclick=()=>{if(view!='scan')newDoc();openCam()};$('#fabGal').onclick=()=>{if(view!='scan')newDoc();$('#sf').click()};
+$('#camGal').onclick=()=>$('#sf').click();
+// ---- camera: focus, torch, grid, steady capture, AUTO
+let stream=null,track=null,caps={},torchOn=false,focusCont=true,motion=0,autoOn=LS.fbAuto!=='0',steadyOn=LS.fbSteady!=='0',autoT=null;
 addEventListener('devicemotion',e=>{const a=e.acceleration||{};if(a.x!=null)motion=Math.max(motion*.8,Math.hypot(a.x,a.y,a.z))});
 function camNote(t){const n=$('#camNote');n.textContent=t;n.style.display=t?'block':'none'}
 async function setupCaps(){track=stream.getVideoTracks()[0];caps=(track.getCapabilities&&track.getCapabilities())||{};torchOn=false;
-  const fm=caps.focusMode||[],fb=$('#focusBtn'),tb=$('#torchBtn');tb.style.display=caps.torch?'':'none';tb.classList.remove('on');
-  if(fm.includes('continuous')){fb.disabled=false;focusCont=true;fb.textContent='🎯 Focus: Auto';fb.classList.add('on');try{await track.applyConstraints({advanced:[{focusMode:'continuous'}]})}catch(e){}camNote('')}
-  else{fb.disabled=true;fb.classList.remove('on');fb.textContent='🎯 Focus: N/A';camNote('Autofocus control not supported on this camera / इस कैमरे पर focus control उपलब्ध नहीं')}}
-$('#focusBtn').onclick=async()=>{const fm=caps.focusMode||[];focusCont=!focusCont;const b=$('#focusBtn');b.classList.toggle('on',focusCont);
-  b.textContent=focusCont?'🎯 Focus: Auto':'🎯 Tap to focus';try{await track.applyConstraints({advanced:[{focusMode:focusCont?'continuous':(fm.includes('single-shot')?'single-shot':'manual')}]})}catch(e){}};
-$('#torchBtn').onclick=async()=>{torchOn=!torchOn;try{await track.applyConstraints({advanced:[{torch:torchOn}]});$('#torchBtn').classList.toggle('on',torchOn)}catch(e){torchOn=false;st('Flash not available / फ़्लैश उपलब्ध नहीं')}};
-$('#vid').onclick=async e=>{if(!track||!(caps.focusMode||[]).length)return;const r=e.target.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height,f=$('#fring');
-  f.style.left=e.clientX-r.left+'px';f.style.top=e.clientY-r.top+'px';f.style.display='block';setTimeout(()=>f.style.display='none',900);
-  const c={pointsOfInterest:[{x,y}]};const fm=caps.focusMode;if(fm.includes('single-shot'))c.focusMode='single-shot';else if(fm.includes('continuous'))c.focusMode='continuous';
-  try{await track.applyConstraints({advanced:[c]})}catch(err){}};
-$('#camBtn').onclick=async()=>{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return $('#sfc').click();
-  try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false});$('#vid').srcObject=stream;$('#cam').classList.add('on');$('#scount').textContent=spages.length;await setupCaps()}
-  catch(e){$('#sfc').click()}};
-const camOff=()=>{if(torchOn&&track)track.applyConstraints({advanced:[{torch:false}]}).catch(()=>{});if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null;$('#cam').classList.remove('on');$('#steady').style.display='none';drawScan()};
+  const fm=caps.focusMode||[],fb=$('#focusBtn'),tb=$('#torchBtn');tb.style.visibility=caps.torch?'visible':'hidden';tb.classList.add('off');tb.classList.remove('on');
+  if(fm.includes('continuous')){fb.disabled=false;focusCont=true;fb.classList.add('on');try{await track.applyConstraints({advanced:[{focusMode:'continuous'}]})}catch(e){}camNote('')}
+  else{fb.disabled=true;fb.classList.remove('on');camNote('Autofocus control not supported on this camera / इस कैमरे पर focus control उपलब्ध नहीं');setTimeout(()=>camNote(''),4000)}}
+$('#focusBtn').onclick=async()=>{const fm=caps.focusMode||[];focusCont=!focusCont;$('#focusBtn').classList.toggle('on',focusCont);st(focusCont?'Focus: Auto (continuous)':'Tap to focus / टैप करके focus');
+  try{await track.applyConstraints({advanced:[{focusMode:focusCont?'continuous':(fm.includes('single-shot')?'single-shot':'manual')}]})}catch(e){}};
+$('#torchBtn').onclick=async()=>{torchOn=!torchOn;try{await track.applyConstraints({advanced:[{torch:torchOn}]});$('#torchBtn').classList.toggle('on',torchOn);$('#torchBtn').classList.toggle('off',!torchOn)}catch(e){torchOn=false;st('Flash not available / फ़्लैश उपलब्ध नहीं')}};
+$('#gridBtn').onclick=()=>{const g=$('#cgrid').classList.toggle('on');$('#gridBtn').classList.toggle('on',g)};
+$('#autoBtn').onclick=()=>{autoOn=!autoOn;LS.fbAuto=autoOn?'1':'0';$('#autoBtn').classList.toggle('on',autoOn);st(autoOn?'AUTO: captures when steady / स्थिर होते ही फोटो':'AUTO off — press shutter / बटन दबाएँ')};
+$('#setBtn').onclick=()=>sheet('Camera settings / सेटिंग्स',[['🪄','Default filter: '+({orig:'Original',gray:'Gray',bw:'B&W',magic:'Magic'})[defF()],'डिफ़ॉल्ट फ़िल्टर बदलें',()=>sheet('Default filter',[['🖼️','Original','',()=>LS.fbFilter='orig'],['🌫️','Grayscale','',()=>LS.fbFilter='gray'],['⬛','B&W','',()=>LS.fbFilter='bw'],['🪄','Magic Color','',()=>LS.fbFilter='magic']])],
+  ['✋','Steady capture: '+(steadyOn?'ON':'OFF'),'स्थिर होने पर ही फोटो',()=>{steadyOn=!steadyOn;LS.fbSteady=steadyOn?'1':'0'}],
+  ['▦','Grid overlay','ग्रिड',()=>$('#gridBtn').click()]]);
+$('#vid').onclick=async e=>{const r=e.target.getBoundingClientRect(),f=$('#fring');f.style.left=e.clientX-r.left+'px';f.style.top=e.clientY-r.top+'px';f.style.display='block';setTimeout(()=>f.style.display='none',900);
+  if(!track||!(caps.focusMode||[]).length)return;const c={pointsOfInterest:[{x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height}]};const fm=caps.focusMode;
+  if(fm.includes('single-shot'))c.focusMode='single-shot';else if(fm.includes('continuous'))c.focusMode='continuous';try{await track.applyConstraints({advanced:[c]})}catch(err){}};
+async function openCam(){if(!cur)newDoc();if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return $('#sfc').click();
+  try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false});$('#vid').srcObject=stream;
+    $('#cam').classList.add('on');$('#scount').textContent=spages.length||'';$('#autoBtn').classList.toggle('on',autoOn);setMode(mode,false);await setupCaps();autoLoop()}
+  catch(e){$('#sfc').click()}}
+const camOff=async()=>{clearTimeout(autoT);if(torchOn&&track)track.applyConstraints({advanced:[{torch:false}]}).catch(()=>{});if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null;
+  $('#cam').classList.remove('on');$('#steady').style.display='none';closeDlg();await saveCur();if(spages.length)go('scan');else{cur=null;go('home')}};
 $('#camX').onclick=camOff;$('#camOk').onclick=camOff;
 function tiny(v){const c=cv(64,48),g=c.getContext('2d',{willReadFrequently:true});g.drawImage(v,0,0,64,48);const d=g.getImageData(0,0,64,48).data,o=new Uint8Array(64*48);for(let i=0;i<o.length;i++)o[i]=(d[i*4]+d[i*4+1]+d[i*4+2])/3;return o}
+const fdiff=(a,b)=>{let s=0;for(let i=0;i<a.length;i++)s+=Math.abs(a[i]-b[i]);return s/a.length};
 function sharp(c){const s=Math.min(1,400/Math.max(c.width,c.height)),w=Math.round(c.width*s),h=Math.round(c.height*s),t=cv(w,h),g=t.getContext('2d');g.drawImage(c,0,0,w,h);
   const d=g.getImageData(0,0,w,h).data,G=new Float32Array(w*h);for(let i=0;i<w*h;i++)G[i]=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;let n=0,m=0,m2=0;
   for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const i=y*w+x,L=G[i-1]+G[i+1]+G[i-w]+G[i+w]-4*G[i];m+=L;m2+=L*L;n++}m/=n;return m2/n-m*m}
-const frame=()=>new Promise(r=>{const v=$('#vid');v.requestVideoFrameCallback?v.requestVideoFrameCallback(()=>r()):setTimeout(r,50)});
+const frame=()=>Promise.race([new Promise(r=>{const v=$('#vid');v.requestVideoFrameCallback?v.requestVideoFrameCallback(()=>r()):setTimeout(r,50)}),new Promise(r=>setTimeout(r,80))]);
 let snapping=false;
 async function stableCapture(v){const ind=$('#steady');ind.className='';ind.style.display='block';const t0=performance.now();let prev=tiny(v),calm=0;
-  while(performance.now()-t0<1500){await Promise.race([frame(),new Promise(r=>setTimeout(r,80))]);const cur=tiny(v);let df=0;for(let i=0;i<cur.length;i++)df+=Math.abs(cur[i]-prev[i]);df/=cur.length;prev=cur;
-    if(df<4&&motion<0.6){if(++calm>=3)break}else calm=0}
+  while(steadyOn&&performance.now()-t0<1500){await frame();const cur_=tiny(v),df=fdiff(cur_,prev);prev=cur_;if(df<4&&motion<0.6){if(++calm>=3)break}else calm=0}
   ind.className='ok';ind.innerHTML='📸 Capturing…<br><small>ले रहे हैं</small>';let best=null,bs=-1;
-  for(let k=0;k<3;k++){if(k)await Promise.race([frame(),new Promise(r=>setTimeout(r,80))]);const c=srcCanvas(v),s=sharp(c);if(s>bs){bs=s;best=c}}
+  for(let k=0;k<3;k++){if(k)await frame();const c=srcCanvas(v),s=sharp(c);if(s>bs){bs=s;best=c}}
   setTimeout(()=>{ind.style.display='none';ind.className='';ind.innerHTML='✋ Hold steady<br><small>स्थिर रखें</small>'},300);return best}
-$('#snap').onclick=async()=>{const v=$('#vid');if(!v.videoWidth||snapping)return;snapping=true;try{const c=await stableCapture(v);navigator.vibrate&&navigator.vibrate(20);v.style.opacity=.3;setTimeout(()=>v.style.opacity=1,120);
-  await addPage(c);ssel=spages.length-1;$('#scount').textContent=spages.length}finally{snapping=false}};
-// crop editor with 4 handles
+async function snap(){const v=$('#vid');if(!v.videoWidth||snapping||$('#dlg').classList.contains('on'))return;snapping=true;
+  try{const c=await stableCapture(v);navigator.vibrate&&navigator.vibrate(20);v.style.opacity=.3;setTimeout(()=>v.style.opacity=1,120);await addCanvas(c)}catch(e){console.error(e)}finally{snapping=false}}
+$('#snap').onclick=snap;
+// AUTO: in Document/Book/Signature mode, shoot automatically when a page is held steady (~1.2s), at most every 3s
+let lastShot=0,autoPrev=null,autoCalm=0;
+function autoLoop(){clearTimeout(autoT);if(!stream)return;autoT=setTimeout(autoLoop,150);const v=$('#vid');if(!autoOn||!v.videoWidth||snapping||!['doc','book','sign'].includes(mode)||$('#dlg').classList.contains('on')||$('#sheet').classList.contains('on'))return;
+  const t=tiny(v);if(autoPrev){const df=fdiff(t,autoPrev);if(df<2.5&&motion<0.5)autoCalm++;else autoCalm=0}autoPrev=t;
+  if(autoCalm>=8&&Date.now()-lastShot>3000){autoCalm=0;lastShot=Date.now();snap()}}
+// ---- crop editor
 let cp=null,cq=null;
 function openCrop(p){cp=p;cq=p.q.map(x=>[...x]);$('#crop').classList.add('on');const c=$('#ccv');c.width=p.src.width;c.height=p.src.height;requestAnimationFrame(()=>{mkHandles();drawCrop()})}
 function drawCrop(){const c=$('#ccv'),g=c.getContext('2d');g.drawImage(cp.src,0,0);g.fillStyle='#0006';g.beginPath();g.rect(0,0,c.width,c.height);g.moveTo(...cq[0]);[1,2,3,0].forEach(i=>g.lineTo(...cq[i]));g.fill('evenodd');
-  g.strokeStyle='#818cf8';g.lineWidth=Math.max(3,c.width/250);g.beginPath();g.moveTo(...cq[0]);[1,2,3,0].forEach(i=>g.lineTo(...cq[i]));g.stroke();
+  g.strokeStyle='#42a5f5';g.lineWidth=Math.max(3,c.width/250);g.beginPath();g.moveTo(...cq[0]);[1,2,3,0].forEach(i=>g.lineTo(...cq[i]));g.stroke();
   const r=c.getBoundingClientRect(),sr=$('#stage').getBoundingClientRect(),k=r.width/c.width;document.querySelectorAll('.hdl').forEach((h,i)=>{h.style.left=(r.left-sr.left+cq[i][0]*k)+'px';h.style.top=(r.top-sr.top+cq[i][1]*k)+'px'})}
 function mkHandles(){document.querySelectorAll('.hdl').forEach(h=>h.remove());for(let i=0;i<4;i++){const h=document.createElement('div');h.className='hdl';$('#stage').appendChild(h);
   h.onpointerdown=e=>{e.preventDefault();h.setPointerCapture(e.pointerId);h.onpointermove=ev=>{const c=$('#ccv'),r=c.getBoundingClientRect(),k=c.width/r.width;
     cq[i]=[Math.max(0,Math.min(c.width,(ev.clientX-r.left)*k)),Math.max(0,Math.min(c.height,(ev.clientY-r.top)*k))];drawCrop()};h.onpointerup=()=>h.onpointermove=null}}}
 $('#cropX').onclick=()=>$('#crop').classList.remove('on');
-$('#cropAuto').onclick=()=>{cq=detect(cp.src);drawCrop()};$('#cropFull').onclick=()=>{const c=cp.src;cq=[[0,0],[c.width,0],[c.width,c.height],[0,c.height]];drawCrop()};
-$('#cropOk').onclick=()=>{cp.q=cq;render(cp);$('#crop').classList.remove('on');drawScan()};
-addEventListener('resize',()=>{if($('#crop').classList.contains('on'))drawCrop()});
-$('#sall').onchange=e=>{const f=e.target.value;if(!f)return;st('Applying…',0);setTimeout(()=>{spages.forEach(p=>{p.f=f;render(p)});drawScan();st('✅ Done')},30)};
-$('#sclr').onclick=()=>{if(spages.length&&confirm('Clear all pages? / सब हटाएँ?')){spages=[];drawScan()}};
+$('#cropAuto').onclick=()=>{cq=detect(cp.src);drawCrop()};$('#cropFull').onclick=()=>{cq=fullQ(cp.src);drawCrop()};
+$('#cropOk').onclick=async()=>{cp.q=cq;$('#crop').classList.remove('on');await rerender(cp)};
+addEventListener('resize',()=>{if($('#crop').classList.contains('on'))drawCrop();if($('#cam').classList.contains('on'))setGuide()});
+// ---- export
 function scansPdf(){let pdf;for(const p of spages){const W=595.28,H=W*p.out.height/p.out.width,o=W>H?'l':'p';
-  if(!pdf)pdf=new jspdf.jsPDF({orientation:o,unit:'pt',format:[W,H]});else pdf.addPage([W,H],o);pdf.addImage(p.out.toDataURL('image/jpeg',.88),'JPEG',0,0,W,H)}return pdf.output('blob')}
-$('#spdf').onclick=async()=>{if(!spages.length)return st('Scan a page first / पहले स्कैन करें');const n=($('#sname').value.trim()||'scan')+'.pdf',b=scansPdf();dl(b,n);await saveDoc(n,b,spages[0].thumb)};
-$('#sjpg').onclick=async()=>{if(!spages.length)return st('Scan a page first / पहले स्कैन करें');const n=$('#sname').value.trim()||'scan';
-  for(let i=0;i<spages.length;i++){const b=await new Promise(r=>spages[i].out.toBlob(r,'image/jpeg',.92)),nm=n+(spages.length>1?'_'+(i+1):'')+'.jpg';dl(b,nm);await saveDoc(nm,b,spages[i].thumb);await new Promise(r=>setTimeout(r,300))}};
-$('#socr').onclick=()=>{if(!spages.length)return st('Scan a page first / पहले स्कैन करें');go('ocr');runOcr(spages.map(p=>p.out))};
+  if(!pdf)pdf=new jspdf.jsPDF({orientation:o,unit:'pt',format:[W,H]});else pdf.addPage([W,H],o);pdf.addImage(p.outURL,'JPEG',0,0,W,H)}return pdf.output('blob')}
+const fname=()=>(cur&&cur.name||'scan').replace(/[\\/:*?"<>|]+/g,'-');
+async function exportPdf(){if(!spages.length)return st('No pages / कोई पेज नहीं');const n=fname()+'.pdf',b=scansPdf();dl(b,n);await saveDoc(n,b,spages[0].thumb)}
+async function exportJpg(){if(!spages.length)return st('No pages / कोई पेज नहीं');const n=fname();
+  for(let i=0;i<spages.length;i++){const b=await new Promise(r=>spages[i].out.toBlob(r,'image/jpeg',.92)),nm=n+(spages.length>1?'_'+(i+1):'')+'.jpg';dl(b,nm);await saveDoc(nm,b,spages[i].thumb);await new Promise(r=>setTimeout(r,300))}}
+function docOcr(){if(!spages.length)return st('No pages / कोई पेज नहीं');go('ocr');runOcr(spages.map(p=>p.out))}
 // ---- OCR (tesseract.js, all files local)
 let tw=null,twLang='';
 function loadScript(s){return new Promise((r,j)=>{if(window.Tesseract)return r();const e=document.createElement('script');e.src=s;e.onload=r;e.onerror=()=>j(new Error('load '+s));document.head.appendChild(e)})}
@@ -445,11 +546,12 @@ async function runOcr(imgs){const o=$('#otext');o.value='';st('OCR starting… /
   st('✅ Text ready / टेक्स्ट तैयार')}catch(e){console.error(e);st('❌ OCR error: '+e.message,6000)}}
 $('#obtnr').onclick=async()=>{const fs=[...$('#ocf').files];if(!fs.length)return st('Pick a file / फ़ाइल चुनें');const imgs=[];
   for(const f of fs){if(ext(f.name)=='pdf'||f.type=='application/pdf'){const doc=await pdfjsLib.getDocument({data:await readBuf(f)}).promise;
-      for(let p=1;p<=doc.numPages;p++){const pg=await doc.getPage(p),tc=await pg.getTextContent(),t=tc.items.map(i=>i.str).join('').trim();
-        const v=pg.getViewport({scale:2}),c=cv(v.width,v.height),g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await pg.render({canvasContext:g,viewport:v}).promise;imgs.push(c)}}
+      for(let p=1;p<=doc.numPages;p++){const pg=await doc.getPage(p),v=pg.getViewport({scale:2}),c=cv(v.width,v.height),g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await pg.render({canvasContext:g,viewport:v}).promise;imgs.push(c)}}
     else imgs.push(srcCanvas(await loadImg(f)))}runOcr(imgs)};
 $('#ocopy').onclick=async()=>{const t=$('#otext').value;try{await navigator.clipboard.writeText(t)}catch(e){$('#otext').select();document.execCommand('copy')}st('📋 Copied / कॉपी हो गया')};
 $('#otxt').onclick=()=>dl(new Blob([$('#otext').value],{type:'text/plain'}),'ocr.txt');
+addEventListener('popstate',()=>{});
+go('home');
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')){const had=!!navigator.serviceWorker.controller;let rl=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!rl&&!sessionStorage.fbReloaded){rl=true;sessionStorage.fbReloaded=1;location.reload()}});
   navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});

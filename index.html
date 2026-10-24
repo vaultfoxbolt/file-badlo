@@ -50,6 +50,8 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 .sheet{position:fixed;inset:0;z-index:250;display:none;background:#0006;align-items:flex-end;justify-content:center}.sheet.on{display:flex;animation:fo .15s}
 .sheet .in{background:#fff;width:100%;max-width:600px;border-radius:16px 16px 0 0;max-height:82vh;overflow:auto;animation:up .22s ease;padding-bottom:8px}
 @keyframes up{from{transform:translateY(100%)}to{transform:none}}.sheet .tt{padding:14px 18px 6px;font-weight:600;color:#444;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res{position:fixed;inset:0;z-index:240;display:none;background:var(--bg);flex-direction:column;overflow:auto}.res.on{display:flex}.res .rtop{display:flex;align-items:center;gap:10px;background:var(--nv);color:#fff;padding:12px 14px;font-size:18px}.res .rtop button{background:none;border:0;color:#fff;font-size:22px}#resPv{margin:16px auto 8px;max-width:70%;max-height:46vh;box-shadow:0 2px 10px #0003;background:#fff;cursor:pointer}#resPv canvas{display:block;max-width:100%;max-height:46vh}.res .rh{text-align:center;color:var(--mu);font-size:13px}.rfile{display:flex;align-items:center;gap:12px;margin:12px 16px;padding:12px 14px;background:#fff;border-radius:12px;box-shadow:0 1px 3px #0002;border:0;width:calc(100% - 32px);text-align:left;font-size:15px}.rfile i{font-style:normal;width:42px;height:42px;border-radius:10px;background:#e53935;color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}.rfile small{display:block;color:var(--mu);font-size:12px}
+.acts .s-wa i{background:#25d366;color:#fff}.acts .s-ms i{background:#0084ff;color:#fff}.acts .s-tg i{background:#29a9eb;color:#fff}.acts .s-sm i{background:#43a047;color:#fff}
 .acts{list-style:none;margin:0;padding:0}
 .acts button{display:flex;align-items:center;gap:16px;width:100%;min-height:54px;padding:8px 18px;border:0;background:#fff;font-size:16px;font-weight:500;color:var(--tx);text-align:left}
 .acts button:active{background:var(--pl)}.acts i{font-style:normal;font-size:26px;width:42px;height:42px;border-radius:12px;background:var(--pl);display:flex;align-items:center;justify-content:center;flex:none}
@@ -154,6 +156,7 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 <li><button data-go="ocr"><i>🔤</i><div>OCR Text<small>टेक्स्ट निकालें</small></div></button></li>
 <li><button data-go="edit"><i>✍️</i><div>Editor<small>लिखें / एडिट</small></div></button></li>
 <li><button data-go="files"><i>⬇️</i><div>Exported files<small>सेव की गई फ़ाइलें</small></div></button></li></ul></div></div>
+<div class="res" id="res"><div class="rtop"><button id="resX" aria-label="close">←</button><b>Done / तैयार</b></div><div id="resPv" title="Save to"></div><div class="rh">Tap preview to save · सेव करने के लिए टैप करें</div><button class="rfile" id="resF"><i>PDF</i><div><b id="resN"></b><small id="resS"></small></div><span style="margin-left:auto;font-size:20px">⤴</span></button><div class="rh">Tap the file to share · शेयर करने के लिए टैप करें</div></div>
 <div class="sheet" id="sheet"><div class="in"><div class="tt" id="shT"></div><ul class="acts" id="shL"></ul></div></div>
 <div class="dlg" id="dlg"><div class="in" id="dlgIn"></div></div>
 <div id="cam" class="ov">
@@ -177,7 +180,16 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.min.js';
 const $=s=>document.querySelector(s);
 function st(m,t){const e=$('#status');e.textContent=m;e.style.display='block';clearTimeout(st.t);if(t!==0)st.t=setTimeout(()=>e.style.display='none',t||3500)}
-function dl(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),60000);st('✅ Saved / डाउनलोड: '+name)}
+// ---- downloads: always a same-document <a download> with a clean, predictable name (lands in Downloads)
+const stamp=()=>{const d=new Date(),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`};
+function safeName(name,blob){let e=(String(name||'').match(/\.([A-Za-z0-9]{1,5})$/)||[])[1];if(!e)e=blob&&blob.type=='application/pdf'?'pdf':'bin';
+  let b=String(name||'').replace(/\.[A-Za-z0-9]{1,5}$/,'').normalize('NFC').replace(/[\\/:*?"<>|\x00-\x1f]+/g,'-').replace(/[\s,;#%&+]+/g,'_').replace(/_+/g,'_').replace(/^[._-]+|[._-]+$/g,'').slice(0,80);
+  if(!b)b='FileBadlo_'+stamp();return b+'.'+e.toLowerCase()}
+const MIME={pdf:'application/pdf',jpg:'image/jpeg',png:'image/png',webp:'image/webp',txt:'text/plain',html:'text/html',csv:'text/csv',json:'application/json',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'};
+function rawDl(blob,name){name=safeName(name,blob);const t=MIME[ext(name)];if(t&&blob.type!==t)blob=new Blob([blob],{type:t});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.rel='noopener';a.style.display='none';document.body.appendChild(a);a.click();
+  setTimeout(()=>{a.remove();URL.revokeObjectURL(a.href)},60000);return name}
+function dl(blob,name,quiet){const n=rawDl(blob,name);if(!quiet)st('✅ Saved to Downloads / डाउनलोड: '+n);if(/\.pdf$/i.test(n)&&!quiet)showResult(blob,n);return n}
 const base=n=>n.replace(/\.[^.]+$/,''), ext=n=>(n.split('.').pop()||'').toLowerCase();
 const readText=f=>f.text(), readBuf=f=>f.arrayBuffer();
 const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
@@ -671,6 +683,32 @@ $('#cropX').onclick=()=>$('#crop').classList.remove('on');
 $('#cropAuto').onclick=()=>{cq=detect(cp.src);drawCrop()};$('#cropFull').onclick=()=>{cq=fullQ(cp.src);drawCrop()};
 $('#cropOk').onclick=async()=>{cp.q=cq;$('#crop').classList.remove('on');await rerender(cp)};
 addEventListener('resize',()=>{if($('#crop').classList.contains('on'))drawCrop();if($('#cam').classList.contains('on'))setGuide()});
+// ---- result screen (shown after a PDF is produced): preview -> "Save to" sheet, file card -> share sheet
+let RES=null;
+async function showResult(blob,name){RES={blob,name};$('#resN').textContent=name;$('#resS').textContent=(blob.size/1024>1024?(blob.size/1048576).toFixed(1)+' MB':Math.max(1,Math.round(blob.size/1024))+' KB')+' · Downloads';
+  const pv=$('#resPv');pv.innerHTML='';$('#res').classList.add('on');
+  try{const doc=await pdfjsLib.getDocument({data:await blob.arrayBuffer()}).promise,pg=await doc.getPage(1),v=pg.getViewport({scale:1}),k=Math.min(2,600/v.width),vv=pg.getViewport({scale:k}),c=document.createElement('canvas');
+    c.width=vv.width;c.height=vv.height;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await pg.render({canvasContext:g,viewport:vv}).promise;if(RES&&RES.blob===blob)pv.appendChild(c)}
+  catch(e){pv.innerHTML='<div style="padding:40px 30px;font-size:40px">📄</div>'}}
+$('#resX').onclick=()=>$('#res').classList.remove('on');
+const pdfFile=()=>new File([RES.blob],RES.name,{type:'application/pdf'});
+/* Honest limits: a web app cannot hand a file to one specific app. navigator.share({files}) opens the OS share sheet and the user
+   picks WhatsApp/Messenger/Telegram/Messages there. Deep links (whatsapp://, fb-messenger://, t.me, sms:) can carry TEXT only, never
+   the file, so the fallback downloads the PDF and opens the app with a message telling the user where the PDF is. */
+async function sharePdf(app){const f=pdfFile();
+  try{if(navigator.canShare&&navigator.share&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:RES.name,text:RES.name});return}}
+  catch(e){if(e&&e.name=='AbortError')return;console.warn('share failed',e)}
+  rawDl(RES.blob,RES.name);const msg=`I made a PDF with File Badlo: "${RES.name}". It is downloaded in my Downloads folder; I will attach it here.`,m=encodeURIComponent(msg);
+  const url={wa:/Android|iPhone|iPad/i.test(navigator.userAgent)?'whatsapp://send?text='+m:'https://wa.me/?text='+m,ms:'fb-messenger://share?link='+encodeURIComponent(location.href.split('#')[0])+'&app_id=',tg:'https://t.me/share/url?url='+encodeURIComponent(location.href.split('#')[0])+'&text='+m,sm:'sms:?body='+m}[app];
+  st('📥 Saved to Downloads: '+safeName(RES.name)+' — attach it in the app / ऐप में अटैच करें',6000);if(url)setTimeout(()=>{location.href=url},700)}
+$('#resF').onclick=()=>($('#status').style.display='none',sheet)('Share PDF / शेयर करें',[['<b>W</b>','WhatsApp','व्हाट्सऐप',()=>sharePdf('wa'),'s-wa'],['<b>m</b>','Messenger','फ़ेसबुक मैसेंजर',()=>sharePdf('ms'),'s-ms'],['<b>✈</b>','Telegram','टेलीग्राम',()=>sharePdf('tg'),'s-tg'],['<b>💬</b>','Messages','मैसेज (SMS)',()=>sharePdf('sm'),'s-sm'],['⋯','More…','और ऐप्स',()=>sharePdf('more')]]);
+// Save to: Downloads, or a user-chosen location via File System Access (showSaveFilePicker: Chrome desktop; Chrome Android 132+ where exposed)
+async function saveToFolder(){const f=pdfFile();
+  try{if(window.showSaveFilePicker){const h=await showSaveFilePicker({suggestedName:safeName(RES.name),types:[{description:'PDF',accept:{'application/pdf':['.pdf']}}]});const w=await h.createWritable();await w.write(f);await w.close();return st('✅ Saved / सेव हुआ: '+h.name,5000)}
+    if(window.showDirectoryPicker){const d=await showDirectoryPicker({mode:'readwrite'}),h=await d.getFileHandle(safeName(RES.name),{create:true}),w=await h.createWritable();await w.write(f);await w.close();return st('✅ Saved in '+d.name+': '+h.name,5000)}}
+  catch(e){if(e&&e.name=='AbortError')return;console.warn('picker failed',e)}
+  const n=rawDl(RES.blob,RES.name);st('Folder choice is not supported in this browser — saved to Downloads: '+n+' / Downloads में सेव हुआ',6000)}
+$('#resPv').onclick=()=>($('#status').style.display='none',sheet)('Save to / यहाँ सेव करें',[['📱','Internal Memory','Downloads फ़ोल्डर',()=>{const n=rawDl(RES.blob,RES.name);st('✅ Saved to Downloads: '+n,5000)}],['📁','Choose folder / File location','फ़ोल्डर चुनें',saveToFolder]]);
 // ---- export
 function scansPdf(){// A4 portrait, image fit-to-page (contain), centred on white, no border (matches scanner-app layout)
   const W=595.28,H=841.89,pdf=new jspdf.jsPDF({orientation:'p',unit:'pt',format:'a4',compress:true});

@@ -98,8 +98,19 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 .varr{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:#0008!important;color:#fff;font-size:26px;z-index:2}.varr:disabled{opacity:.2}#vPrev{left:6px}#vNext{right:6px}
 #vtool{background:#fff;color:#333;display:flex;overflow-x:auto;scrollbar-width:none;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}#vtool::-webkit-scrollbar{display:none}
 #vtool button{flex:none;min-width:74px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 8px;font-size:12.5px;color:#333}#vtool button span{font-size:22px;line-height:1}#vtool button.dn{color:#d32f2f}
+#viewer{height:100vh;height:100dvh;bottom:auto}#viewer .vb{padding-top:calc(8px + env(safe-area-inset-top))}#vtool{flex:none;padding-bottom:calc(8px + env(safe-area-inset-bottom))}#vwrap{min-height:0}
+#vE{background:#1e88e5!important;color:#fff;border-radius:18px!important;padding:7px 14px!important;font-size:14px;font-weight:700;white-space:nowrap}
+#vwrap.gl::before,#vwrap.gr::after{content:'';position:absolute;top:0;bottom:0;width:36px;z-index:3;pointer-events:none}#vwrap.gl::before{left:0;background:radial-gradient(ellipse at left,#42a5f580,transparent 70%)}#vwrap.gr::after{right:0;background:radial-gradient(ellipse at right,#42a5f580,transparent 70%)}
+.lc .ed{border:0;background:#e3f2fd;color:#1565c0;font-size:18px;width:44px;height:44px;border-radius:50%;flex:none;margin-right:2px}
+#ed{z-index:120;height:100vh;height:100dvh;bottom:auto}#ed .eb{display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top)) 8px 8px;background:#1F3A4A}#ed .eb b{flex:1;text-align:center;font-size:17px}#ed .eb button{border:0;border-radius:18px;padding:8px 14px;font-size:14px;font-weight:700}#edX{background:#fff2;color:#fff}#edOk{background:#1e88e5;color:#fff}
+#estage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;touch-action:none;padding:22px}#ecv{max-width:100%;max-height:100%;display:block}
+.eh{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;border:3px solid #fff;background:#1e88e5;touch-action:none;box-shadow:0 0 0 2px #1e88e5,0 2px 6px #0008;z-index:2}.eh.s{width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:6px}
+#emove{position:absolute;touch-action:none;cursor:move;z-index:1}
+#etool{flex:none;background:#fff;color:#333;display:flex;overflow-x:auto;padding:6px 4px calc(8px + env(safe-area-inset-bottom));scrollbar-width:none}#etool button{flex:none;min-width:70px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 6px;border:0;background:none;font-size:12px;color:#333;border-radius:10px}#etool button span{font-size:21px;line-height:1}#etool button.on{background:#e3f2fd;color:#1565c0;font-weight:700}
+#vtrack{position:absolute;top:0;bottom:0;left:0;width:300%;display:flex;will-change:transform}#vtrack .vs{position:relative;width:33.3333%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#vtrack .vs img{width:100%;height:auto;max-height:100%;object-fit:contain;background:#fff;-webkit-user-drag:none;pointer-events:none}#vtrack .vs img.e{visibility:hidden}#vimg{transform-origin:0 0}#vT{transition:opacity .14s}#vT.f{opacity:0}
 </style></head><body>
-<header class="ab" id="ab"><button id="abL" aria-label="menu">☰</button><h1 id="abT">File Badlo <small id="ver">v7</small></h1><input id="q" type="search" placeholder="Search / खोजें">
+<header class="ab" id="ab"><button id="abL" aria-label="menu">☰</button><h1 id="abT">File Badlo <small id="ver">v8</small></h1><input id="q" type="search" placeholder="Search / खोजें">
 <button id="abS" aria-label="search">🔍</button><button id="abP" class="pdfi" aria-label="export pdf" style="display:none"><b>PDF</b></button><button id="abM" aria-label="more">⋮</button></header>
 <main>
 <section id="home" class="on"><h2 id="dcount">Documents (0) <small>/ दस्तावेज़</small></h2><div id="dlist"></div></section>
@@ -136,7 +147,7 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 </main>
 <div class="fab" id="fab"><button id="fabCam" aria-label="scan with camera">📷</button><i></i><button id="fabGal" aria-label="import from gallery">🖼️</button></div>
 <input type="file" id="sf" accept="image/*" multiple style="display:none"><input type="file" id="sfc" accept="image/*" capture="environment" style="display:none">
-<div id="drawer"><div class="bg"></div><div class="pn"><div class="top"><b>📁 File Badlo</b> <small style="opacity:.8">v7</small><div class="h" style="color:#cfd8dc">Scan · Convert · Edit — offline</div></div>
+<div id="drawer"><div class="bg"></div><div class="pn"><div class="top"><b>📁 File Badlo</b> <small style="opacity:.8">v8</small><div class="h" style="color:#cfd8dc">Scan · Convert · Edit — offline</div></div>
 <ul class="acts"><li><button data-go="home"><i>🏠</i><div>Documents<small>दस्तावेज़</small></div></button></li>
 <li><button data-go="conv"><i>🔄</i><div>Converter<small>फ़ाइल बदलें</small></div></button></li>
 <li><button data-go="pdf"><i>📑</i><div>PDF Tools<small>जोड़ें / क्रम / लिखें</small></div></button></li>
@@ -151,13 +162,16 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 <div id="steady">✋ Hold steady<br><small>स्थिर रखें</small></div><div id="fring"></div></div>
 <div class="modes" id="modes"><button data-m="photo">Photo</button><button data-m="id">ID Card</button><button data-m="doc" class="on">Document</button><button data-m="book">Book</button><button data-m="sign">Signature</button></div>
 <div class="cbot"><button class="sm on" id="autoBtn"><span>⏱️</span>AUTO</button><button class="shut" id="snap" aria-label="capture">📷</button><button class="sm" id="camGal" style="position:relative"><span>🖼️</span>Gallery</button><button class="sm" id="camOk" style="position:relative"><span>✅</span>Done<b id="scount"></b></button></div></div>
+<div id="ed" class="ov"><div class="eb"><button id="edX">✕ Cancel</button><b id="edT">Edit / एडिट</b><button id="edOk">✓ Save</button></div>
+<div id="estage"><canvas id="ecv"></canvas></div>
+<div id="etool"><button data-e="rect" class="on"><span>⬚</span>Free crop</button><button data-e="quad"><span>◇</span>Perspective</button><button data-e="rot"><span>⟳</span>Rotate</button><button data-e="auto"><span>🪄</span>Auto edges</button><button data-e="reset"><span>↺</span>Reset</button></div></div>
 <div id="crop" class="ov"><div class="stage" id="stage"><canvas id="ccv"></canvas></div><div class="bar"><button class="btn red" id="cropX">✕</button><button class="btn alt" id="cropAuto">Auto</button><button class="btn alt" id="cropFull">Full</button><button class="btn" id="cropOk">Apply ✓</button></div></div>
 <div id="status"></div>
 <script src="jspdf.umd.min.js"></script><script src="pdf.min.js"></script><script src="docx.umd.js"></script>
 <script src="mammoth.browser.min.js"></script><script src="xlsx.full.min.js"></script><script src="quill.min.js"></script>
 <script src="pdf-lib.min.js"></script><script src="marked.min.js"></script><script src="html2canvas.min.js"></script>
-<div id="viewer"><div class="vb"><button id="vX" aria-label="back">←</button><div class="vt"><b id="vT"></b><span id="vN"></span></div><button id="vZ" aria-label="zoom">🔍</button></div>
-<div id="vwrap"><img id="vimg" alt="page" draggable="false"><button class="varr" id="vPrev" aria-label="previous">‹</button><button class="varr" id="vNext" aria-label="next">›</button></div>
+<div id="viewer"><div class="vb"><button id="vX" aria-label="back">←</button><div class="vt"><b id="vT"></b><span id="vN"></span></div><button id="vE" aria-label="edit">✏️ Edit / एडिट</button><button id="vZ" aria-label="zoom">🔍</button></div>
+<div id="vwrap"><div id="vtrack"><div class="vs"><img id="vimgP" alt="" draggable="false"></div><div class="vs"><img id="vimg" alt="page" draggable="false"></div><div class="vs"><img id="vimgN" alt="" draggable="false"></div></div><button class="varr" id="vPrev" aria-label="previous">‹</button><button class="varr" id="vNext" aria-label="next">›</button></div>
 <div id="vtool"><button data-v="crop"><span>✂️</span>Crop</button><button data-v="filter"><span>🎨</span>Filter</button><button data-v="rot"><span>⟳</span>Rotate</button><button data-v="ocr"><span>🔤</span>OCR</button><button data-v="share"><span>📤</span>Share</button><button data-v="del" class="dn"><span>🗑️</span>Delete</button></div></div>
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.min.js';
@@ -322,7 +336,7 @@ let view='home';
 function go(t){view=t;document.querySelectorAll('main>section').forEach(x=>x.classList.toggle('on',x.id==t));$('#drawer').classList.remove('on');
   const home=t=='home';$('#abL').textContent=home?'☰':'←';$('#abP').style.display=t=='scan'?'':'none';$('#abS').style.display=(home||t=='scan')?'':'none';$('#abM').style.display=(home||t=='scan')?'':'none';
   $('#fab').style.display=(home||t=='scan')?'':'none';$('#ab').classList.remove('srch');$('#q').value='';
-  $('#abT').innerHTML=home?'File Badlo <small id="ver">v7</small>':t=='scan'?esc(cur?cur.name:'Scan'):({conv:'Converter',pdf:'PDF Tools',ocr:'OCR Text',edit:'Editor',files:'Exported files'})[t];
+  $('#abT').innerHTML=home?'File Badlo <small id="ver">v8</small>':t=='scan'?esc(cur?cur.name:'Scan'):({conv:'Converter',pdf:'PDF Tools',ocr:'OCR Text',edit:'Editor',files:'Exported files'})[t];
   scrollTo(0,0);if(home)listDocs();if(t=='files')showRecent();if(t=='scan')drawScan()}
 $('#abL').onclick=()=>{if(view=='home')$('#drawer').classList.add('on');else{if(view=='scan')saveCur();go('home')}};
 $('#drawer .bg').onclick=()=>$('#drawer').classList.remove('on');
@@ -372,12 +386,14 @@ function filt(c,f){if(f=='orig')return c;const g=c.getContext('2d'),im=g.getImag
 function rotC(c,r){if(!(r%360))return c;const s=r%180?cv(c.height,c.width):cv(c.width,c.height),g=s.getContext('2d');g.translate(s.width/2,s.height/2);g.rotate(r*Math.PI/180);g.drawImage(c,-c.width/2,-c.height/2);return s}
 // v7 thumbs: 3x displayed CSS size (100px box) x devicePixelRatio, stepwise halving w/ high-quality smoothing, JPEG .9
 const TV=7,thumbPx=()=>Math.min(1200,Math.ceil(100*Math.max(2,devicePixelRatio||1)*3));
+function applyFc(c,f){if(!f||(f[0]<=0&&f[1]<=0&&f[2]>=1&&f[3]>=1))return c;const x=Math.round(f[0]*c.width),y=Math.round(f[1]*c.height),w=Math.max(8,Math.round((f[2]-f[0])*c.width)),h=Math.max(8,Math.round((f[3]-f[1])*c.height));
+  const o=cv(w,h);o.getContext('2d').drawImage(c,x,y,w,h,0,0,w,h);return o}
 function mkThumb(c){const T=thumbPx();let s=c,W=c.width,H=c.height;const k=Math.min(1,T/Math.max(W,H)),tw=Math.max(1,Math.round(W*k)),th=Math.max(1,Math.round(H*k));
   while(W/2>=tw&&H/2>=th){W=Math.round(W/2);H=Math.round(H/2);const n=cv(W,H),g=n.getContext('2d');g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.drawImage(s,0,0,W,H);s=n}
   const t=cv(tw,th),g=t.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,tw,th);g.imageSmoothingEnabled=true;g.imageSmoothingQuality='high';g.drawImage(s,0,0,tw,th);return t.toDataURL('image/jpeg',.9)}
 // page: {src canvas, srcURL, q, rot, f, t, out canvas, outURL, size, thumb}
 function render(p){const isFull=JSON.stringify(p.q)==JSON.stringify(fullQ(p.src));let w=isFull?(()=>{const c=cv(p.src.width,p.src.height);c.getContext('2d').drawImage(p.src,0,0);return c})():warp(p.src,p.q);
-  p.out=rotC(filt(w,p.f),p.rot);p.outURL=p.out.toDataURL('image/jpeg',.95);p.size=Math.round((p.outURL.length-23)*3/4);p.thumb=mkThumb(p.out);p.tv=TV}
+  p.out=applyFc(rotC(filt(w,p.f),p.rot),p.fc);p.outURL=p.out.toDataURL('image/jpeg',.95);p.size=Math.round((p.outURL.length-23)*3/4);p.thumb=mkThumb(p.out);p.tv=TV}
 const urlCanvas=u=>new Promise((r,j)=>{const i=new Image();i.onload=()=>{const c=cv(i.naturalWidth,i.naturalHeight);c.getContext('2d').drawImage(i,0,0);r(c)};i.onerror=j;i.src=u});
 async function ensureSrc(p){if(!p.src)p.src=await urlCanvas(p.srcURL)}
 async function rerender(p){await ensureSrc(p);render(p);await saveCur();drawScan();if(vOn())viewPage(vi)}
@@ -387,7 +403,7 @@ const newName=()=>'DocScanner '+new Date().toLocaleString('en-IN',{month:'short'
 function newDoc(){cur={name:newName(),t:Date.now()};spages=[]}
 async function saveCur(){if(!cur)return;if(!spages.length){if(cur.id){await tx('readwrite',s=>s.delete(cur.id),'scans');delete cur.id}return}
   for(const p of spages)if(!p.srcURL)p.srcURL=p.src.toDataURL('image/jpeg',.95);
-  const rec={name:cur.name,t:cur.t,mt:Date.now(),pages:spages.map(p=>({srcURL:p.srcURL,outURL:p.outURL,q:p.q,rot:p.rot,f:p.f,t:p.t,size:p.size,thumb:p.thumb,tv:p.tv}))};if(cur.id)rec.id=cur.id;
+  const rec={name:cur.name,t:cur.t,mt:Date.now(),pages:spages.map(p=>({srcURL:p.srcURL,outURL:p.outURL,q:p.q,rot:p.rot,f:p.f,t:p.t,size:p.size,thumb:p.thumb,tv:p.tv,fc:p.fc||null}))};if(cur.id)rec.id=cur.id;
   cur.id=await tx('readwrite',s=>s.put(rec),'scans')}
 async function openDoc(id){const r=await tx('readonly',s=>s.get(id),'scans');if(!r)return;cur={id:r.id,name:r.name,t:r.t};
   spages=await Promise.all(r.pages.map(async p=>({...p,out:await urlCanvas(p.outURL)})));go('scan')}
@@ -395,42 +411,90 @@ async function fixThumbs(all){let ch=false;for(const d of all){if(d.pages.every(
   for(const p of d.pages)if(p.tv!==TV&&p.outURL){try{p.thumb=mkThumb(await urlCanvas(p.outURL));p.tv=TV}catch(e){}}
   await tx('readwrite',s=>s.put(d),'scans');ch=true}return ch}
 // full-res viewer: shows processed page (crop+warp+filter+rotation = exactly what exports)
-// ---- page viewer: shows processed page (crop+warp+filter+rotate = export), swipe/arrows, pinch & double-tap zoom
-let vi=0,vz={s:1,x:0,y:0};const vOn=()=>$('#viewer').classList.contains('on');
+// ---- page viewer v8: 3-slot carousel (prev|cur|next) follows finger 1:1, slide 280ms; rubber band at ends; pinch/double-tap zoom
+let vi=0,vz={s:1,x:0,y:0},vAnim=false;const vOn=()=>$('#viewer').classList.contains('on'),VEASE='transform .28s cubic-bezier(.22,.61,.36,1)';
+const pURL=p=>p?(p.outURL||p.out.toDataURL('image/jpeg',.95)):'';
 function vApply(){$('#vimg').style.transform=`translate(${vz.x}px,${vz.y}px) scale(${vz.s})`}
-function vReset(){vz={s:1,x:0,y:0};$('#vimg').style.transition='';vApply()}
+function vReset(){vz={s:1,x:0,y:0};vApply()}
+function vW(){return $('#vwrap').clientWidth}
+function vTrack(dx,anim){const t=$('#vtrack');t.style.transition=anim?VEASE:'none';t.style.transform=`translateX(${-vW()+dx}px)`}
 function vClamp(){const w=$('#vwrap').getBoundingClientRect(),im=$('#vimg'),W=im.offsetWidth*vz.s,H=im.offsetHeight*vz.s,ox=im.offsetLeft,oy=im.offsetTop;
   if(vz.s<=1){vz={s:1,x:0,y:0};return}const minX=w.width-ox-W,maxX=-ox,minY=Math.min(-oy,w.height-oy-H),maxY=Math.max(-oy,w.height-oy-H);
   vz.x=Math.min(maxX,Math.max(minX,vz.x));vz.y=H<=w.height?(w.height-H)/2-oy:Math.min(Math.max(minY,vz.y),Math.max(maxY,minY))}
 function vZoomAt(s,cx,cy){const im=$('#vimg'),r=$('#vwrap').getBoundingClientRect(),px=cx-r.left-im.offsetLeft,py=cy-r.top-im.offsetTop,k=s/vz.s;vz.x=px-(px-vz.x)*k;vz.y=py-(py-vz.y)*k;vz.s=s;vClamp();vApply()}
-function viewPage(i){if(!spages.length)return closeViewer();vi=Math.max(0,Math.min(i,spages.length-1));const p=spages[vi];
-  $('#vimg').src=p.out?p.out.toDataURL('image/jpeg',.95):p.outURL;$('#vT').textContent=`Page ${vi+1} / ${spages.length}`;$('#vN').textContent=cur?cur.name:'';
-  $('#vPrev').disabled=vi==0;$('#vNext').disabled=vi>=spages.length-1;vReset();$('#viewer').classList.add('on')}
+function setImg(el,p){const u=pURL(p);el.classList.toggle('e',!u);if(u){if(el.src!==u)el.src=u}else el.removeAttribute('src')}
+function vLabel(fade){const f=()=>{$('#vT').textContent=`Page ${vi+1} / ${spages.length}`;$('#vN').textContent=cur?cur.name:'';$('#vPrev').disabled=vi==0;$('#vNext').disabled=vi>=spages.length-1};
+  if(!fade)return f();$('#vT').classList.add('f');setTimeout(()=>{f();$('#vT').classList.remove('f')},140)}
+function vFill(){setImg($('#vimgP'),spages[vi-1]);setImg($('#vimg'),spages[vi]);setImg($('#vimgN'),spages[vi+1])}
+function viewPage(i){if(!spages.length)return closeViewer();vi=Math.max(0,Math.min(i,spages.length-1));vAnim=false;vReset();vFill();$('#viewer').classList.add('on');vTrack(0,false);vLabel(false)}
+function vSlide(dir){if(vAnim)return;const n=vi+dir;if(n<0||n>=spages.length){vTrack(0,true);return}
+  vAnim=true;vReset();const t=$('#vtrack');vTrack(-dir*vW(),true);vi=n;vLabel(true);
+  let done=false;const fin=()=>{if(done)return;done=true;t.removeEventListener('transitionend',fin);vFill();vTrack(0,false);vAnim=false};t.addEventListener('transitionend',fin);setTimeout(fin,360)}
 function closeViewer(){$('#viewer').classList.remove('on');vReset()}
-$('#vX').onclick=closeViewer;$('#vPrev').onclick=()=>viewPage(vi-1);$('#vNext').onclick=()=>viewPage(vi+1);
+$('#vX').onclick=closeViewer;$('#vE').onclick=()=>openEdit(vi);$('#vPrev').onclick=()=>vSlide(-1);$('#vNext').onclick=()=>vSlide(1);
 $('#vZ').onclick=()=>{const r=$('#vwrap').getBoundingClientRect();vZoomAt(vz.s>1?1:2.5,r.left+r.width/2,r.top+r.height/2)};
-addEventListener('keydown',e=>{if(!vOn())return;if(e.key=='ArrowLeft')viewPage(vi-1);else if(e.key=='ArrowRight')viewPage(vi+1);else if(e.key=='Escape')closeViewer()});
+addEventListener('keydown',e=>{if(!vOn()||E)return;if(e.key=='ArrowLeft')vSlide(-1);else if(e.key=='ArrowRight')vSlide(1);else if(e.key=='Escape')closeViewer()});
+addEventListener('resize',()=>{if(vOn()&&!vAnim)vTrack(0,false)});
 {const W=$('#vwrap'),P=new Map();let g=null,lastTap=0;
- W.addEventListener('pointerdown',e=>{if(e.target.closest('.varr'))return;W.setPointerCapture(e.pointerId);P.set(e.pointerId,{x:e.clientX,y:e.clientY});
-   if(P.size==2){const [a,b]=[...P.values()];g={pinch:1,d:Math.hypot(a.x-b.x,a.y-b.y),s:vz.s}}else g={x0:e.clientX,y0:e.clientY,vx:vz.x,vy:vz.y,t:Date.now(),moved:0}});
+ W.addEventListener('pointerdown',e=>{if(e.target.closest('.varr')||vAnim)return;try{W.setPointerCapture(e.pointerId)}catch(_){}P.set(e.pointerId,{x:e.clientX,y:e.clientY});
+   if(P.size==2){const [a,b]=[...P.values()];vTrack(0,true);g={pinch:1,d:Math.hypot(a.x-b.x,a.y-b.y),s:vz.s}}else g={x0:e.clientX,y0:e.clientY,vx:vz.x,vy:vz.y,moved:0,hist:[[performance.now(),e.clientX]]}});
  W.addEventListener('pointermove',e=>{if(!P.has(e.pointerId)||!g)return;P.set(e.pointerId,{x:e.clientX,y:e.clientY});
    if(g.pinch&&P.size==2){const [a,b]=[...P.values()];vZoomAt(Math.min(6,Math.max(1,g.s*Math.hypot(a.x-b.x,a.y-b.y)/g.d)),(a.x+b.x)/2,(a.y+b.y)/2);return}
-   const dx=e.clientX-g.x0,dy=e.clientY-g.y0;if(Math.hypot(dx,dy)>8)g.moved=1;
-   if(vz.s>1){vz.x=g.vx+dx;vz.y=g.vy+dy;vClamp();vApply()}else if(!g.pinch){$('#vimg').style.transform=`translateX(${dx}px)`}});
+   if(g.pinch)return;const dx=e.clientX-g.x0,dy=e.clientY-g.y0;if(Math.hypot(dx,dy)>8)g.moved=1;const now=performance.now();g.hist.push([now,e.clientX]);while(g.hist.length>2&&now-g.hist[0][0]>100)g.hist.shift();
+   if(vz.s>1){vz.x=g.vx+dx;vz.y=g.vy+dy;vClamp();vApply();return}
+   const edge=(dx<0&&vi>=spages.length-1)||(dx>0&&vi<=0);let tx=dx;
+   if(edge){const M=.15*vW();tx=Math.sign(dx)*M*Math.tanh(Math.abs(dx)/(M*2.2))}
+   W.classList.toggle('gl',edge&&dx>0);W.classList.toggle('gr',edge&&dx<0);g.edge=edge;vTrack(tx,false)});
  const end=e=>{if(!P.has(e.pointerId))return;P.delete(e.pointerId);if(!g)return;
-   if(g.pinch){if(!P.size)g=null;return}const dx=e.clientX-g.x0,dy=e.clientY-g.y0;
-   if(vz.s<=1){if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)){const n=vi+(dx<0?1:-1);if(n>=0&&n<spages.length){viewPage(n);g=null;return}}vReset()}
+   if(g.pinch){if(!P.size)g=null;return}const dx=e.clientX-g.x0,dy=e.clientY-g.y0;W.classList.remove('gl','gr');
+   if(vz.s<=1&&g.moved){const h=g.hist,v=h.length>1?(h[h.length-1][1]-h[0][1])/Math.max(1,h[h.length-1][0]-h[0][0]):0,
+       go=!g.edge&&Math.abs(dx)>Math.abs(dy)&&(Math.abs(dx)>.25*vW()||(Math.abs(v)>.5&&Math.sign(v)==Math.sign(dx)&&Math.abs(dx)>20));
+     if(go)vSlide(dx<0?1:-1);else{const t=$('#vtrack');t.style.transition='transform .25s cubic-bezier(.2,.9,.3,1.2)';t.style.transform=`translateX(${-vW()}px)`}}
    if(!g.moved){const now=Date.now();if(now-lastTap<300){vZoomAt(vz.s>1?1:2.5,e.clientX,e.clientY);lastTap=0}else lastTap=now}g=null};
  W.addEventListener('pointerup',end);W.addEventListener('pointercancel',end)}
 async function sharePage(p,i){const nm=(cur?cur.name:'page').replace(/[\\/:*?"<>|]/g,'_')+'_p'+(i+1)+'.jpg';const b=await new Promise(r=>p.out.toBlob(r,'image/jpeg',.95));
   try{const f=new File([b],nm,{type:'image/jpeg'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:nm});return}}catch(e){if(e.name=='AbortError')return}dl(b,nm)}
 $('#vtool').onclick=async e=>{const b=e.target.closest('button');if(!b)return;const p=spages[vi];if(!p)return;
-  ({crop:async()=>{await ensureSrc(p);openCrop(p)},
+  ({crop:()=>openEdit(vi),
     filter:()=>sheet('Filter / फ़िल्टर',[['🖼️','Original','असली',()=>{p.f='orig';rerender(p)},p.f=='orig'?'on':''],['🌫️','Grayscale','ग्रे',()=>{p.f='gray';rerender(p)},p.f=='gray'?'on':''],['⬛','B&W','काला-सफ़ेद',()=>{p.f='bw';rerender(p)},p.f=='bw'?'on':''],['🪄','Magic Color','मैजिक कलर',()=>{p.f='magic';rerender(p)},p.f=='magic'?'on':'']]),
     rot:()=>{p.rot=(p.rot+90)%360;rerender(p)},
     ocr:()=>{closeViewer();go('ocr');runOcr([p.out])},
     share:()=>sharePage(p,vi),
     del:()=>{if(confirm('Delete page? / पेज हटाएँ?')){spages.splice(vi,1);saveCur();drawScan();spages.length?viewPage(Math.min(vi,spages.length-1)):closeViewer()}}})[b.dataset.v]()};
+// ---- v8 Edit: free crop (8 handles + move), perspective (4 corners), rotate
+let E=null;
+function openEdit(i){const p=spages[i];if(!p)return;(async()=>{await ensureSrc(p);const k=Math.min(1,1400/Math.max(p.src.width,p.src.height)),ps=cv(Math.round(p.src.width*k),Math.round(p.src.height*k));
+  {const g=ps.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(p.src,0,0,ps.width,ps.height)}
+  E={p,i,ps,k,q:p.q.map(x=>[...x]),rot:p.rot,fc:(p.fc||[0,0,1,1]).slice(),mode:'rect'};$('#ed').classList.add('on');edMode('rect')})()}
+function edBase(){const q=E.q.map(([x,y])=>[x*E.k,y*E.k]),full=JSON.stringify(E.q)==JSON.stringify(fullQ(E.p.src));let w=full?(()=>{const c=cv(E.ps.width,E.ps.height);c.getContext('2d').drawImage(E.ps,0,0);return c})():warp(E.ps,q);E.base=rotC(filt(w,E.p.f),E.rot)}
+function edMode(m){E.mode=m;document.querySelectorAll('#etool [data-e=rect],#etool [data-e=quad]').forEach(b=>b.classList.toggle('on',b.dataset.e==m));
+  const c=$('#ecv');if(m=='rect'){edBase();c.width=E.base.width;c.height=E.base.height}else{c.width=E.ps.width;c.height=E.ps.height}
+  $('#edT').textContent=(m=='rect'?'Free crop':'Perspective')+(E.rot?` · ${E.rot}°`:'');requestAnimationFrame(()=>{edHandles();edDraw()})}
+function edDraw(){const c=$('#ecv'),g=c.getContext('2d'),W=c.width,H=c.height;const r=c.getBoundingClientRect(),sr=$('#estage').getBoundingClientRect(),k=r.width/W,ox=r.left-sr.left,oy=r.top-sr.top;
+  if(E.mode=='rect'){g.drawImage(E.base,0,0);const [a,b,cc,d]=E.fc,x=a*W,y=b*H,w=(cc-a)*W,h=(d-b)*H;g.fillStyle='#000a';g.beginPath();g.rect(0,0,W,H);g.rect(x,y,w,h);g.fill('evenodd');
+    g.strokeStyle='#42a5f5';g.lineWidth=Math.max(2,W/300);g.strokeRect(x,y,w,h);g.strokeStyle='#ffffff88';g.lineWidth=Math.max(1,W/700);g.beginPath();for(const t of[1/3,2/3]){g.moveTo(x+w*t,y);g.lineTo(x+w*t,y+h);g.moveTo(x,y+h*t);g.lineTo(x+w,y+h*t)}g.stroke();
+    const pts=[[a,b],[(a+cc)/2,b],[cc,b],[cc,(b+d)/2],[cc,d],[(a+cc)/2,d],[a,d],[a,(b+d)/2]];document.querySelectorAll('#estage .eh').forEach((h,i)=>{h.style.left=ox+pts[i][0]*W*k+'px';h.style.top=oy+pts[i][1]*H*k+'px'});
+    const m=$('#emove');Object.assign(m.style,{left:ox+x*k+16+'px',top:oy+y*k+16+'px',width:Math.max(0,w*k-32)+'px',height:Math.max(0,h*k-32)+'px'})}
+  else{g.drawImage(E.ps,0,0);const q=E.q.map(([x,y])=>[x*E.k,y*E.k]);g.fillStyle='#0008';g.beginPath();g.rect(0,0,W,H);g.moveTo(...q[0]);[1,2,3,0].forEach(i=>g.lineTo(...q[i]));g.fill('evenodd');
+    g.strokeStyle='#42a5f5';g.lineWidth=Math.max(2,W/300);g.beginPath();g.moveTo(...q[0]);[1,2,3,0].forEach(i=>g.lineTo(...q[i]));g.stroke();
+    document.querySelectorAll('#estage .eh').forEach((h,i)=>{h.style.left=ox+q[i][0]*k+'px';h.style.top=oy+q[i][1]*k+'px'})}}
+function edHandles(){document.querySelectorAll('#estage .eh,#emove').forEach(h=>h.remove());const st=$('#estage'),rect=E.mode=='rect',n=rect?8:4;
+  const drag=(el,fn)=>{el.onpointerdown=e=>{e.preventDefault();e.stopPropagation();el.setPointerCapture(e.pointerId);const c=$('#ecv'),r=c.getBoundingClientRect(),s0={x:e.clientX,y:e.clientY,fc:E.fc.slice()};
+    el.onpointermove=ev=>{fn((ev.clientX-r.left)/r.width,(ev.clientY-r.top)/r.height,(ev.clientX-s0.x)/r.width,(ev.clientY-s0.y)/r.height,s0);edDraw()};el.onpointerup=el.onpointercancel=()=>el.onpointermove=null}};
+  if(rect){const m=document.createElement('div');m.id='emove';st.appendChild(m);drag(m,(fx,fy,dx,dy,s0)=>{const [a,b,c,d]=s0.fc,w=c-a,h=d-b,nx=Math.min(1-w,Math.max(0,a+dx)),ny=Math.min(1-h,Math.max(0,b+dy));E.fc=[nx,ny,nx+w,ny+h]})}
+  const MIN=.05,cl=v=>Math.max(0,Math.min(1,v));
+  for(let i=0;i<n;i++){const h=document.createElement('div');h.className='eh'+(rect&&i%2?' s':'');h.dataset.h=i;st.appendChild(h);
+    drag(h,rect?(fx,fy)=>{fx=cl(fx);fy=cl(fy);let [a,b,c,d]=E.fc;if([0,6,7].includes(i))a=Math.min(fx,c-MIN);if([2,3,4].includes(i))c=Math.max(fx,a+MIN);if([0,1,2].includes(i))b=Math.min(fy,d-MIN);if([4,5,6].includes(i))d=Math.max(fy,b+MIN);E.fc=[a,b,c,d]}
+      :(fx,fy)=>{E.q[i]=[cl(fx)*E.p.src.width,cl(fy)*E.p.src.height]})}}
+const rotFc=f=>[1-f[3],f[0],1-f[1],f[2]];// 90° clockwise
+$('#etool').onclick=e=>{const b=e.target.closest('button');if(!b||!E)return;const a=b.dataset.e;
+  if(a=='rect'||a=='quad')return edMode(a);
+  if(a=='rot'){E.rot=(E.rot+90)%360;E.fc=rotFc(E.fc);return edMode(E.mode)}
+  if(a=='auto'){E.q=detect(E.p.src);E.fc=[0,0,1,1];return edMode(E.mode)}
+  if(a=='reset'){E.q=fullQ(E.p.src);E.fc=[0,0,1,1];E.rot=0;return edMode(E.mode)}};
+$('#edX').onclick=()=>{E=null;$('#ed').classList.remove('on')};
+$('#edOk').onclick=async()=>{const p=E.p,f=E.fc.map(v=>+v.toFixed(4));p.q=E.q;p.rot=E.rot;p.fc=(f[0]<=0&&f[1]<=0&&f[2]>=1&&f[3]>=1)?null:f;E=null;$('#ed').classList.remove('on');await rerender(p);st('✅ Saved / सेव हो गया')};
+addEventListener('resize',()=>{if(E)edDraw()});
 async function listDocs(){let all=[];try{all=await tx('readonly',s=>s.getAll(),'scans')||[]}catch(e){}all.sort((a,b)=>(b.mt||b.t)-(a.mt||a.t));if(await fixThumbs(all))return listDocs();
   const q=$('#q').value.trim().toLowerCase(),L=$('#dlist');$('#dcount').innerHTML=`Documents (${all.length}) <small>/ दस्तावेज़</small>`;
   const show=all.filter(d=>!q||d.name.toLowerCase().includes(q));L.innerHTML=show.length?'':`<div class="empty"><div>📄</div>${q?'No match / कुछ नहीं मिला':'No documents yet.<br>Tap 📷 to scan / स्कैन करने के लिए 📷 दबाएँ'}</div>`;
@@ -444,10 +508,10 @@ async function listDocs(){let all=[];try{all=await tx('readonly',s=>s.getAll(),'
 function drawScan(){const L=$('#plist');L.innerHTML='';if(cur)$('#abT').textContent=cur.name;
   if(!spages.length)L.innerHTML='<div class="empty"><div>📷</div>No pages. Tap 📷 or 🖼️ / पेज जोड़ें</div>';
   spages.forEach((p,i)=>{const e=document.createElement('div');e.className='lc pr';e.dataset.i=i;
-    e.innerHTML=`<img src="${p.thumb}" alt=""><div class="tx"><div class="big">${i+1}</div><div class="tm">${rel(p.t)}</div><div class="bd"><span>${kb(p.size||0)}</span><span class="bx">${({orig:'Original',gray:'Gray',bw:'B&W',magic:'Magic'})[p.f]}</span></div></div><button class="mo" aria-label="more">•••</button>`;
-    e.querySelector('.mo').onclick=()=>pageMenu(i);e.onclick=ev=>{if(!ev.target.closest('.mo')&&Date.now()-dragEnd>300)viewPage(i)};e.addEventListener('pointerdown',ev=>pdStart(ev,e));e.addEventListener('contextmenu',ev=>ev.preventDefault());L.appendChild(e)})}
+    e.innerHTML=`<img src="${p.thumb}" alt=""><div class="tx"><div class="big">${i+1}</div><div class="tm">${rel(p.t)}</div><div class="bd"><span>${kb(p.size||0)}</span><span class="bx">${({orig:'Original',gray:'Gray',bw:'B&W',magic:'Magic'})[p.f]}</span></div></div><button class="ed" aria-label="edit">✏️</button><button class="mo" aria-label="more">•••</button>`;
+    e.querySelector('.ed').onclick=ev=>{ev.stopPropagation();openEdit(i)};e.querySelector('.mo').onclick=ev=>{ev.stopPropagation();pageMenu(i)};e.onclick=ev=>{if(!ev.target.closest('.mo,.ed')&&Date.now()-dragEnd>300)viewPage(i)};e.addEventListener('pointerdown',ev=>pdStart(ev,e));e.addEventListener('contextmenu',ev=>ev.preventDefault());L.appendChild(e)})}
 function pageMenu(i){const p=spages[i];sheet(`Page ${i+1} · ${kb(p.size)} · ${new Date(p.t).toLocaleString()}`,[
-  ['✂️','Crop & straighten','कोने ठीक करें / काटें',async()=>{await ensureSrc(p);openCrop(p)}],
+  ['✏️','Edit (free crop / rotate)','एडिट — कहीं से भी काटें',()=>openEdit(i)],['✂️','Crop & straighten','कोने ठीक करें / काटें',async()=>{await ensureSrc(p);openCrop(p)}],
   ['🎨','Filter','फ़िल्टर',()=>sheet('Filter / फ़िल्टर',[['🖼️','Original','असली',()=>{p.f='orig';rerender(p)},p.f=='orig'?'on':''],['🌫️','Grayscale','ग्रे',()=>{p.f='gray';rerender(p)},p.f=='gray'?'on':''],
     ['⬛','B&W','काला-सफ़ेद',()=>{p.f='bw';rerender(p)},p.f=='bw'?'on':''],['🪄','Magic Color','मैजिक कलर',()=>{p.f='magic';rerender(p)},p.f=='magic'?'on':'']])],
   ['⟳','Rotate','घुमाएँ (90°)',()=>{p.rot=(p.rot+90)%360;rerender(p)}],
@@ -465,7 +529,7 @@ async function allF(f){st('Applying… / लगा रहे हैं…',0);fo
 $('#abP').onclick=()=>exportPdf();
 // long-press drag reorder for page cards
 let pdrag=null,dragEnd=0;addEventListener('touchmove',e=>{if(pdrag&&pdrag.on)e.preventDefault()},{passive:false});
-function pdStart(e,el){if(e.target.closest('.mo')||pdrag)return;const x=e.clientX,y=e.clientY,id=e.pointerId;el.classList.add('arm');
+function pdStart(e,el){if(e.target.closest('.mo,.ed')||pdrag)return;const x=e.clientX,y=e.clientY,id=e.pointerId;el.classList.add('arm');
   pdrag={el,id,y0:y,on:false};
   const cancel=()=>{clearTimeout(pdrag&&pdrag.tm);el.classList.remove('arm');removeEventListener('pointermove',mvH);removeEventListener('pointerup',up);removeEventListener('pointercancel',up)};
   const mvH=ev=>{if(ev.pointerId!==id||!pdrag)return;if(!pdrag.on){if(Math.hypot(ev.clientX-x,ev.clientY-y)>10){cancel();pdrag=null}return}

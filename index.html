@@ -1,47 +1,101 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>File Badlo</title><meta name="theme-color" content="#4f46e5">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="quill.snow.css">
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,"Noto Sans Devanagari",sans-serif;background:#f3f4f6;color:#111}
-header{background:#4f46e5;color:#fff;padding:14px 16px}header h1{margin:0;font-size:22px}header p{margin:2px 0 0;font-size:13px;opacity:.9}
-nav{display:flex;position:sticky;top:0;z-index:5;background:#fff;box-shadow:0 1px 4px #0002}
-nav button{flex:1;padding:14px 4px;border:0;background:none;font-size:15px;font-weight:600;border-bottom:3px solid transparent}
-nav button.on{border-color:#4f46e5;color:#4f46e5}nav small,.h{display:block;font-weight:400;font-size:12px;color:#666}
-main{padding:12px;max-width:800px;margin:auto}section{display:none}section.on{display:block}
-.card{background:#fff;border-radius:12px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px #0001}
-.btn{display:inline-block;min-height:48px;padding:12px 16px;margin:4px;border:0;border-radius:10px;background:#4f46e5;color:#fff;font-size:16px;font-weight:600}
-.btn.alt{background:#e0e7ff;color:#3730a3}.btn.red{background:#fee2e2;color:#b91c1c}
+:root{--p:#4f46e5;--pl:#eef2ff;--bg:#f5f6fb;--tx:#111827;--mu:#6b7280}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:system-ui,"Noto Sans Devanagari",sans-serif;background:var(--bg);color:var(--tx);padding-bottom:84px}
+header{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;padding:16px 18px 18px;border-radius:0 0 22px 22px;box-shadow:0 4px 16px #4f46e533}
+header h1{margin:0;font-size:22px;display:flex;align-items:center;gap:8px}header p{margin:4px 0 0;font-size:13px;opacity:.9}
+#ver{font-size:12px;background:#fff3;padding:2px 8px;border-radius:9px}
+#back{display:none;border:0;background:#fff3;color:#fff;border-radius:50%;width:34px;height:34px;font-size:18px}
+main{padding:14px;max-width:800px;margin:auto}section{display:none}section.on{display:block;animation:fi .28s ease}
+@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+h2{font-size:17px;margin:6px 2px 10px}h2 small{font-weight:400;color:var(--mu);font-size:13px}
+.card{background:#fff;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px #0000000f,0 4px 14px #0000000a}
+.btn{display:inline-block;min-height:48px;padding:12px 16px;margin:4px;border:0;border-radius:12px;background:var(--p);color:#fff;font-size:16px;font-weight:600;transition:transform .12s}
+.btn:active{transform:scale(.96)}.btn.alt{background:#e0e7ff;color:#3730a3}.btn.red{background:#fee2e2;color:#b91c1c}
 .btn:disabled{opacity:.5}.grid{display:flex;flex-wrap:wrap}
-input[type=file]{width:100%;padding:16px;border:2px dashed #a5b4fc;border-radius:10px;background:#eef2ff;font-size:15px}
-input[type=text],input[type=number],select{font-size:16px;padding:10px;border:1px solid #ccc;border-radius:8px;width:100%;margin:4px 0}
-#status{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:12px;font-size:14px;display:none;z-index:9}
+input[type=file]{width:100%;padding:16px;border:2px dashed #a5b4fc;border-radius:12px;background:var(--pl);font-size:15px}
+input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;border:1px solid #ccc;border-radius:10px;width:100%;margin:4px 0}
+#status{position:fixed;bottom:84px;left:12px;right:12px;background:#111;color:#fff;padding:12px 14px;border-radius:12px;font-size:14px;display:none;z-index:60;animation:fi .2s}
 #editor{height:55vh;background:#fff;font-size:16px}.pages{display:flex;flex-wrap:wrap;gap:8px}
-.pg{background:#fff;border:1px solid #ddd;border-radius:8px;padding:4px;text-align:center;width:120px;position:relative;user-select:none;-webkit-user-select:none;transition:box-shadow .2s,opacity .25s;touch-action:manipulation}.pg canvas{width:100%;pointer-events:none}
+.pg{background:#fff;border:1px solid #ddd;border-radius:10px;padding:4px;text-align:center;width:120px;position:relative;user-select:none;-webkit-user-select:none;transition:box-shadow .2s,opacity .25s;touch-action:manipulation}.pg canvas{width:100%;pointer-events:none}
 .pg.arm{outline:3px solid #a5b4fc}.pg.lift{z-index:20;box-shadow:0 12px 28px #0005;transition:box-shadow .2s;cursor:grabbing}.pg.gone{opacity:0;transform:scale(.6)!important;transition:opacity .25s,transform .25s}
-.pg{width:150px}.pg .hd{display:block;width:100%;min-height:52px;border-radius:8px;background:#4f46e5;color:#fff;font-size:15px;font-weight:700;line-height:1.1;touch-action:none;cursor:grab;margin-bottom:3px}
-
+.pg{width:150px}.pg .hd{display:block;width:100%;min-height:52px;border-radius:8px;background:var(--p);color:#fff;font-size:15px;font-weight:700;line-height:1.1;touch-action:none;cursor:grab;margin-bottom:3px}
 .pg button{min-width:34px;min-height:36px;margin:1px;border:0;border-radius:6px;background:#e0e7ff;font-size:16px}
-.note{font-size:13px;color:#555}
+.note{font-size:13px;color:#555}.h{display:block;font-weight:400;font-size:12px;color:var(--mu)}
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tile{background:#fff;border:0;border-radius:16px;padding:14px 6px;text-align:center;box-shadow:0 1px 3px #0000000f,0 4px 14px #0000000a;font-size:13px;font-weight:600;color:var(--tx);transition:transform .15s}
+.tile:active{transform:scale(.94)}.tile i{display:flex;align-items:center;justify-content:center;width:48px;height:48px;margin:0 auto 8px;border-radius:14px;font-size:24px;font-style:normal}
+.tile small{display:block;font-weight:400;color:var(--mu);font-size:11px;margin-top:2px}
+.hero{display:flex;align-items:center;gap:14px;background:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 4px 18px #4f46e51f;border:0;width:100%;text-align:left;font-size:15px;color:var(--tx)}
+.hero i{font-style:normal;font-size:30px;width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center}
+.recent{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.doc{background:#fff;border-radius:12px;padding:6px;box-shadow:0 1px 4px #0001;font-size:11px;text-align:center;overflow:hidden}
+.doc img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px;background:#eee}.doc b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.doc .ac button{border:0;background:#e0e7ff;border-radius:6px;margin:2px;min-width:30px;min-height:30px}
+/* bottom nav */
+nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:#fff;display:flex;box-shadow:0 -2px 12px #0000001a;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;border:0;background:none;font-size:12px;font-weight:600;color:var(--mu);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+nav button span{font-size:22px;transition:transform .2s}nav button.on{color:var(--p)}nav button.on span{transform:translateY(-2px) scale(1.1)}
+nav small{font-weight:400;font-size:10px}
+nav .fab{flex:none;width:66px;height:66px;margin:-26px 6px 0;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;box-shadow:0 6px 18px #4f46e577;font-size:11px}
+nav .fab span{font-size:26px}nav .fab.on{color:#fff}
+/* scanner */
+.sp{width:140px;background:#fff;border-radius:12px;padding:5px;box-shadow:0 1px 4px #0002;text-align:center;font-size:12px;animation:fi .25s}
+.sp img{width:100%;border-radius:8px;display:block;background:#eee}.sp button{border:0;background:#e0e7ff;border-radius:6px;margin:1px;min-width:30px;min-height:32px;font-size:14px}
+.sp select{font-size:12px;padding:4px;margin:3px 0}
+.ov{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column}.ov.on{display:flex}
+.ov video,.ov .stage{flex:1;min-height:0;width:100%;object-fit:contain}.ov .bar{display:flex;justify-content:space-around;align-items:center;padding:14px;background:#111}
+.shut{width:72px;height:72px;border-radius:50%;border:5px solid #fff;background:#fff4}.ov .bar .btn{margin:0}
+.stage{position:relative;display:flex;align-items:center;justify-content:center;touch-action:none}.stage canvas{max-width:100%;max-height:100%}
+.hdl{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:3px solid #fff;background:#4f46e5aa;touch-action:none;box-shadow:0 0 0 2px #4f46e5}
+#scount{color:#fff;font-size:14px}
+#otext{min-height:180px;font-family:inherit}
 </style></head><body>
-<header><h1>📁 File Badlo <small id="ver" style="font-size:12px;background:#fff3;padding:2px 8px;border-radius:9px;vertical-align:middle">v3</small></h1><p>Convert & edit files — sab kuch aapke phone par, koi upload nahi</p></header>
-<nav><button data-t="conv" class="on">Convert<small>बदलें</small></button><button data-t="edit">Editor<small>लिखें/एडिट</small></button><button data-t="pdf">PDF Tools<small>PDF जोड़ें/काटें</small></button></nav>
+<header><h1><button id="back" aria-label="back">←</button>📁 File Badlo <small id="ver">v4</small></h1><p>Scan, convert & edit — sab kuch aapke phone par, koi upload nahi</p></header>
 <main>
-<section id="conv" class="on"><div class="card"><b>1. Pick file(s)</b><span class="h">फ़ाइल चुनें (एक या ज़्यादा)</span>
+<section id="home" class="on">
+<button class="hero" data-go="scan"><i>📷</i><div><b>Scan Document</b><span class="h">दस्तावेज़ स्कैन करें → PDF / JPG</span></div></button>
+<h2>Tools <small>/ टूल्स</small></h2>
+<div class="tiles">
+<button class="tile" data-go="scan"><i style="background:#ede9fe">📷</i>Scanner<small>स्कैनर</small></button>
+<button class="tile" data-go="conv"><i style="background:#dbeafe">🔄</i>Convert<small>बदलें</small></button>
+<button class="tile" data-go="pdf"><i style="background:#fee2e2">📑</i>PDF Tools<small>PDF टूल्स</small></button>
+<button class="tile" data-go="ocr"><i style="background:#dcfce7">🔤</i>OCR Text<small>टेक्स्ट निकालें</small></button>
+<button class="tile" data-go="edit"><i style="background:#fef3c7">✍️</i>Editor<small>लिखें/एडिट</small></button>
+<button class="tile" data-go="files"><i style="background:#e0f2fe">🗂️</i>My Files<small>मेरी फ़ाइलें</small></button>
+</div>
+<h2 style="margin-top:18px">Recent scans <small>/ हाल के स्कैन</small></h2><div id="recentH" class="recent"></div>
+</section>
+<section id="tools"><h2>All tools <small>/ सभी टूल्स</small></h2><div class="tiles">
+<button class="tile" data-go="scan"><i style="background:#ede9fe">📷</i>Scan<small>स्कैन</small></button>
+<button class="tile" data-go="conv"><i style="background:#dbeafe">🖼️</i>Image→PDF<small>फोटो→PDF</small></button>
+<button class="tile" data-go="conv"><i style="background:#dbeafe">📄</i>PDF→JPG<small>PDF→फोटो</small></button>
+<button class="tile" data-go="conv"><i style="background:#dbeafe">📝</i>Word↔PDF<small>DOCX/PDF</small></button>
+<button class="tile" data-go="conv"><i style="background:#dbeafe">📊</i>Excel/CSV<small>शीट बदलें</small></button>
+<button class="tile" data-go="pdf"><i style="background:#fee2e2">➕</i>Merge PDF<small>जोड़ें</small></button>
+<button class="tile" data-go="pdf"><i style="background:#fee2e2">↕️</i>Reorder<small>पेज क्रम</small></button>
+<button class="tile" data-go="pdf"><i style="background:#fee2e2">🖊️</i>Add text<small>PDF पर लिखें</small></button>
+<button class="tile" data-go="ocr"><i style="background:#dcfce7">🔤</i>OCR<small>टेक्स्ट निकालें</small></button>
+<button class="tile" data-go="edit"><i style="background:#fef3c7">✍️</i>Editor<small>एडिटर</small></button>
+</div></section>
+<section id="conv"><h2>🔄 Convert <small>/ बदलें</small></h2><div class="card"><b>1. Pick file(s)</b><span class="h">फ़ाइल चुनें (एक या ज़्यादा)</span>
 <input type="file" id="cf" multiple></div>
 <div class="card"><b>2. Convert to</b><span class="h">किस format में बदलना है?</span><div id="copts" class="grid note">Pick a file first. / पहले फ़ाइल चुनें।</div></div>
 <div class="card note"><b>Supported / समर्थित:</b><br>Images (PNG/JPG/WEBP/GIF/BMP) → PNG, JPG, WEBP, PDF<br>PDF → PNG, JPG (per page), TXT<br>TXT / MD / HTML → PDF, DOCX, HTML, TXT<br>DOCX → PDF, HTML, TXT, DOCX(clean)<br>CSV / XLSX / XLS / ODS / JSON → XLSX, CSV, JSON, HTML, PDF<br>Not supported: video, audio, PPT. / वीडियो-ऑडियो नहीं।</div></section>
 
-<section id="edit"><div class="card"><b>Open a file</b> <span class="h">.txt .md .html .docx खोलें, या नया लिखें</span>
+<section id="edit"><h2>✍️ Editor <small>/ एडिटर</small></h2><div class="card"><b>Open a file</b> <span class="h">.txt .md .html .docx खोलें, या नया लिखें</span>
 <input type="file" id="ef" accept=".txt,.md,.html,.htm,.docx"></div>
 <div id="editor"></div>
 <div class="card"><b>Save as</b><span class="h">इस format में सेव करें</span>
 <input type="text" id="ename" value="document" placeholder="file name"><div class="grid">
 <button class="btn" data-s="docx">DOCX</button><button class="btn" data-s="pdf">PDF</button><button class="btn alt" data-s="html">HTML</button><button class="btn alt" data-s="txt">TXT</button><button class="btn red" id="eclear">New / नया</button></div></div></section>
 
-<section id="pdf">
+<section id="pdf"><h2>📑 PDF Tools <small>/ PDF टूल्स</small></h2>
 <div class="card"><b>Merge PDFs</b><span class="h">कई PDF को एक में जोड़ें (चुनने के क्रम में)</span>
 <input type="file" id="mf" accept="application/pdf" multiple><button class="btn" id="mbtn">Merge / जोड़ें</button></div>
 <div class="card"><b>Reorder / delete pages</b><span class="h">⠿ पकड़कर खींचें (drag) या ◀ ▶ दबाएँ, 🗑 से हटाएँ</span>
@@ -52,7 +106,34 @@ input[type=text],input[type=number],select{font-size:16px;padding:10px;border:1p
 <label class="note">From left % / बाएँ से %<input type="number" id="ax" value="10"></label><label class="note">From top % / ऊपर से %<input type="number" id="ay" value="10"></label>
 <label class="note">Size<input type="number" id="asize" value="20"></label><label class="note">Color<select id="acol"><option value="#000">Black</option><option value="#d00">Red</option><option value="#00c">Blue</option></select></label>
 <button class="btn" id="abtn">Add & save / जोड़ें</button></div>
-</section></main><div id="status"></div>
+</section>
+
+<section id="scan"><h2>📷 Document Scanner <small>/ दस्तावेज़ स्कैनर</small></h2>
+<div class="card"><div class="grid"><button class="btn" id="camBtn">📷 Camera / कैमरा</button><button class="btn alt" id="galBtn">🖼️ Gallery / गैलरी</button></div>
+<input type="file" id="sf" accept="image/*" multiple style="display:none"><input type="file" id="sfc" accept="image/*" capture="environment" style="display:none">
+<span class="h">Edges auto-detect होते हैं; ✂️ से कोने ठीक करें। Filters, rotate, क्रम बदलें।</span></div>
+<div class="card"><b>Pages <span id="scnt">(0)</span></b><span class="h">पेज — ◀ ▶ क्रम, ✂️ crop, ⟳ घुमाएँ, 🗑 हटाएँ</span>
+<div id="spages" class="pages" style="margin-top:8px"></div>
+<input type="text" id="sname" value="scan" placeholder="file name"><label class="note">Apply filter to all / सब पर filter
+<select id="sall"><option value="">—</option><option value="orig">Original</option><option value="gray">Grayscale</option><option value="bw">B&amp;W</option><option value="magic">Magic Color</option></select></label>
+<div class="grid"><button class="btn" id="spdf">⬇ PDF</button><button class="btn alt" id="sjpg">⬇ JPG</button><button class="btn alt" id="socr">🔤 OCR</button><button class="btn red" id="sclr">Clear / साफ़</button></div></div>
+</section>
+
+<section id="ocr"><h2>🔤 OCR — Text निकालें</h2>
+<div class="card"><b>Pick image or PDF</b><span class="h">फोटो या PDF चुनें — टेक्स्ट फ़ोन पर ही पढ़ा जाता है (offline)</span>
+<input type="file" id="ocf" accept="image/*,application/pdf" multiple>
+<label class="note">Language / भाषा<select id="olang"><option value="eng">English</option><option value="hin">हिंदी</option><option value="eng+hin" selected>English + हिंदी</option></select></label>
+<button class="btn" id="obtnr">Extract text / टेक्स्ट निकालें</button></div>
+<div class="card"><b>Text</b><textarea id="otext" placeholder="Text yahan aayega…"></textarea>
+<div class="grid"><button class="btn" id="ocopy">📋 Copy / कॉपी</button><button class="btn alt" id="otxt">⬇ TXT</button></div></div></section>
+
+<section id="files"><h2>🗂️ My Files <small>/ मेरी फ़ाइलें</small></h2><span class="h" style="margin:0 2px 8px">Scanner से बनी फ़ाइलें यहाँ (इसी फ़ोन में) सेव रहती हैं।</span><div id="recentF" class="recent"></div></section>
+</main>
+<nav><button data-t="home" class="on"><span>🏠</span>Home<small>होम</small></button><button data-t="tools"><span>🧰</span>Tools<small>टूल्स</small></button>
+<button data-t="scan" class="fab"><span>📷</span>Scan</button><button data-t="files"><span>🗂️</span>Files<small>फ़ाइलें</small></button></nav>
+<div id="cam" class="ov"><video id="vid" playsinline muted autoplay></video><div class="bar"><button class="btn red" id="camX">✕</button><button class="shut" id="snap" aria-label="capture"></button><span id="scount">0</span><button class="btn" id="camOk">Done ✓</button></div></div>
+<div id="crop" class="ov"><div class="stage" id="stage"><canvas id="ccv"></canvas></div><div class="bar"><button class="btn red" id="cropX">✕</button><button class="btn alt" id="cropAuto">Auto</button><button class="btn alt" id="cropFull">Full</button><button class="btn" id="cropOk">Apply ✓</button></div></div>
+<div id="status"></div>
 <script src="jspdf.umd.min.js"></script><script src="pdf.min.js"></script><script src="docx.umd.js"></script>
 <script src="mammoth.browser.min.js"></script><script src="xlsx.full.min.js"></script><script src="quill.min.js"></script>
 <script src="pdf-lib.min.js"></script><script src="marked.min.js"></script><script src="html2canvas.min.js"></script>
@@ -60,7 +141,6 @@ input[type=text],input[type=number],select{font-size:16px;padding:10px;border:1p
 pdfjsLib.GlobalWorkerOptions.workerSrc='pdf.worker.min.js';
 const $=s=>document.querySelector(s);
 function st(m,t){const e=$('#status');e.textContent=m;e.style.display='block';clearTimeout(st.t);if(t!==0)st.t=setTimeout(()=>e.style.display='none',t||3500)}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,section').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('#'+b.dataset.t).classList.add('on')});
 function dl(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),60000);st('✅ Saved / डाउनलोड: '+name)}
 const base=n=>n.replace(/\.[^.]+$/,''), ext=n=>(n.split('.').pop()||'').toLowerCase();
 const readText=f=>f.text(), readBuf=f=>f.arrayBuffer();
@@ -198,6 +278,121 @@ $('#abtn').onclick=async()=>{const f=$('#af').files[0],t=$('#atext').value;if(!f
   lines.forEach((l,i)=>g.fillText(l,4,i*sz*4*1.3));const img=await d.embedPng(c.toDataURL('image/png'));const w=c.width/4,h=c.height/4;
   p.drawImage(img,{x:W*(+$('#ax').value)/100,y:H-H*(+$('#ay').value)/100-h,width:w,height:h});
   dl(new Blob([await d.save()],{type:'application/pdf'}),base(f.name)+'_text.pdf')}catch(e){st('❌ '+e.message,6000)}};
+// ---- Navigation (v4)
+const SUB=['conv','edit','pdf','ocr'];
+function go(t){document.querySelectorAll('main>section').forEach(x=>x.classList.toggle('on',x.id==t));
+  const nt=SUB.includes(t)?'tools':t;document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t==nt));
+  $('#back').style.display=t=='home'?'none':'inline-block';scrollTo(0,0);if(t=='files'||t=='home')showRecent()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.t));
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+$('#back').onclick=()=>go('home');
+// ---- Recent files (IndexedDB)
+const idb=new Promise((r,j)=>{const q=indexedDB.open('fb',1);q.onupgradeneeded=()=>q.result.createObjectStore('docs',{keyPath:'id',autoIncrement:true});q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});
+async function tx(m,fn){const d=await idb;return new Promise((r,j)=>{const t=d.transaction('docs',m),s=t.objectStore('docs'),q=fn(s);t.oncomplete=()=>r(q&&q.result);t.onerror=()=>j(t.error)})}
+const saveDoc=(name,blob,thumb)=>tx('readwrite',s=>s.add({name,blob,thumb,t:Date.now()})).catch(()=>{});
+async function showRecent(){let all=[];try{all=(await tx('readonly',s=>s.getAll())||[]).reverse()}catch(e){}
+  const mk=(lim)=>all.length?all.slice(0,lim).map(d=>`<div class="doc"><img src="${d.thumb||''}" alt=""><b>${esc(d.name)}</b><span class="h">${new Date(d.t).toLocaleDateString()}</span><div class="ac"><button data-o="${d.id}">⬇</button><button data-del="${d.id}">🗑</button></div></div>`).join(''):'<div class="note" style="grid-column:1/-1">No scans yet. 📷 दबाकर स्कैन करें।</div>';
+  $('#recentH').innerHTML=mk(6);$('#recentF').innerHTML=mk(999);
+  document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{const d=all.find(x=>x.id==b.dataset.o);dl(d.blob,d.name)});
+  document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{if(confirm('Delete? / हटाएँ?')){await tx('readwrite',s=>s.delete(+b.dataset.del));showRecent()}})}
+showRecent();
+// ---- Scanner
+let spages=[];// {src:canvas, q:[[x,y]x4], rot, f, out:canvas}
+const cv=(w,h)=>{const c=document.createElement('canvas');c.width=w;c.height=h;return c};
+function srcCanvas(img){const s=Math.min(1,2400/Math.max(img.naturalWidth||img.videoWidth||img.width,img.naturalHeight||img.videoHeight||img.height));
+  const w=Math.round((img.naturalWidth||img.videoWidth||img.width)*s),h=Math.round((img.naturalHeight||img.videoHeight||img.height)*s),c=cv(w,h);c.getContext('2d').drawImage(img,0,0,w,h);return c}
+// auto edge detect: Otsu threshold on downscaled gray, largest bright blob, extreme corners
+function detect(src){const S=200/Math.max(src.width,src.height),w=Math.max(1,Math.round(src.width*S)),h=Math.max(1,Math.round(src.height*S)),c=cv(w,h),g=c.getContext('2d');g.drawImage(src,0,0,w,h);
+  const d=g.getImageData(0,0,w,h).data,G=new Uint8Array(w*h),hist=new Array(256).fill(0);for(let i=0;i<w*h;i++){G[i]=(d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11)|0;hist[G[i]]++}
+  let sum=0;for(let i=0;i<256;i++)sum+=i*hist[i];let sB=0,wB=0,best=0,T=128;for(let i=0;i<256;i++){wB+=hist[i];if(!wB)continue;const wF=w*h-wB;if(!wF)break;sB+=i*hist[i];const mB=sB/wB,mF=(sum-sB)/wF,v=wB*wF*(mB-mF)**2;if(v>best){best=v;T=i}}
+  const lab=new Int32Array(w*h).fill(-1);let bestN=0,bestL=-1,stack=[];
+  for(let i=0;i<w*h;i++){if(G[i]<=T||lab[i]>=0)continue;let n=0;stack.push(i);lab[i]=i;while(stack.length){const p=stack.pop();n++;const x=p%w,y=(p/w)|0;
+    for(const q of [x>0?p-1:-1,x<w-1?p+1:-1,y>0?p-w:-1,y<h-1?p+w:-1])if(q>=0&&lab[q]<0&&G[q]>T){lab[q]=i;stack.push(q)}}if(n>bestN){bestN=n;bestL=i}}
+  const full=[[0,0],[src.width,0],[src.width,src.height],[0,src.height]];if(bestN<w*h*.15||bestN>w*h*.97)return full;
+  let c4=[[1e9,0,0],[-1e9,0,0],[-1e9,0,0],[1e9,0,0]];// tl min x+y, tr max x-y, br max x+y, bl min x-y
+  for(let i=0;i<w*h;i++){if(lab[i]!==bestL)continue;const x=i%w,y=(i/w)|0;
+    if(x+y<c4[0][0])c4[0]=[x+y,x,y];if(x-y>c4[1][0])c4[1]=[x-y,x,y];if(x+y>c4[2][0])c4[2]=[x+y,x,y];if(x-y<c4[3][0])c4[3]=[x-y,x,y]}
+  return c4.map(([,x,y])=>[Math.min(src.width,(x+.5)/S),Math.min(src.height,(y+.5)/S)])}
+// homography: maps unit square (0,0),(1,0),(1,1),(0,1) to quad
+function sq2quad(q){const [[x0,y0],[x1,y1],[x2,y2],[x3,y3]]=q,dx1=x1-x2,dx2=x3-x2,dy1=y1-y2,dy2=y3-y2,sx=x0-x1+x2-x3,sy=y0-y1+y2-y3;
+  let g=0,h=0;if(sx||sy){const den=dx1*dy2-dx2*dy1;g=(sx*dy2-dx2*sy)/den;h=(dx1*sy-sx*dy1)/den}
+  return [x1-x0+g*x1,x3-x0+h*x3,x0,y1-y0+g*y1,y3-y0+h*y3,y0,g,h]}
+function warp(src,q){const L=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);let W=Math.round(Math.max(L(q[0],q[1]),L(q[3],q[2]))),H=Math.round(Math.max(L(q[0],q[3]),L(q[1],q[2])));
+  const s=Math.min(1,2000/Math.max(W,H));W=Math.max(1,Math.round(W*s));H=Math.max(1,Math.round(H*s));
+  const [a,b,c,d,e,f,g,h]=sq2quad(q),sw=src.width,sh=src.height,sd=src.getContext('2d').getImageData(0,0,sw,sh).data,o=cv(W,H),og=o.getContext('2d'),od=og.createImageData(W,H),D=od.data;
+  for(let y=0;y<H;y++){const v=(y+.5)/H;for(let x=0;x<W;x++){const u=(x+.5)/W,z=g*u+h*v+1;let X=(a*u+b*v+c)/z-.5,Y=(d*u+e*v+f)/z-.5;
+    X=Math.max(0,Math.min(sw-1.001,X));Y=Math.max(0,Math.min(sh-1.001,Y));const x0=X|0,y0=Y|0,fx=X-x0,fy=Y-y0,i=(y0*sw+x0)*4,j=i+sw*4,k=(y*W+x)*4;
+    for(let ch=0;ch<3;ch++)D[k+ch]=(sd[i+ch]*(1-fx)+sd[i+4+ch]*fx)*(1-fy)+(sd[j+ch]*(1-fx)+sd[j+4+ch]*fx)*fy;D[k+3]=255}}
+  og.putImageData(od,0,0);return o}
+function filt(c,f){if(f=='orig')return c;const g=c.getContext('2d'),im=g.getImageData(0,0,c.width,c.height),d=im.data,n=d.length;
+  if(f=='gray')for(let i=0;i<n;i+=4){const v=d[i]*.3+d[i+1]*.59+d[i+2]*.11;d[i]=d[i+1]=d[i+2]=v}
+  else if(f=='bw'){// adaptive threshold using local mean via integral image
+    const w=c.width,h=c.height,G=new Float32Array(w*h),I=new Float64Array((w+1)*(h+1));for(let i=0;i<w*h;i++)G[i]=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;
+    for(let y=0;y<h;y++){let r=0;for(let x=0;x<w;x++){r+=G[y*w+x];I[(y+1)*(w+1)+x+1]=I[y*(w+1)+x+1]+r}}const R=Math.max(8,Math.round(Math.min(w,h)/16));
+    for(let y=0;y<h;y++)for(let x=0;x<w;x++){const x1=Math.max(0,x-R),x2=Math.min(w,x+R),y1=Math.max(0,y-R),y2=Math.min(h,y+R),m=(I[y2*(w+1)+x2]-I[y1*(w+1)+x2]-I[y2*(w+1)+x1]+I[y1*(w+1)+x1])/((x2-x1)*(y2-y1));
+      const v=G[y*w+x]<m*.88?0:255,k=(y*w+x)*4;d[k]=d[k+1]=d[k+2]=v}}
+  else if(f=='magic'){let lo=255,hi=0;const hs=new Array(256).fill(0);for(let i=0;i<n;i+=4)hs[(d[i]*.3+d[i+1]*.59+d[i+2]*.11)|0]++;
+    let acc=0,tot=n/4;for(let i=0;i<256;i++){acc+=hs[i];if(acc>tot*.02&&lo==255)lo=i;if(acc>tot*.9){hi=i;break}}const sc=255/Math.max(20,hi-lo);
+    for(let i=0;i<n;i+=4){const m=(d[i]+d[i+1]+d[i+2])/3;for(let ch=0;ch<3;ch++){let v=d[i+ch]+(d[i+ch]-m)*.5;v=(v-lo)*sc;d[i+ch]=v<0?0:v>255?255:v}}}
+  g.putImageData(im,0,0);return c}
+function rotC(c,r){if(!(r%360))return c;const s=r%180?cv(c.height,c.width):cv(c.width,c.height),g=s.getContext('2d');g.translate(s.width/2,s.height/2);g.rotate(r*Math.PI/180);g.drawImage(c,-c.width/2,-c.height/2);return s}
+function render(p){p.out=rotC(filt(warp(p.src,p.q),p.f),p.rot);p.thumb=(()=>{const s=180/Math.max(p.out.width,p.out.height),t=cv(Math.round(p.out.width*s),Math.round(p.out.height*s));t.getContext('2d').drawImage(p.out,0,0,t.width,t.height);return t.toDataURL('image/jpeg',.7)})()}
+async function addPage(img){const src=srcCanvas(img),p={src,q:detect(src),rot:0,f:'magic'};render(p);spages.push(p);drawScan();return p}
+function drawScan(){const b=$('#spages');b.innerHTML='';$('#scnt').textContent=`(${spages.length})`;
+  spages.forEach((p,i)=>{const d=document.createElement('div');d.className='sp';
+    d.innerHTML=`<img src="${p.thumb}"><div>#${i+1}</div><select>${[['orig','Original'],['gray','Gray'],['bw','B&W'],['magic','Magic']].map(([k,l])=>`<option value="${k}"${p.f==k?' selected':''}>${l}</option>`).join('')}</select><div><button data-a="u">◀</button><button data-a="d">▶</button><button data-a="c">✂️</button><button data-a="r">⟳</button><button data-a="x">🗑</button></div>`;
+    d.querySelector('select').onchange=e=>{p.f=e.target.value;render(p);drawScan()};
+    d.querySelectorAll('[data-a]').forEach(btn=>btn.onclick=()=>{const a=btn.dataset.a;
+      if(a=='u'&&i>0)[spages[i-1],spages[i]]=[spages[i],spages[i-1]];else if(a=='d'&&i<spages.length-1)[spages[i+1],spages[i]]=[spages[i],spages[i+1]];
+      else if(a=='x')spages.splice(i,1);else if(a=='r'){p.rot=(p.rot+90)%360;render(p)}else if(a=='c')return openCrop(p);drawScan()});b.appendChild(d)})}
+$('#galBtn').onclick=()=>$('#sf').click();
+async function addFiles(fs){st('Processing… / प्रोसेस हो रहा है…',0);try{for(const f of fs)await addPage(await loadImg(f));st(`✅ ${fs.length} page(s) added`)}catch(e){st('❌ '+e.message,6000)}}
+$('#sf').onchange=()=>{addFiles([...$('#sf').files]);$('#sf').value=''};$('#sfc').onchange=()=>{addFiles([...$('#sfc').files]);$('#sfc').value=''};
+let stream=null;
+$('#camBtn').onclick=async()=>{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return $('#sfc').click();
+  try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false});$('#vid').srcObject=stream;$('#cam').classList.add('on');$('#scount').textContent=spages.length}
+  catch(e){$('#sfc').click()}};
+const camOff=()=>{if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;$('#cam').classList.remove('on');drawScan()};
+$('#camX').onclick=camOff;$('#camOk').onclick=camOff;
+$('#snap').onclick=async()=>{const v=$('#vid');if(!v.videoWidth)return;navigator.vibrate&&navigator.vibrate(20);v.style.opacity=.3;setTimeout(()=>v.style.opacity=1,120);await addPage(v);$('#scount').textContent=spages.length};
+// crop editor with 4 handles
+let cp=null,cq=null;
+function openCrop(p){cp=p;cq=p.q.map(x=>[...x]);$('#crop').classList.add('on');const c=$('#ccv');c.width=p.src.width;c.height=p.src.height;requestAnimationFrame(()=>{mkHandles();drawCrop()})}
+function drawCrop(){const c=$('#ccv'),g=c.getContext('2d');g.drawImage(cp.src,0,0);g.fillStyle='#0006';g.beginPath();g.rect(0,0,c.width,c.height);g.moveTo(...cq[0]);[1,2,3,0].forEach(i=>g.lineTo(...cq[i]));g.fill('evenodd');
+  g.strokeStyle='#818cf8';g.lineWidth=Math.max(3,c.width/250);g.beginPath();g.moveTo(...cq[0]);[1,2,3,0].forEach(i=>g.lineTo(...cq[i]));g.stroke();
+  const r=c.getBoundingClientRect(),sr=$('#stage').getBoundingClientRect(),k=r.width/c.width;document.querySelectorAll('.hdl').forEach((h,i)=>{h.style.left=(r.left-sr.left+cq[i][0]*k)+'px';h.style.top=(r.top-sr.top+cq[i][1]*k)+'px'})}
+function mkHandles(){document.querySelectorAll('.hdl').forEach(h=>h.remove());for(let i=0;i<4;i++){const h=document.createElement('div');h.className='hdl';$('#stage').appendChild(h);
+  h.onpointerdown=e=>{e.preventDefault();h.setPointerCapture(e.pointerId);h.onpointermove=ev=>{const c=$('#ccv'),r=c.getBoundingClientRect(),k=c.width/r.width;
+    cq[i]=[Math.max(0,Math.min(c.width,(ev.clientX-r.left)*k)),Math.max(0,Math.min(c.height,(ev.clientY-r.top)*k))];drawCrop()};h.onpointerup=()=>h.onpointermove=null}}}
+$('#cropX').onclick=()=>$('#crop').classList.remove('on');
+$('#cropAuto').onclick=()=>{cq=detect(cp.src);drawCrop()};$('#cropFull').onclick=()=>{const c=cp.src;cq=[[0,0],[c.width,0],[c.width,c.height],[0,c.height]];drawCrop()};
+$('#cropOk').onclick=()=>{cp.q=cq;render(cp);$('#crop').classList.remove('on');drawScan()};
+addEventListener('resize',()=>{if($('#crop').classList.contains('on'))drawCrop()});
+$('#sall').onchange=e=>{const f=e.target.value;if(!f)return;st('Applying…',0);setTimeout(()=>{spages.forEach(p=>{p.f=f;render(p)});drawScan();st('✅ Done')},30)};
+$('#sclr').onclick=()=>{if(spages.length&&confirm('Clear all pages? / सब हटाएँ?')){spages=[];drawScan()}};
+function scansPdf(){let pdf;for(const p of spages){const W=595.28,H=W*p.out.height/p.out.width,o=W>H?'l':'p';
+  if(!pdf)pdf=new jspdf.jsPDF({orientation:o,unit:'pt',format:[W,H]});else pdf.addPage([W,H],o);pdf.addImage(p.out.toDataURL('image/jpeg',.88),'JPEG',0,0,W,H)}return pdf.output('blob')}
+$('#spdf').onclick=async()=>{if(!spages.length)return st('Scan a page first / पहले स्कैन करें');const n=($('#sname').value.trim()||'scan')+'.pdf',b=scansPdf();dl(b,n);await saveDoc(n,b,spages[0].thumb)};
+$('#sjpg').onclick=async()=>{if(!spages.length)return st('Scan a page first / पहले स्कैन करें');const n=$('#sname').value.trim()||'scan';
+  for(let i=0;i<spages.length;i++){const b=await new Promise(r=>spages[i].out.toBlob(r,'image/jpeg',.92)),nm=n+(spages.length>1?'_'+(i+1):'')+'.jpg';dl(b,nm);await saveDoc(nm,b,spages[i].thumb);await new Promise(r=>setTimeout(r,300))}};
+$('#socr').onclick=()=>{if(!spages.length)return st('Scan a page first / पहले स्कैन करें');go('ocr');runOcr(spages.map(p=>p.out))};
+// ---- OCR (tesseract.js, all files local)
+let tw=null,twLang='';
+function loadScript(s){return new Promise((r,j)=>{if(window.Tesseract)return r();const e=document.createElement('script');e.src=s;e.onload=r;e.onerror=()=>j(new Error('load '+s));document.head.appendChild(e)})}
+async function getWorker(lang){await loadScript('tesseract.min.js');if(tw&&twLang==lang)return tw;if(tw)await tw.terminate();
+  const base=new URL('./',location.href).href;
+  tw=await Tesseract.createWorker(lang.split('+'),1,{workerPath:base+'tesseract-worker.min.js',corePath:base,langPath:base.replace(/\/$/,''),gzip:true,workerBlobURL:false,
+    logger:m=>m.status&&st(`OCR: ${m.status} ${m.progress?Math.round(m.progress*100)+'%':''}`,0)});twLang=lang;return tw}
+async function runOcr(imgs){const o=$('#otext');o.value='';st('OCR starting… / शुरू…',0);
+  try{const w=await getWorker($('#olang').value);for(let i=0;i<imgs.length;i++){st(`OCR page ${i+1}/${imgs.length}…`,0);const r=await w.recognize(imgs[i]);o.value+=(imgs.length>1?`--- Page ${i+1} ---\n`:'')+r.data.text.trim()+'\n\n'}
+  st('✅ Text ready / टेक्स्ट तैयार')}catch(e){console.error(e);st('❌ OCR error: '+e.message,6000)}}
+$('#obtnr').onclick=async()=>{const fs=[...$('#ocf').files];if(!fs.length)return st('Pick a file / फ़ाइल चुनें');const imgs=[];
+  for(const f of fs){if(ext(f.name)=='pdf'||f.type=='application/pdf'){const doc=await pdfjsLib.getDocument({data:await readBuf(f)}).promise;
+      for(let p=1;p<=doc.numPages;p++){const pg=await doc.getPage(p),tc=await pg.getTextContent(),t=tc.items.map(i=>i.str).join('').trim();
+        const v=pg.getViewport({scale:2}),c=cv(v.width,v.height),g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await pg.render({canvasContext:g,viewport:v}).promise;imgs.push(c)}}
+    else imgs.push(srcCanvas(await loadImg(f)))}runOcr(imgs)};
+$('#ocopy').onclick=async()=>{const t=$('#otext').value;try{await navigator.clipboard.writeText(t)}catch(e){$('#otext').select();document.execCommand('copy')}st('📋 Copied / कॉपी हो गया')};
+$('#otxt').onclick=()=>dl(new Blob([$('#otext').value],{type:'text/plain'}),'ocr.txt');
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')){const had=!!navigator.serviceWorker.controller;let rl=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!rl&&!sessionStorage.fbReloaded){rl=true;sessionStorage.fbReloaded=1;location.reload()}});
   navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});

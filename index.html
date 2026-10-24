@@ -20,13 +20,13 @@ input[type=text],input[type=number],select{font-size:16px;padding:10px;border:1p
 #status{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:12px;font-size:14px;display:none;z-index:9}
 #editor{height:55vh;background:#fff;font-size:16px}.pages{display:flex;flex-wrap:wrap;gap:8px}
 .pg{background:#fff;border:1px solid #ddd;border-radius:8px;padding:4px;text-align:center;width:120px;position:relative;user-select:none;-webkit-user-select:none;transition:box-shadow .2s,opacity .25s;touch-action:manipulation}.pg canvas{width:100%;pointer-events:none}
-.pg.lift{z-index:20;box-shadow:0 12px 28px #0005;transition:box-shadow .2s;cursor:grabbing}.pg.gone{opacity:0;transform:scale(.6)!important;transition:opacity .25s,transform .25s}
-.pg .hd{display:block;width:100%;min-height:36px;border-radius:6px;background:#4f46e5;color:#fff;font-size:18px;touch-action:none;cursor:grab;margin-bottom:3px}
+.pg.arm{outline:3px solid #a5b4fc}.pg.lift{z-index:20;box-shadow:0 12px 28px #0005;transition:box-shadow .2s;cursor:grabbing}.pg.gone{opacity:0;transform:scale(.6)!important;transition:opacity .25s,transform .25s}
+.pg{width:150px}.pg .hd{display:block;width:100%;min-height:52px;border-radius:8px;background:#4f46e5;color:#fff;font-size:15px;font-weight:700;line-height:1.1;touch-action:none;cursor:grab;margin-bottom:3px}
 
 .pg button{min-width:34px;min-height:36px;margin:1px;border:0;border-radius:6px;background:#e0e7ff;font-size:16px}
 .note{font-size:13px;color:#555}
 </style></head><body>
-<header><h1>📁 File Badlo</h1><p>Convert & edit files — sab kuch aapke phone par, koi upload nahi</p></header>
+<header><h1>📁 File Badlo <small id="ver" style="font-size:12px;background:#fff3;padding:2px 8px;border-radius:9px;vertical-align:middle">v3</small></h1><p>Convert & edit files — sab kuch aapke phone par, koi upload nahi</p></header>
 <nav><button data-t="conv" class="on">Convert<small>बदलें</small></button><button data-t="edit">Editor<small>लिखें/एडिट</small></button><button data-t="pdf">PDF Tools<small>PDF जोड़ें/काटें</small></button></nav>
 <main>
 <section id="conv" class="on"><div class="card"><b>1. Pick file(s)</b><span class="h">फ़ाइल चुनें (एक या ज़्यादा)</span>
@@ -157,21 +157,30 @@ function flip(fn,skip){const els=[...box().children].filter(e=>e!==skip),r=new M
 function syncOrder(){order=[...box().children].filter(e=>!e.classList.contains('gone')).map(e=>+e.dataset.p);
   [...box().children].forEach((e,i)=>e.querySelector('.pn').textContent=`#${i+1} · p${+e.dataset.p+1}`);$('#obtn').disabled=!order.length}
 function mkCard(p){const d=document.createElement('div');d.className='pg';d.dataset.p=p;
-  d.innerHTML='<button class="hd" aria-label="drag">⠿ drag</button><canvas></canvas><div class="pn"></div><button data-a="u">◀</button><button data-a="d">▶</button><button data-a="x">🗑</button>';
+  d.innerHTML='<button class="hd" aria-label="drag">⠿ Drag<br><small>पकड़कर खींचें</small></button><canvas></canvas><div class="pn"></div><button data-a="u">◀</button><button data-a="d">▶</button><button data-a="x">🗑</button>';
   d.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
     if(a=='x'){d.classList.add('gone');setTimeout(()=>{flip(()=>d.remove());syncOrder()},250);syncOrder();return}
     const sib=a=='u'?d.previousElementSibling:d.nextElementSibling;if(!sib)return;flip(()=>a=='u'?box().insertBefore(d,sib):box().insertBefore(sib,d));syncOrder()});
   const h=d.querySelector('.hd');h.addEventListener('pointerdown',e=>startDrag(e,d));
-  d.addEventListener('pointerdown',e=>{if(e.pointerType=='mouse'&&!e.target.closest('button'))startDrag(e,d)});return d}
+  d.addEventListener('contextmenu',e=>e.preventDefault());
+  d.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;if(e.pointerType=='mouse')return startDrag(e,d);
+    // touch: long-press ~300ms anywhere on the card
+    const x=e.clientX,y=e.clientY,id=e.pointerId;d.classList.add('arm');
+    const stop=()=>{clearTimeout(tm);d.classList.remove('arm');removeEventListener('pointermove',mv);removeEventListener('pointerup',stop);removeEventListener('pointercancel',stop)};
+    const mv=ev=>{if(ev.pointerId===id&&Math.hypot(ev.clientX-x,ev.clientY-y)>10)stop()};
+    const tm=setTimeout(()=>{stop();navigator.vibrate&&navigator.vibrate(30);startDrag({clientX:x,clientY:y,pointerId:id,preventDefault(){}},d)},300);
+    addEventListener('pointermove',mv);addEventListener('pointerup',stop);addEventListener('pointercancel',stop)});return d}
+// block page scroll while dragging (touchmove is still cancelable after a still long-press)
+addEventListener('touchmove',e=>{if(drag)e.preventDefault()},{passive:false});
 let drag=null;
-function startDrag(e,d){if(drag)return;e.preventDefault();const t=e.currentTarget;
+function startDrag(e,d){if(drag)return;e.preventDefault();const t=d;
   const r=d.getBoundingClientRect();drag={d,t,id:e.pointerId,ox:e.clientX-r.left,oy:e.clientY-r.top,x:e.clientX,y:e.clientY,sy:scrollY};
   d.classList.add('lift');d.style.transition='box-shadow .2s';place();
   addEventListener('pointermove',move,{passive:false});addEventListener('pointerup',end);addEventListener('pointercancel',end);drag.raf=requestAnimationFrame(auto)}
 function place(){const {d,x,y,ox,oy}=drag;d.style.transform='none';const r=d.getBoundingClientRect();d.style.transform=`translate(${x-ox-r.left}px,${y-oy-r.top}px) scale(1.07)`}
 function move(e){if(!drag||e.pointerId!==drag.id)return;e.preventDefault();drag.x=e.clientX;drag.y=e.clientY;reorderAt();place()}
 function reorderAt(){const {d,x,y}=drag;const others=[...box().children].filter(c=>c!==d&&!c.classList.contains('gone'));
-  for(const c of others){const r=c.getBoundingClientRect();if(x>r.left&&x<r.right&&y>r.top&&y<r.bottom){
+  const br=box().getBoundingClientRect();for(const c of others){const l=br.left+c.offsetLeft-box().offsetLeft,t=br.top+c.offsetTop-box().offsetTop,r={left:l,top:t,right:l+c.offsetWidth,bottom:t+c.offsetHeight};if(x>r.left&&x<r.right&&y>r.top&&y<r.bottom){
     const kids=[...box().children],before=kids.indexOf(d)>kids.indexOf(c);flip(()=>box().insertBefore(d,before?c:c.nextSibling),d);syncOrder();break}}}
 function auto(){if(!drag)return;const m=70,H=innerHeight;let v=0;if(drag.y<m)v=-Math.ceil((m-drag.y)/5);else if(drag.y>H-m)v=Math.ceil((drag.y-(H-m))/5);
   if(v){scrollBy(0,v);reorderAt();place()}drag.raf=requestAnimationFrame(auto)}
@@ -189,5 +198,8 @@ $('#abtn').onclick=async()=>{const f=$('#af').files[0],t=$('#atext').value;if(!f
   lines.forEach((l,i)=>g.fillText(l,4,i*sz*4*1.3));const img=await d.embedPng(c.toDataURL('image/png'));const w=c.width/4,h=c.height/4;
   p.drawImage(img,{x:W*(+$('#ax').value)/100,y:H-H*(+$('#ay').value)/100-h,width:w,height:h});
   dl(new Blob([await d.save()],{type:'application/pdf'}),base(f.name)+'_text.pdf')}catch(e){st('❌ '+e.message,6000)}};
-if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker' in navigator&&location.protocol.startsWith('http')){const had=!!navigator.serviceWorker.controller;let rl=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!rl&&!sessionStorage.fbReloaded){rl=true;sessionStorage.fbReloaded=1;location.reload()}});
+  navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
+  setTimeout(()=>sessionStorage.removeItem('fbReloaded'),10000)}
 </script></body></html>

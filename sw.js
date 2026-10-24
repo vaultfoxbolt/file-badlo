@@ -1,0 +1,2 @@
+const C='fb-v1';self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(['./','index.html','manifest.json','icon.svg',...['jspdf.umd.min.js','pdf.min.js','pdf.worker.min.js','docx.umd.js','mammoth.browser.min.js','xlsx.full.min.js','quill.min.js','quill.snow.css','pdf-lib.min.js','marked.min.js','html2canvas.min.js'].map(f=>''+f)]))));
+self.addEventListener('fetch',e=>e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request))));

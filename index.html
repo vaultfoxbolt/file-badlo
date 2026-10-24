@@ -244,7 +244,36 @@ async function sheetConv(f,fmt){const e=ext(f.name),n=base(f.name);let wb;
   else if(fmt=='csv')wb.SheetNames.forEach((s,i)=>dl(new Blob(['\ufeff'+XLSX.utils.sheet_to_csv(wb.Sheets[s])],{type:'text/csv'}),n+(i?'_'+s:'')+'.csv'));
   else if(fmt=='json')dl(new Blob([JSON.stringify(XLSX.utils.sheet_to_json(ws),null,2)],{type:'application/json'}),n+'.json');
   else{const h=wb.SheetNames.map(s=>'<h3>'+esc(s)+'</h3>'+XLSX.utils.sheet_to_html(wb.Sheets[s],{header:'',footer:''})).join('');
-    if(fmt=='html')dl(new Blob([wrapHtml(h,n)],{type:'text/html'}),n+'.html');else dl(await htmlToPdf(h),n+'.pdf')}}
+    if(fmt=='html')dl(new Blob([wrapHtml(h,n)],{type:'text/html'}),n+'.html');else dl(await sheetToPdf(wb),n+'.pdf')}}
+// ---- Sheet -> PDF: A4, 10mm margins, gridlines, columns fitted to width (landscape if wide), header row repeated, no cut-off columns
+async function sheetToPdf(wb){const W=794,H=1123,M=38;let pdf;const shots=[];
+  for(const sn of wb.SheetNames){const rows=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,raw:false,defval:''}).filter(r=>r.some(v=>String(v).trim()!==''));if(!rows.length)continue;
+    const nc=Math.max(...rows.map(r=>r.length));rows.forEach(r=>{while(r.length<nc)r.push('')});
+    const d=document.createElement('div');d.style.cssText='position:fixed;left:-20000px;top:0;background:#fff;color:#000;font:11px/1.35 Arial,"Noto Sans Devanagari",sans-serif';
+    const td='border:0.75px solid #8a8a8a;padding:3px 5px;white-space:nowrap;vertical-align:top';
+    d.innerHTML='<table style="border-collapse:collapse">'+rows.map((r,i)=>'<tr>'+r.map(v=>{const t=esc(String(v)),num=/^-?[\d,]+(\.\d+)?%?$/.test(String(v).trim());return `<td style="${td};${i==0?'font-weight:bold;background:#eeeeee;':''}text-align:${num&&i?'right':'left'}">${t||'&nbsp;'}</td>`}).join('')+'</tr>').join('')+'</table>';
+    document.body.appendChild(d);
+    try{const tb=d.firstChild,nat=tb.offsetWidth,land=11*(W-2*M)/nat<8,PW=land?H:W,PH=land?W:H,aw=PW-2*M,title=26;
+      // shrink font (min 7px) so all columns fit the printable width; wrap long cells if still too wide
+      let fs=11;if(nat>aw){fs=Math.max(7,11*aw/nat);d.style.fontSize=fs+'px'}
+      if(tb.offsetWidth>aw){tb.querySelectorAll('td').forEach(c=>{c.style.whiteSpace='normal';c.style.wordBreak='break-word'});tb.style.width=aw+'px';tb.style.tableLayout='fixed'}
+      const tw=tb.offsetWidth,sc=Math.min(1,aw/tw),trs=[...tb.rows],hh=trs[0].offsetHeight,avail=(PH-2*M-title)/sc;
+      const c=await html2canvas(d,{scale:3,backgroundColor:'#fff',logging:false}),r=c.width/d.offsetWidth;
+      // paginate on row boundaries, repeat header row
+      let start=1,pg=0;const tops=trs.map(t=>t.offsetTop),hs=trs.map(t=>t.offsetHeight);
+      do{let end=start,used=hh;while(end<trs.length&&used+hs[end]<=avail-(pg?0:0)){used+=hs[end];end++}if(end==start&&end<trs.length){used+=hs[end];end++}
+        const s=document.createElement('canvas');s.width=Math.ceil(tw*r);s.height=Math.ceil(used*r);const g=s.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,s.width,s.height);
+        g.drawImage(c,0,tops[0]*r,s.width,hh*r,0,0,s.width,hh*r);if(end>start)g.drawImage(c,0,tops[start]*r,s.width,(tops[end-1]+hs[end-1]-tops[start])*r,0,hh*r,s.width,(tops[end-1]+hs[end-1]-tops[start])*r);
+        shots.push({s,sn,land,PW,PH,w:tw*sc,h:used*sc,title,pg:++pg});start=end}while(start<trs.length)}
+    finally{d.remove()}}
+  if(!shots.length)throw new Error('Sheet is empty');
+  const pt=72/96;shots.forEach((x,i)=>{const o=x.land?'l':'p';if(!pdf)pdf=new jspdf.jsPDF({orientation:o,unit:'pt',format:'a4',compress:true});else pdf.addPage('a4',o);
+    const PW=x.PW*pt,PH=x.PH*pt,m=M*pt;pdf.setFillColor(255,255,255);pdf.rect(0,0,PW,PH,'F');
+    pdf.setFont('helvetica','bold');pdf.setFontSize(11);pdf.setTextColor(0);pdf.text(String(x.sn).replace(/[^\x20-\x7e]/g,'')+(x.pg>1?' (cont.)':''),m,m+11);
+    pdf.setFont('helvetica','normal');pdf.setFontSize(8);pdf.setTextColor(110);pdf.text('Page '+(i+1)+' / '+shots.length,PW-m,PH-m/2,{align:'right'});
+    pdf.addImage(x.s.toDataURL('image/jpeg',.92),'JPEG',m,m+x.title*pt,x.w*pt,x.h*pt,undefined,'FAST')});
+  return pdf.output('blob')}
+
 $('#cf').onchange=()=>{const fs=[...$('#cf').files],box=$('#copts');box.innerHTML='';if(!fs.length)return;const e=ext(fs[0].name);let opts=[],fn;
   if(IMG.includes(e)||fs[0].type.startsWith('image/')){opts=[['pdf','PDF'+(fs.length>1?' (all in one / सब एक PDF में)':'')],['jpg','JPG'],['png','PNG'],['webp','WEBP']];fn=f=>f=='pdf'?imgsToPdf(fs):imgConv(fs,f)}
   else if(e=='pdf'){opts=[['jpg','JPG images'],['png','PNG images'],['txt','TXT (text only)']];fn=async f=>{for(const x of fs)await pdfTo(x,f)}}
@@ -646,8 +675,10 @@ $('#cropAuto').onclick=()=>{cq=detect(cp.src);drawCrop()};$('#cropFull').onclick
 $('#cropOk').onclick=async()=>{cp.q=cq;$('#crop').classList.remove('on');await rerender(cp)};
 addEventListener('resize',()=>{if($('#crop').classList.contains('on'))drawCrop();if($('#cam').classList.contains('on'))setGuide()});
 // ---- export
-function scansPdf(){let pdf;for(const p of spages){const W=595.28,H=W*p.out.height/p.out.width,o=W>H?'l':'p';
-  if(!pdf)pdf=new jspdf.jsPDF({orientation:o,unit:'pt',format:[W,H]});else pdf.addPage([W,H],o);pdf.addImage(p.outURL,'JPEG',0,0,W,H)}return pdf.output('blob')}
+function scansPdf(){// A4 portrait, image fit-to-page (contain), centred on white, no border (matches scanner-app layout)
+  const W=595.28,H=841.89,pdf=new jspdf.jsPDF({orientation:'p',unit:'pt',format:'a4',compress:true});
+  spages.forEach((p,i)=>{if(i)pdf.addPage('a4','p');const iw=p.out.width,ih=p.out.height,k=Math.min(W/iw,H/ih),w=iw*k,h=ih*k;
+    pdf.setFillColor(255,255,255);pdf.rect(0,0,W,H,'F');pdf.addImage(p.outURL,'JPEG',(W-w)/2,(H-h)/2,w,h,undefined,'NONE')});return pdf.output('blob')}
 const fname=()=>(cur&&cur.name||'scan').replace(/[\\/:*?"<>|]+/g,'-');
 async function exportPdf(){if(!spages.length)return st('No pages / कोई पेज नहीं');const n=fname()+'.pdf',b=scansPdf();dl(b,n);await saveDoc(n,b,spages[0].thumb)}
 async function exportJpg(){if(!spages.length)return st('No pages / कोई पेज नहीं');const n=fname();

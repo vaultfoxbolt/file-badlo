@@ -19,7 +19,10 @@ input[type=file]{width:100%;padding:16px;border:2px dashed #a5b4fc;border-radius
 input[type=text],input[type=number],select{font-size:16px;padding:10px;border:1px solid #ccc;border-radius:8px;width:100%;margin:4px 0}
 #status{position:fixed;bottom:0;left:0;right:0;background:#111;color:#fff;padding:12px;font-size:14px;display:none;z-index:9}
 #editor{height:55vh;background:#fff;font-size:16px}.pages{display:flex;flex-wrap:wrap;gap:8px}
-.pg{background:#fff;border:1px solid #ddd;border-radius:8px;padding:4px;text-align:center;width:120px}.pg canvas{width:100%}
+.pg{background:#fff;border:1px solid #ddd;border-radius:8px;padding:4px;text-align:center;width:120px;position:relative;user-select:none;-webkit-user-select:none;transition:box-shadow .2s,opacity .25s;touch-action:manipulation}.pg canvas{width:100%;pointer-events:none}
+.pg.lift{z-index:20;box-shadow:0 12px 28px #0005;transition:box-shadow .2s;cursor:grabbing}.pg.gone{opacity:0;transform:scale(.6)!important;transition:opacity .25s,transform .25s}
+.pg .hd{display:block;width:100%;min-height:36px;border-radius:6px;background:#4f46e5;color:#fff;font-size:18px;touch-action:none;cursor:grab;margin-bottom:3px}
+
 .pg button{min-width:34px;min-height:36px;margin:1px;border:0;border-radius:6px;background:#e0e7ff;font-size:16px}
 .note{font-size:13px;color:#555}
 </style></head><body>
@@ -41,7 +44,7 @@ input[type=text],input[type=number],select{font-size:16px;padding:10px;border:1p
 <section id="pdf">
 <div class="card"><b>Merge PDFs</b><span class="h">कई PDF को एक में जोड़ें (चुनने के क्रम में)</span>
 <input type="file" id="mf" accept="application/pdf" multiple><button class="btn" id="mbtn">Merge / जोड़ें</button></div>
-<div class="card"><b>Reorder / delete pages</b><span class="h">पेज ऊपर-नीचे करें या हटाएँ</span>
+<div class="card"><b>Reorder / delete pages</b><span class="h">⠿ पकड़कर खींचें (drag) या ◀ ▶ दबाएँ, 🗑 से हटाएँ</span>
 <input type="file" id="of" accept="application/pdf"><div id="pages" class="pages"></div><button class="btn" id="obtn" disabled>Save PDF / सेव करें</button></div>
 <div class="card"><b>Add text to PDF</b><span class="h">PDF पर लिखें (हिंदी भी)</span>
 <input type="file" id="af" accept="application/pdf">
@@ -147,12 +150,36 @@ $('#mbtn').onclick=async()=>{const fs=[...$('#mf').files];if(fs.length<2)return 
   try{const out=await PDFDocument.create();for(const f of fs){const s=await PDFDocument.load(await readBuf(f),{ignoreEncryption:true});(await out.copyPages(s,s.getPageIndices())).forEach(p=>out.addPage(p))}
   dl(new Blob([await out.save()],{type:'application/pdf'}),'merged.pdf')}catch(e){st('❌ '+e.message,6000)}};
 let order=[],obuf,oname;
-async function drawPages(){const box=$('#pages');box.innerHTML='';const doc=await pdfjsLib.getDocument({data:obuf.slice(0)}).promise;
-  for(let i=0;i<order.length;i++){const d=document.createElement('div');d.className='pg';const c=document.createElement('canvas');d.appendChild(c);
-    d.insertAdjacentHTML('beforeend',`<div>Page ${order[i]+1}</div><button data-a="u">◀</button><button data-a="d">▶</button><button data-a="x">🗑</button>`);
-    d.querySelectorAll('button').forEach(b=>b.onclick=()=>{const a=b.dataset.a;if(a=='x')order.splice(i,1);else{const j=a=='u'?i-1:i+1;if(j<0||j>=order.length)return;[order[i],order[j]]=[order[j],order[i]]}drawPages()});
-    box.appendChild(d);const pg=await doc.getPage(order[i]+1),v=pg.getViewport({scale:.3});c.width=v.width;c.height=v.height;await pg.render({canvasContext:c.getContext('2d'),viewport:v}).promise}
-  $('#obtn').disabled=!order.length}
+const box=()=>$('#pages');
+function flip(fn,skip){const els=[...box().children].filter(e=>e!==skip),r=new Map(els.map(e=>[e,e.getBoundingClientRect()]));fn();
+  els.forEach(e=>{if(!e.isConnected)return;const o=r.get(e),n=e.getBoundingClientRect(),dx=o.left-n.left,dy=o.top-n.top;if(!dx&&!dy)return;
+    e.style.transition='none';e.style.transform=`translate(${dx}px,${dy}px)`;e.offsetWidth;e.style.transition='transform .22s ease';e.style.transform='';})}
+function syncOrder(){order=[...box().children].filter(e=>!e.classList.contains('gone')).map(e=>+e.dataset.p);
+  [...box().children].forEach((e,i)=>e.querySelector('.pn').textContent=`#${i+1} · p${+e.dataset.p+1}`);$('#obtn').disabled=!order.length}
+function mkCard(p){const d=document.createElement('div');d.className='pg';d.dataset.p=p;
+  d.innerHTML='<button class="hd" aria-label="drag">⠿ drag</button><canvas></canvas><div class="pn"></div><button data-a="u">◀</button><button data-a="d">▶</button><button data-a="x">🗑</button>';
+  d.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
+    if(a=='x'){d.classList.add('gone');setTimeout(()=>{flip(()=>d.remove());syncOrder()},250);syncOrder();return}
+    const sib=a=='u'?d.previousElementSibling:d.nextElementSibling;if(!sib)return;flip(()=>a=='u'?box().insertBefore(d,sib):box().insertBefore(sib,d));syncOrder()});
+  const h=d.querySelector('.hd');h.addEventListener('pointerdown',e=>startDrag(e,d));
+  d.addEventListener('pointerdown',e=>{if(e.pointerType=='mouse'&&!e.target.closest('button'))startDrag(e,d)});return d}
+let drag=null;
+function startDrag(e,d){if(drag)return;e.preventDefault();const t=e.currentTarget;
+  const r=d.getBoundingClientRect();drag={d,t,id:e.pointerId,ox:e.clientX-r.left,oy:e.clientY-r.top,x:e.clientX,y:e.clientY,sy:scrollY};
+  d.classList.add('lift');d.style.transition='box-shadow .2s';place();
+  addEventListener('pointermove',move,{passive:false});addEventListener('pointerup',end);addEventListener('pointercancel',end);drag.raf=requestAnimationFrame(auto)}
+function place(){const {d,x,y,ox,oy}=drag;d.style.transform='none';const r=d.getBoundingClientRect();d.style.transform=`translate(${x-ox-r.left}px,${y-oy-r.top}px) scale(1.07)`}
+function move(e){if(!drag||e.pointerId!==drag.id)return;e.preventDefault();drag.x=e.clientX;drag.y=e.clientY;reorderAt();place()}
+function reorderAt(){const {d,x,y}=drag;const others=[...box().children].filter(c=>c!==d&&!c.classList.contains('gone'));
+  for(const c of others){const r=c.getBoundingClientRect();if(x>r.left&&x<r.right&&y>r.top&&y<r.bottom){
+    const kids=[...box().children],before=kids.indexOf(d)>kids.indexOf(c);flip(()=>box().insertBefore(d,before?c:c.nextSibling),d);syncOrder();break}}}
+function auto(){if(!drag)return;const m=70,H=innerHeight;let v=0;if(drag.y<m)v=-Math.ceil((m-drag.y)/5);else if(drag.y>H-m)v=Math.ceil((drag.y-(H-m))/5);
+  if(v){scrollBy(0,v);reorderAt();place()}drag.raf=requestAnimationFrame(auto)}
+function end(e){if(!drag||e.pointerId!==drag.id)return;const {d,t}=drag;cancelAnimationFrame(drag.raf);removeEventListener('pointermove',move);removeEventListener('pointerup',end);removeEventListener('pointercancel',end);
+  d.classList.remove('lift');d.style.transition='transform .2s ease';d.style.transform='';drag=null;syncOrder()}
+async function drawPages(){box().innerHTML='';const doc=await pdfjsLib.getDocument({data:obuf.slice(0)}).promise;
+  for(const p of order){const d=mkCard(p);box().appendChild(d)}syncOrder();
+  for(const d of box().children){const c=d.querySelector('canvas'),pg=await doc.getPage(+d.dataset.p+1),v=pg.getViewport({scale:.3});c.width=v.width;c.height=v.height;await pg.render({canvasContext:c.getContext('2d'),viewport:v}).promise}}
 $('#of').onchange=async()=>{const f=$('#of').files[0];if(!f)return;obuf=await readBuf(f);oname=base(f.name);const d=await PDFDocument.load(obuf.slice(0),{ignoreEncryption:true});order=d.getPageIndices();drawPages()};
 $('#obtn').onclick=async()=>{const s=await PDFDocument.load(obuf.slice(0),{ignoreEncryption:true}),out=await PDFDocument.create();(await out.copyPages(s,order)).forEach(p=>out.addPage(p));dl(new Blob([await out.save()],{type:'application/pdf'}),oname+'_edited.pdf')};
 $('#abtn').onclick=async()=>{const f=$('#af').files[0],t=$('#atext').value;if(!f||!t)return st('Pick PDF and type text / PDF चुनें और लिखें');

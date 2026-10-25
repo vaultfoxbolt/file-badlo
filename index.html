@@ -21,12 +21,12 @@ h2{font-size:15px;margin:6px 4px 10px;color:var(--mu);font-weight:500}h2 small{f
 .btn:active{transform:scale(.96)}.btn.alt{background:#e3f2fd;color:#0d47a1}.btn.red{background:#fee2e2;color:#b91c1c}.btn:disabled{opacity:.5}.grid{display:flex;flex-wrap:wrap}
 input[type=file]{width:100%;padding:16px;border:2px dashed #90caf9;border-radius:10px;background:var(--pl);font-size:15px}
 input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;border:1px solid #ccc;border-radius:8px;width:100%;margin:4px 0}
-#status{position:fixed;bottom:20px;left:12px;right:12px;background:#323232;color:#fff;padding:12px 14px;border-radius:8px;font-size:14px;display:none;z-index:300;animation:fi .2s}
+#status{pointer-events:none;position:fixed;bottom:20px;left:12px;right:12px;background:#323232;color:#fff;padding:12px 14px;border-radius:8px;font-size:14px;display:none;z-index:300;animation:fi .2s}
 #editor{height:55vh;background:#fff;font-size:16px}.pages{display:flex;flex-wrap:wrap;gap:8px}
 .pg{background:#fff;border:1px solid #ddd;border-radius:10px;padding:4px;text-align:center;width:120px;position:relative;user-select:none;-webkit-user-select:none;transition:box-shadow .2s,opacity .25s;touch-action:manipulation}.pg canvas{width:100%;pointer-events:none}
 .pg.arm{outline:3px solid #90caf9}.pg.lift{z-index:20;box-shadow:0 12px 28px #0005;transition:box-shadow .2s;cursor:grabbing}.pg.gone{opacity:0;transform:scale(.6)!important;transition:opacity .25s,transform .25s}
 .pg{width:150px}.pg .hd{display:block;width:100%;min-height:52px;border-radius:8px;background:var(--nv);color:#fff;font-size:15px;font-weight:700;line-height:1.1;touch-action:none;cursor:grab;margin-bottom:3px}
-.pg button{min-width:34px;min-height:36px;margin:1px;border:0;border-radius:6px;background:#e3f2fd;font-size:16px}
+.pg button{min-width:44px;min-height:44px;margin:1px;border:0;border-radius:6px;background:#e3f2fd;font-size:16px}
 .note{font-size:13px;color:#555}.h{display:block;font-weight:400;font-size:12px;color:var(--mu)}
 /* list cards (home docs + detail pages) */
 .lc{display:flex;align-items:center;gap:14px;background:#fff;border-radius:10px;padding:12px 6px 12px 14px;margin-bottom:10px;box-shadow:0 1px 3px #0000001f,0 2px 8px #0000000d;user-select:none;-webkit-user-select:none;touch-action:pan-y;position:relative;animation:fi .25s}
@@ -91,7 +91,7 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 #otext{min-height:180px;font-family:inherit}
 .recent{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.doc{background:#fff;border-radius:10px;padding:6px;box-shadow:0 1px 4px #0001;font-size:11px;text-align:center;overflow:hidden}
 .doc img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;background:#eee}.doc b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.doc .ac button{border:0;background:#e3f2fd;border-radius:6px;margin:2px;min-width:30px;min-height:30px}
+.doc .ac button{border:0;background:#e3f2fd;border-radius:6px;margin:2px;min-width:44px;min-height:44px}
 #viewer{position:fixed;inset:0;background:#000;z-index:90;display:none;flex-direction:column;color:#fff;user-select:none;-webkit-user-select:none}#viewer.on{display:flex}
 #viewer .vb{display:flex;align-items:center;gap:6px;padding:8px 6px;min-height:58px;background:#000}#viewer button{background:none;border:0;color:inherit;cursor:pointer}
 #vX{font-size:24px;padding:6px 12px}#viewer .vt{flex:1;min-width:0;line-height:1.2}#vT{font-size:20px;font-weight:700;display:block}#vN{font-size:13px;opacity:.75;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#vZ{font-size:20px;padding:6px 10px}
@@ -112,7 +112,7 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 #vtrack{position:absolute;top:0;bottom:0;left:0;width:300%;display:flex;will-change:transform}#vtrack .vs{position:relative;width:33.3333%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
 #vtrack .vs img{width:100%;height:auto;max-height:100%;object-fit:contain;background:#fff;-webkit-user-drag:none;pointer-events:none}#vtrack .vs img.e{visibility:hidden}#vimg{transform-origin:0 0}#vT{transition:opacity .14s}#vT.f{opacity:0}
 </style></head><body>
-<header class="ab" id="ab"><button id="abL" aria-label="menu">☰</button><h1 id="abT">File Badlo <small id="ver">v8</small></h1><input id="q" type="search" placeholder="Search / खोजें">
+<header class="ab" id="ab"><button id="abL" aria-label="menu">☰</button><h1 id="abT">File Badlo <small id="ver">v12</small></h1><input id="q" type="search" placeholder="Search / खोजें">
 <button id="abS" aria-label="search">🔍</button><button id="abP" class="pdfi" aria-label="export pdf" style="display:none"><b>PDF</b></button><button id="abM" aria-label="more">⋮</button></header>
 <main>
 <section id="home" class="on"><h2 id="dcount">Documents (0) <small>/ दस्तावेज़</small></h2><div id="dlist"></div></section>
@@ -149,14 +149,14 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 </main>
 <div class="fab" id="fab"><button id="fabCam" aria-label="scan with camera">📷</button><i></i><button id="fabGal" aria-label="import from gallery">🖼️</button></div>
 <input type="file" id="sf" accept="image/*" multiple style="display:none"><input type="file" id="sfc" accept="image/*" capture="environment" style="display:none">
-<div id="drawer"><div class="bg"></div><div class="pn"><div class="top"><b>📁 File Badlo</b> <small style="opacity:.8">v8</small><div class="h" style="color:#cfd8dc">Scan · Convert · Edit — offline</div></div>
+<div id="drawer"><div class="bg"></div><div class="pn"><div class="top"><b>📁 File Badlo</b> <small style="opacity:.8">v12</small><div class="h" style="color:#cfd8dc">Scan · Convert · Edit — offline</div></div>
 <ul class="acts"><li><button data-go="home"><i>🏠</i><div>Documents<small>दस्तावेज़</small></div></button></li>
 <li><button data-go="conv"><i>🔄</i><div>Converter<small>फ़ाइल बदलें</small></div></button></li>
 <li><button data-go="pdf"><i>📑</i><div>PDF Tools<small>जोड़ें / क्रम / लिखें</small></div></button></li>
 <li><button data-go="ocr"><i>🔤</i><div>OCR Text<small>टेक्स्ट निकालें</small></div></button></li>
 <li><button data-go="edit"><i>✍️</i><div>Editor<small>लिखें / एडिट</small></div></button></li>
 <li><button data-go="files"><i>⬇️</i><div>Exported files<small>सेव की गई फ़ाइलें</small></div></button></li></ul></div></div>
-<div class="res" id="res"><div class="rtop"><button id="resX" aria-label="close">←</button><b>Done / तैयार</b></div><div id="resPv" title="Save to"></div><div class="rh">Tap preview to save · सेव करने के लिए टैप करें</div><button class="rfile" id="resF"><i>PDF</i><div><b id="resN"></b><small id="resS"></small></div><span style="margin-left:auto;font-size:20px">⤴</span></button><div class="rh">Tap the file to share · शेयर करने के लिए टैप करें</div></div>
+<div class="res" id="res"><div class="rtop"><button id="resX" aria-label="close">←</button><b>Done / तैयार</b></div><div id="resPv" title="Save to" role="button" tabindex="0" aria-label="Save to"></div><div class="rh">Tap preview to save · सेव करने के लिए टैप करें</div><button class="rfile" id="resF"><i>PDF</i><div><b id="resN"></b><small id="resS"></small></div><span style="margin-left:auto;font-size:20px">⤴</span></button><div class="rh">Tap the file to share · शेयर करने के लिए टैप करें</div></div>
 <div class="sheet" id="sheet"><div class="in"><div class="tt" id="shT"></div><ul class="acts" id="shL"></ul></div></div>
 <div class="dlg" id="dlg"><div class="in" id="dlgIn"></div></div>
 <div id="cam" class="ov">
@@ -168,7 +168,7 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 <div id="ed" class="ov"><div class="eb"><button id="edX">✕ Cancel</button><b id="edT">Edit / एडिट</b><button id="edOk">✓ Save</button></div>
 <div id="estage"><canvas id="ecv"></canvas></div>
 <div id="etool"><button data-e="rect" class="on"><span>⬚</span>Free crop</button><button data-e="quad"><span>◇</span>Perspective</button><button data-e="rot"><span>⟳</span>Rotate</button><button data-e="auto"><span>🪄</span>Auto edges</button><button data-e="reset"><span>↺</span>Reset</button></div></div>
-<div id="crop" class="ov"><div class="stage" id="stage"><canvas id="ccv"></canvas></div><div class="bar"><button class="btn red" id="cropX">✕</button><button class="btn alt" id="cropAuto">Auto</button><button class="btn alt" id="cropFull">Full</button><button class="btn" id="cropOk">Apply ✓</button></div></div>
+<div id="crop" class="ov"><div class="stage" id="stage"><canvas id="ccv"></canvas></div><div class="bar"><button class="btn red" id="cropX" aria-label="cancel crop">✕</button><button class="btn alt" id="cropAuto">Auto</button><button class="btn alt" id="cropFull">Full</button><button class="btn" id="cropOk">Apply ✓</button></div></div>
 <div id="status"></div>
 <script src="jspdf.umd.min.js"></script><script src="pdf.min.js"></script><script src="docx.umd.js"></script>
 <script src="mammoth.browser.min.js"></script><script src="xlsx.full.min.js"></script><script src="quill.min.js"></script>
@@ -190,26 +190,34 @@ function rawDl(blob,name){name=safeName(name,blob);const t=MIME[ext(name)];if(t&
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.rel='noopener';a.style.display='none';document.body.appendChild(a);a.click();
   setTimeout(()=>{a.remove();URL.revokeObjectURL(a.href)},60000);return name}
 function dl(blob,name,quiet){const n=rawDl(blob,name);if(!quiet)st('✅ Saved to Downloads / डाउनलोड: '+n);if(/\.pdf$/i.test(n)&&!quiet)showResult(blob,n);return n}
-const base=n=>n.replace(/\.[^.]+$/,''), ext=n=>(n.split('.').pop()||'').toLowerCase();
+const base=n=>n.replace(/\.[^.]+$/,''), ext=n=>{const i=n.lastIndexOf('.');return i>0?n.slice(i+1).toLowerCase():''};
 const readText=f=>f.text(), readBuf=f=>f.arrayBuffer();
 const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-function loadImg(f){return new Promise((r,j)=>{const i=new Image();i.onload=()=>r(i);i.onerror=()=>j(new Error('Cannot read image'));i.src=URL.createObjectURL(f)})}
+function loadImg(f){return new Promise((r,j)=>{const i=new Image(),u=URL.createObjectURL(f);i.onload=()=>{URL.revokeObjectURL(u);r(i)};i.onerror=()=>{URL.revokeObjectURL(u);j(new Error('Cannot read image: '+f.name))};i.src=u})}
 // ---- HTML -> PDF (renders via browser so Hindi works)
-async function htmlToPdf(html){
-  const d=document.createElement('div');d.style.cssText='position:fixed;left:-10000px;top:0;width:794px;padding:56px;background:#fff;color:#000;font:15px/1.5 system-ui,"Noto Sans Devanagari",sans-serif';
-  d.innerHTML='<style>table{border-collapse:collapse}td,th{border:1px solid #999;padding:3px 6px}img{max-width:100%}</style>'+html;document.body.appendChild(d);
-  try{const c=await html2canvas(d,{scale:2,backgroundColor:'#fff'});
-  const pdf=new jspdf.jsPDF({unit:'pt',format:'a4'});const W=595.28,H=841.89,pxH=Math.floor(c.width*H/W);
-  for(let y=0,i=0;y<c.height;y+=pxH,i++){const s=document.createElement('canvas');s.width=c.width;s.height=Math.min(pxH,c.height-y);
-    const g=s.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,s.width,s.height);g.drawImage(c,0,-y);
-    if(i)pdf.addPage();pdf.addImage(s.toDataURL('image/jpeg',.92),'JPEG',0,0,W,s.height*W/c.width)}
+async function htmlToPdf(html){// renders one A4 page at a time (avoids the browser canvas size limit), 56px margins on every page, breaks between blocks
+  const PW=794,PH=1123,M=56,CH=PH-2*M,pt=595.28/PW;
+  const d=document.createElement('div');d.style.cssText=`position:fixed;left:-10000px;top:0;width:${PW}px;padding:0 ${M}px;box-sizing:border-box;overflow:hidden;background:#fff;color:#000;font:15px/1.5 system-ui,"Noto Sans Devanagari",sans-serif`;
+  const inr=document.createElement('div');inr.style.display='flow-root';inr.innerHTML='<style>table{border-collapse:collapse}td,th{border:1px solid #999;padding:3px 6px}img{max-width:100%}</style>'+html;d.appendChild(inr);document.body.appendChild(d);
+  try{await Promise.all([...inr.querySelectorAll('img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r})));
+  const top=inr.getBoundingClientRect().top,total=Math.max(1,Math.ceil(inr.getBoundingClientRect().height));
+  const cuts=[...inr.querySelectorAll('p,li,tr,h1,h2,h3,h4,h5,h6,pre,blockquote,img,table,div,ul,ol,hr')].map(e=>e.getBoundingClientRect().bottom-top);
+  const pages=[];let y=0;while(y<total-1){let e=y+CH;if(e<total){const c=cuts.filter(v=>v>y+CH*.5&&v<=e+.5);if(c.length)e=Math.max(...c)}else e=total;pages.push([y,e]);y=e}
+  const pdf=new jspdf.jsPDF({unit:'pt',format:'a4'});
+  for(let i=0,n=0;i<pages.length;){let j=i;while(j<pages.length&&pages[j][1]-pages[i][0]<=6000)j++;if(j==i)j++;// render up to ~6000px per pass, then slice into pages
+    const a0=pages[i][0];d.style.height=Math.ceil(pages[j-1][1]-a0)+'px';inr.style.marginTop=(-a0)+'px';const c=await html2canvas(d,{scale:2,backgroundColor:'#fff',logging:false}),k=c.width/PW;
+    for(;i<j;i++){const [a,b]=pages[i],sc=document.createElement('canvas');sc.width=c.width;sc.height=Math.max(1,Math.round((b-a)*k));const g=sc.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,sc.width,sc.height);
+      g.drawImage(c,0,-Math.round((a-a0)*k));if(n++)pdf.addPage();pdf.addImage(sc.toDataURL('image/jpeg',.92),'JPEG',0,M*pt,PW*pt,(b-a)*pt)}}
   return pdf.output('blob')}finally{d.remove()}}
 // ---- HTML -> DOCX
 async function htmlToDocx(html){
-  const D=docx,dom=new DOMParser().parseFromString(html,'text/html'),out=[];
+  const D=docx,dom=new DOMParser().parseFromString(html,'text/html'),out=[],IM=new Map();
+  for(const im of dom.querySelectorAll('img')){const m=/^data:image\/(png|jpe?g|gif|bmp);base64,(.+)$/i.exec(im.getAttribute('src')||'');if(!m)continue;
+    try{const i=await new Promise((r,j)=>{const x=new Image();x.onload=()=>r(x);x.onerror=j;x.src=im.getAttribute('src')}),k=Math.min(1,600/i.naturalWidth),t=m[1].toLowerCase();
+      IM.set(im,{data:Uint8Array.from(atob(m[2]),ch=>ch.charCodeAt(0)),type:t=='jpeg'?'jpg':t,w:Math.round(i.naturalWidth*k),h:Math.round(i.naturalHeight*k)})}catch(e){}}
   const runs=(n,f={})=>{let r=[];n.childNodes.forEach(c=>{if(c.nodeType==3){if(c.textContent)r.push(new D.TextRun({text:c.textContent,...f}))}
     else if(c.nodeType==1){const t=c.tagName,g={...f};if(t=='B'||t=='STRONG')g.bold=true;if(t=='I'||t=='EM')g.italics=true;if(t=='U')g.underline={};if(t=='S'||t=='STRIKE')g.strike=true;
-      if(t=='BR')r.push(new D.TextRun({text:'',break:1}));else r=r.concat(runs(c,g))}});return r};
+      if(t=='BR')r.push(new D.TextRun({text:'',break:1}));else if(t=='IMG'){const x=IM.get(c);if(x)r.push(new D.ImageRun({type:x.type,data:x.data,transformation:{width:x.w,height:x.h}}))}else r=r.concat(runs(c,g))}});return r};
   const H={H1:D.HeadingLevel.HEADING_1,H2:D.HeadingLevel.HEADING_2,H3:D.HeadingLevel.HEADING_3,H4:D.HeadingLevel.HEADING_4};
   const walk=n=>n.childNodes.forEach(c=>{if(c.nodeType==3){if(c.textContent.trim())out.push(new D.Paragraph({children:[new D.TextRun(c.textContent)]}));return}
     if(c.nodeType!=1)return;const t=c.tagName;
@@ -219,15 +227,17 @@ async function htmlToDocx(html){
     else if(['DIV','SECTION','ARTICLE','BODY','MAIN'].includes(t))walk(c);
     else if(t=='PRE'){c.textContent.split('\n').forEach(l=>out.push(new D.Paragraph({children:[new D.TextRun({text:l,font:'Courier New'})]})))}
     else{const al={center:D.AlignmentType.CENTER,right:D.AlignmentType.RIGHT,justify:D.AlignmentType.JUSTIFIED};let a;const m=(c.className||'').match(/ql-align-(\w+)/);if(m)a=al[m[1]];
-      out.push(new D.Paragraph({children:runs(c),alignment:a}))}});
+      out.push(new D.Paragraph({children:t=='IMG'?runs({childNodes:[c]}):runs(c),alignment:a}))}});
   walk(dom.body);if(!out.length)out.push(new D.Paragraph(''));
   return D.Packer.toBlob(new D.Document({sections:[{children:out}]}))}
 const htmlToText=h=>{const d=document.createElement('div');d.innerHTML=h.replace(/<\/(p|h\d|li|div|tr)>/gi,'$&\n').replace(/<br\s*\/?>/gi,'\n');return d.textContent};
 const wrapHtml=(b,t)=>`<!DOCTYPE html><html><head><meta charset="utf-8"><title>${t||'Document'}</title></head><body>${b}</body></html>`;
+function clean(h){const d=new DOMParser().parseFromString(h,'text/html');d.querySelectorAll('script,iframe,frame,object,embed,base,link,meta,form').forEach(e=>e.remove());
+  d.querySelectorAll('*').forEach(e=>[...e.attributes].forEach(a=>{if(/^on/i.test(a.name)||(/^(href|src|xlink:href|action|formaction)$/i.test(a.name)&&/^\s*(javascript|vbscript):/i.test(a.value)))e.removeAttribute(a.name)}));return d.body.innerHTML}
 async function fileToHtml(f){const e=ext(f.name);
-  if(e=='docx')return (await mammoth.convertToHtml({arrayBuffer:await readBuf(f)})).value;
-  const t=await readText(f);if(e=='md'||e=='markdown')return marked.parse(t);
-  if(e=='html'||e=='htm'){const d=new DOMParser().parseFromString(t,'text/html');return d.body.innerHTML}
+  if(e=='docx')return clean((await mammoth.convertToHtml({arrayBuffer:await readBuf(f)})).value);
+  const t=await readText(f);if(e=='md'||e=='markdown')return clean(marked.parse(t));
+  if(e=='html'||e=='htm')return clean(t);
   return t.split(/\n/).map(l=>'<p>'+(esc(l)||'<br>')+'</p>').join('')}
 // ---- Convert tab
 const IMG=['png','jpg','jpeg','webp','gif','bmp'],DOC=['txt','md','markdown','html','htm','docx'],SHEET=['csv','xlsx','xls','ods','json'];
@@ -244,7 +254,7 @@ async function pdfTo(f,fmt){const doc=await pdfjsLib.getDocument({data:await rea
     if(fmt=='txt'){const tc=await pg.getTextContent();txt+=tc.items.map(i=>i.str+(i.hasEOL?'\n':'')).join('')+'\n\n';continue}
     const v=pg.getViewport({scale:2}),c=document.createElement('canvas');c.width=v.width;c.height=v.height;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);
     await pg.render({canvasContext:g,viewport:v}).promise;dl(await new Promise(r=>c.toBlob(r,fmt=='png'?'image/png':'image/jpeg',.92)),`${base(f.name)}_page${p}.${fmt}`);await new Promise(r=>setTimeout(r,400))}
-  if(fmt=='txt')dl(new Blob([txt],{type:'text/plain'}),base(f.name)+'.txt')}
+  doc.destroy();if(fmt=='txt')dl(new Blob([txt],{type:'text/plain'}),base(f.name)+'.txt')}
 async function docConv(f,fmt){const h=await fileToHtml(f),n=base(f.name);
   if(fmt=='pdf')dl(await htmlToPdf(h),n+'.pdf');else if(fmt=='docx')dl(await htmlToDocx(h),n+'.docx');
   else if(fmt=='html')dl(new Blob([wrapHtml(h,n)],{type:'text/html'}),n+'.html');else dl(new Blob([htmlToText(h)],{type:'text/plain'}),n+'.txt')}
@@ -268,32 +278,35 @@ async function sheetToPdf(wb){const W=794,H=1123,M=38,aw=W-2*M,title=26,CAP=260;
     const d=document.createElement('div');d.style.cssText='position:fixed;left:-20000px;top:0;width:max-content;background:#fff;color:#000;font:11px/1.35 Arial,"Noto Sans Devanagari",sans-serif';document.body.appendChild(d);
     try{d.innerHTML=mk(rows,all);const cw=[...d.firstChild.rows[0].cells].map(c=>Math.min(aw,Math.ceil(c.getBoundingClientRect().width)));
       const groups=[];let g=[],gw=0;all.forEach(j=>{if(g.length&&gw+cw[j]>aw){groups.push(g);g=[];gw=0}g.push(j);gw+=cw[j]});groups.push(g);
-      for(const cols of groups){d.innerHTML=mk(rows,cols,cols.map(j=>cw[j]));const tb=d.firstChild,trs=[...tb.rows],tw=tb.offsetWidth,hh=trs[0].offsetHeight,avail=H-2*M-title;
-        const c=await html2canvas(d,{scale:3,backgroundColor:'#fff',logging:false}),r=c.width/d.offsetWidth,tops=trs.map(t=>t.offsetTop),hs=trs.map(t=>t.offsetHeight);
+      for(const cols of groups){const ws=cols.map(j=>cw[j]);d.innerHTML=mk(rows,cols,ws);const tb=d.firstChild,trs=[...tb.rows],tw=tb.offsetWidth,hh=trs[0].offsetHeight,avail=H-2*M-title,hs=trs.map(t=>t.offsetHeight);
         let start=1;do{let end=start,used=hh;while(end<trs.length&&used+hs[end]<=avail){used+=hs[end];end++}if(end==start&&end<trs.length){used+=hs[end];end++}
-          const s=document.createElement('canvas');s.width=Math.ceil(tw*r);s.height=Math.ceil(used*r);const x=s.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,s.width,s.height);
-          x.drawImage(c,0,tops[0]*r,s.width,hh*r,0,0,s.width,hh*r);if(end>start){const bh=(tops[end-1]+hs[end-1]-tops[start])*r;x.drawImage(c,0,tops[start]*r,s.width,bh,0,hh*r,s.width,bh)}
+          d.innerHTML=mk([rows[0],...rows.slice(start,end)],cols,ws);// render only this page's rows: one small canvas per page
+          const s=await html2canvas(d,{scale:3,backgroundColor:'#fff',logging:false});
           shots.push({s,sn,w:tw,h:Math.min(used,avail),first:!shots.some(z=>z.sn===sn)});start=end}while(start<trs.length)}}
     finally{d.remove()}}
   if(!shots.length)throw new Error('Sheet is empty');
   const pt=72/96;shots.forEach((x,i)=>{if(!pdf)pdf=new jspdf.jsPDF({orientation:'p',unit:'pt',format:'a4',compress:true});else pdf.addPage('a4','p');
     const PW=W*pt,PH=H*pt,m=M*pt;pdf.setFillColor(255,255,255);pdf.rect(0,0,PW,PH,'F');
-    pdf.setFont('helvetica','bold');pdf.setFontSize(11);pdf.setTextColor(0);pdf.text(String(x.sn).replace(/[^\x20-\x7e]/g,'')+(x.first?'':' (cont.)'),m,m+11);
+    const tt=String(x.sn)+(x.first?'':' (cont.)');if(/^[\x20-\x7e]*$/.test(tt)){pdf.setFont('helvetica','bold');pdf.setFontSize(11);pdf.setTextColor(0);pdf.text(tt,m,m+11)}
+    else{const k=4,tc=document.createElement('canvas');tc.width=Math.ceil(aw*k);tc.height=Math.ceil(title*k);const g=tc.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,tc.width,tc.height);g.fillStyle='#000';g.font=`bold ${11/pt*k}px Arial,"Noto Sans Devanagari",sans-serif`;g.textBaseline='alphabetic';g.fillText(tt,0,11/pt*k);pdf.addImage(tc.toDataURL('image/png'),'PNG',m,m,aw*pt,title*pt)}// non-Latin sheet names (e.g. Hindi) drawn by the browser
     pdf.setFont('helvetica','normal');pdf.setFontSize(8);pdf.setTextColor(110);pdf.text('Page '+(i+1)+' / '+shots.length,PW-m,PH-m/2,{align:'right'});
     pdf.addImage(x.s.toDataURL('image/jpeg',.92),'JPEG',m,m+title*pt,x.w*pt,x.h*pt,undefined,'FAST')});
   return pdf.output('blob')}
 
-$('#cf').onchange=()=>{const fs=[...$('#cf').files],box=$('#copts');box.innerHTML='';if(!fs.length)return;const e=ext(fs[0].name);let opts=[],fn;
+const fcat=f=>{const e=ext(f.name);return IMG.includes(e)||f.type.startsWith('image/')?'img':e=='pdf'||f.type=='application/pdf'?'pdf':DOC.includes(e)?'doc':SHEET.includes(e)?'sheet':''};
+$('#cf').onchange=()=>{const fs=[...$('#cf').files],box=$('#copts');box.innerHTML='';if(!fs.length){box.textContent='Pick a file first. / पहले फ़ाइल चुनें।';return}const e=ext(fs[0].name);let opts=[],fn;
+  if(new Set(fs.map(fcat)).size>1){box.innerHTML='❌ Pick files of one type at a time (e.g. only images or only PDFs). / एक बार में एक ही प्रकार की फ़ाइलें चुनें।';return}
   if(IMG.includes(e)||fs[0].type.startsWith('image/')){opts=[['pdf','PDF'+(fs.length>1?' (all in one / सब एक PDF में)':'')],['jpg','JPG'],['png','PNG'],['webp','WEBP']];fn=f=>f=='pdf'?imgsToPdf(fs):imgConv(fs,f)}
   else if(e=='pdf'){opts=[['jpg','JPG images'],['png','PNG images'],['txt','TXT (text only)']];fn=async f=>{for(const x of fs)await pdfTo(x,f)}}
   else if(DOC.includes(e)){opts=[['pdf','PDF'],['docx','DOCX (Word)'],['html','HTML'],['txt','TXT']];fn=async f=>{for(const x of fs)await docConv(x,f)}}
   else if(SHEET.includes(e)){opts=[['xlsx','XLSX (Excel)'],['csv','CSV'],['json','JSON'],['html','HTML'],['pdf','PDF']].filter(o=>o[0]!=e);fn=async f=>{for(const x of fs)await sheetConv(x,f)}}
-  if(!opts.length){box.innerHTML='❌ <b>.'+esc(e)+'</b> is not supported. / यह फ़ाइल प्रकार समर्थित नहीं है।';return}
+  if(!opts.length){box.innerHTML='❌ <b>'+esc(e?'.'+e:fs[0].name)+'</b> is not supported. / यह फ़ाइल प्रकार समर्थित नहीं है।';return}
   box.insertAdjacentHTML('beforeend',`<div class="note" style="width:100%">Detected / पहचाना: <b>${esc(e.toUpperCase())}</b> · ${fs.length} file(s)</div>`);
   opts.forEach(([k,l])=>{const b=document.createElement('button');b.className='btn';b.textContent='→ '+l;b.dataset.fmt=k;
     b.onclick=async()=>{b.disabled=true;st('Working… / काम चल रहा है…',0);try{await fn(k)}catch(err){console.error(err);st('❌ Error: '+err.message,6000)}b.disabled=false};box.appendChild(b)})};
 // ---- Editor
 const quill=new Quill('#editor',{theme:'snow',placeholder:'Type here… / यहाँ लिखें…',modules:{toolbar:[[{header:[1,2,3,false]}],['bold','italic','underline','strike'],[{list:'ordered'},{list:'bullet'}],[{align:[]}],['link','image'],['clean']]}});
+document.querySelectorAll('.ql-toolbar button,.ql-toolbar .ql-picker-label').forEach(b=>{if(!b.getAttribute('aria-label')){const k=(b.className.match(/ql-(\w+)/)||[])[1]||'format';b.setAttribute('aria-label',k+(b.value?' '+b.value:''))}});
 $('#ef').onchange=async()=>{const f=$('#ef').files[0];if(!f)return;try{quill.setContents([]);quill.clipboard.dangerouslyPasteHTML(0,await fileToHtml(f));$('#ename').value=base(f.name);st('Opened / खुल गया')}catch(e){st('❌ '+e.message,6000)}};
 $('#eclear').onclick=()=>{if(confirm('Clear editor? / सब मिटाएँ?'))quill.setContents([])};
 document.querySelectorAll('[data-s]').forEach(b=>b.onclick=async()=>{const n=$('#ename').value.trim()||'document',h=quill.root.innerHTML,k=b.dataset.s;st('Saving… / सेव हो रहा है…',0);
@@ -311,7 +324,7 @@ function flip(fn,skip){const els=[...box().children].filter(e=>e!==skip),r=new M
 function syncOrder(){order=[...box().children].filter(e=>!e.classList.contains('gone')).map(e=>+e.dataset.p);
   [...box().children].forEach((e,i)=>e.querySelector('.pn').textContent=`#${i+1} · p${+e.dataset.p+1}`);$('#obtn').disabled=!order.length}
 function mkCard(p){const d=document.createElement('div');d.className='pg';d.dataset.p=p;
-  d.innerHTML='<button class="hd" aria-label="drag">⠿ Drag<br><small>पकड़कर खींचें</small></button><canvas></canvas><div class="pn"></div><button data-a="u">◀</button><button data-a="d">▶</button><button data-a="x">🗑</button>';
+  d.innerHTML='<button class="hd" aria-label="drag">⠿ Drag<br><small>पकड़कर खींचें</small></button><canvas></canvas><div class="pn"></div><button data-a="u" aria-label="move page left">◀</button><button data-a="d" aria-label="move page right">▶</button><button data-a="x" aria-label="delete page">🗑</button>';
   d.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{const a=b.dataset.a;
     if(a=='x'){d.classList.add('gone');setTimeout(()=>{flip(()=>d.remove());syncOrder()},250);syncOrder();return}
     const sib=a=='u'?d.previousElementSibling:d.nextElementSibling;if(!sib)return;flip(()=>a=='u'?box().insertBefore(d,sib):box().insertBefore(sib,d));syncOrder()});
@@ -342,9 +355,10 @@ function end(e){if(!drag||e.pointerId!==drag.id)return;const {d,t}=drag;cancelAn
   d.classList.remove('lift');d.style.transition='transform .2s ease';d.style.transform='';drag=null;syncOrder()}
 async function drawPages(){box().innerHTML='';const doc=await pdfjsLib.getDocument({data:obuf.slice(0)}).promise;
   for(const p of order){const d=mkCard(p);box().appendChild(d)}syncOrder();
-  for(const d of box().children){const c=d.querySelector('canvas'),pg=await doc.getPage(+d.dataset.p+1),v=pg.getViewport({scale:.3});c.width=v.width;c.height=v.height;await pg.render({canvasContext:c.getContext('2d'),viewport:v}).promise}}
-$('#of').onchange=async()=>{const f=$('#of').files[0];if(!f)return;obuf=await readBuf(f);oname=base(f.name);const d=await PDFDocument.load(obuf.slice(0),{ignoreEncryption:true});order=d.getPageIndices();drawPages()};
-$('#obtn').onclick=async()=>{const s=await PDFDocument.load(obuf.slice(0),{ignoreEncryption:true}),out=await PDFDocument.create();(await out.copyPages(s,order)).forEach(p=>out.addPage(p));dl(new Blob([await out.save()],{type:'application/pdf'}),oname+'_edited.pdf')};
+  for(const d of box().children){const c=d.querySelector('canvas'),pg=await doc.getPage(+d.dataset.p+1),v=pg.getViewport({scale:.3});c.width=v.width;c.height=v.height;await pg.render({canvasContext:c.getContext('2d'),viewport:v}).promise}doc.destroy()}
+$('#of').onchange=async()=>{const f=$('#of').files[0];if(!f)return;try{const b=await readBuf(f),d=await PDFDocument.load(b.slice(0),{ignoreEncryption:true});obuf=b;oname=base(f.name);order=d.getPageIndices();await drawPages()}
+  catch(e){console.warn(e);obuf=null;order=[];box().innerHTML='';$('#obtn').disabled=true;st('❌ Cannot open this PDF / यह PDF नहीं खुली: '+e.message,6000)}};
+$('#obtn').onclick=async()=>{if(!obuf||!order.length)return st('Pick a PDF / PDF चुनें');try{const s=await PDFDocument.load(obuf.slice(0),{ignoreEncryption:true}),out=await PDFDocument.create();(await out.copyPages(s,order)).forEach(p=>out.addPage(p));dl(new Blob([await out.save()],{type:'application/pdf'}),oname+'_edited.pdf')}catch(e){st('❌ '+e.message,6000)}};
 $('#abtn').onclick=async()=>{const f=$('#af').files[0],t=$('#atext').value;if(!f||!t)return st('Pick PDF and type text / PDF चुनें और लिखें');
   try{const d=await PDFDocument.load(await readBuf(f),{ignoreEncryption:true}),pages=d.getPages(),pi=Math.min(Math.max(1,+$('#apage').value),pages.length)-1,p=pages[pi],{width:W,height:H}=p.getSize();
   const sz=+$('#asize').value||20,c=document.createElement('canvas'),g=c.getContext('2d'),font=`${sz*4}px system-ui,"Noto Sans Devanagari",sans-serif`;g.font=font;
@@ -366,7 +380,7 @@ const idb=new Promise((r,j)=>{const q=indexedDB.open('fb',2);q.onupgradeneeded=(
 async function tx(m,fn,st_='docs'){const d=await idb;return new Promise((r,j)=>{const t=d.transaction(st_,m),s=t.objectStore(st_),q=fn(s);t.oncomplete=()=>r(q&&q.result);t.onerror=()=>j(t.error)})}
 const saveDoc=(name,blob,thumb)=>tx('readwrite',s=>s.add({name,blob,thumb,t:Date.now()})).catch(()=>{});
 async function showRecent(){let all=[];try{all=(await tx('readonly',s=>s.getAll())||[]).reverse()}catch(e){}
-  $('#recentF').innerHTML=all.length?all.map(d=>`<div class="doc"><img src="${d.thumb||''}" alt=""><b>${esc(d.name)}</b><span class="h">${rel(d.t)}</span><div class="ac"><button data-o="${d.id}">⬇</button><button data-del="${d.id}">🗑</button></div></div>`).join(''):'<div class="note" style="grid-column:1/-1">No exported files yet.</div>';
+  $('#recentF').innerHTML=all.length?all.map(d=>`<div class="doc"><img src="${d.thumb||''}" alt=""><b>${esc(d.name)}</b><span class="h">${rel(d.t)}</span><div class="ac"><button data-o="${d.id}" aria-label="download">⬇</button><button data-del="${d.id}" aria-label="delete">🗑</button></div></div>`).join(''):'<div class="note" style="grid-column:1/-1">No exported files yet.</div>';
   document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{const d=all.find(x=>x.id==b.dataset.o);dl(d.blob,d.name)});
   document.querySelectorAll('[data-del]').forEach(b=>b.onclick=async()=>{if(confirm('Delete? / हटाएँ?')){await tx('readwrite',s=>s.delete(+b.dataset.del));showRecent()}})}
 // ---- navigation / app bar
@@ -374,7 +388,7 @@ let view='home';
 function go(t){view=t;document.querySelectorAll('main>section').forEach(x=>x.classList.toggle('on',x.id==t));$('#drawer').classList.remove('on');
   const home=t=='home';$('#abL').textContent=home?'☰':'←';$('#abP').style.display=t=='scan'?'':'none';$('#abS').style.display=(home||t=='scan')?'':'none';$('#abM').style.display=(home||t=='scan')?'':'none';
   $('#fab').style.display=(home||t=='scan')?'':'none';$('#ab').classList.remove('srch');$('#q').value='';
-  $('#abT').innerHTML=home?'File Badlo <small id="ver">v8</small>':t=='scan'?esc(cur?cur.name:'Scan'):({conv:'Converter',pdf:'PDF Tools',ocr:'OCR Text',edit:'Editor',files:'Exported files'})[t];
+  $('#abS').setAttribute('aria-label',t=='scan'?'OCR text':'search');$('#abT').innerHTML=home?'File Badlo <small id="ver">v12</small>':t=='scan'?esc(cur?cur.name:'Scan'):({conv:'Converter',pdf:'PDF Tools',ocr:'OCR Text',edit:'Editor',files:'Exported files'})[t];
   scrollTo(0,0);if(home)listDocs();if(t=='files')showRecent();if(t=='scan')drawScan()}
 $('#abL').onclick=()=>{if(view=='home')$('#drawer').classList.add('on');else{if(view=='scan')saveCur();go('home')}};
 $('#drawer .bg').onclick=()=>$('#drawer').classList.remove('on');
@@ -439,7 +453,8 @@ async function rerender(p){await ensureSrc(p);render(p);await saveCur();drawScan
 let cur=null,spages=[];
 const newName=()=>'DocScanner '+new Date().toLocaleString('en-IN',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
 function newDoc(){cur={name:newName(),t:Date.now()};spages=[]}
-async function saveCur(){if(!cur)return;if(!spages.length){if(cur.id){await tx('readwrite',s=>s.delete(cur.id),'scans');delete cur.id}return}
+let saveQ=Promise.resolve();function saveCur(){const r=saveQ.then(saveCur1,saveCur1);saveQ=r.catch(()=>{});return r}// one save at a time (no duplicate records)
+async function saveCur1(){if(!cur)return;if(!spages.length){if(cur.id){await tx('readwrite',s=>s.delete(cur.id),'scans');delete cur.id}return}
   for(const p of spages)if(!p.srcURL)p.srcURL=p.src.toDataURL('image/jpeg',.95);
   const rec={name:cur.name,t:cur.t,mt:Date.now(),pages:spages.map(p=>({srcURL:p.srcURL,outURL:p.outURL,q:p.q,rot:p.rot,f:p.f,t:p.t,size:p.size,thumb:p.thumb,tv:p.tv,fc:p.fc||null}))};if(cur.id)rec.id=cur.id;
   cur.id=await tx('readwrite',s=>s.put(rec),'scans')}
@@ -471,7 +486,7 @@ function vSlide(dir){if(vAnim)return;const n=vi+dir;if(n<0||n>=spages.length){vT
 function closeViewer(){$('#viewer').classList.remove('on');vReset()}
 $('#vX').onclick=closeViewer;$('#vE').onclick=()=>openEdit(vi);$('#vPrev').onclick=()=>vSlide(-1);$('#vNext').onclick=()=>vSlide(1);
 $('#vZ').onclick=()=>{const r=$('#vwrap').getBoundingClientRect();vZoomAt(vz.s>1?1:2.5,r.left+r.width/2,r.top+r.height/2)};
-addEventListener('keydown',e=>{if(!vOn()||E)return;if(e.key=='ArrowLeft')vSlide(-1);else if(e.key=='ArrowRight')vSlide(1);else if(e.key=='Escape')closeViewer()});
+addEventListener('keydown',e=>{if(!vOn()||E)return;if(e.key=='ArrowLeft')vSlide(-1);else if(e.key=='ArrowRight')vSlide(1);});
 addEventListener('resize',()=>{if(vOn()&&!vAnim)vTrack(0,false)});
 {const W=$('#vwrap'),P=new Map();let g=null,lastTap=0;
  W.addEventListener('pointerdown',e=>{if(e.target.closest('.varr')||vAnim)return;try{W.setPointerCapture(e.pointerId)}catch(_){}P.set(e.pointerId,{x:e.clientX,y:e.clientY});
@@ -531,7 +546,7 @@ $('#etool').onclick=e=>{const b=e.target.closest('button');if(!b||!E)return;cons
   if(a=='auto'){E.q=detect(E.p.src);E.fc=[0,0,1,1];return edMode(E.mode)}
   if(a=='reset'){E.q=fullQ(E.p.src);E.fc=[0,0,1,1];E.rot=0;return edMode(E.mode)}};
 $('#edX').onclick=()=>{E=null;$('#ed').classList.remove('on')};
-$('#edOk').onclick=async()=>{const p=E.p,f=E.fc.map(v=>+v.toFixed(4));p.q=E.q;p.rot=E.rot;p.fc=(f[0]<=0&&f[1]<=0&&f[2]>=1&&f[3]>=1)?null:f;E=null;$('#ed').classList.remove('on');await rerender(p);st('✅ Saved / सेव हो गया')};
+$('#edOk').onclick=async()=>{if(!E)return;const p=E.p,f=E.fc.map(v=>+v.toFixed(4));p.q=E.q;p.rot=E.rot;p.fc=(f[0]<=0&&f[1]<=0&&f[2]>=1&&f[3]>=1)?null:f;E=null;$('#ed').classList.remove('on');await rerender(p);st('✅ Saved / सेव हो गया')};
 addEventListener('resize',()=>{if(E)edDraw()});
 async function listDocs(){let all=[];try{all=await tx('readonly',s=>s.getAll(),'scans')||[]}catch(e){}all.sort((a,b)=>(b.mt||b.t)-(a.mt||a.t));if(await fixThumbs(all))return listDocs();
   const q=$('#q').value.trim().toLowerCase(),L=$('#dlist');$('#dcount').innerHTML=`Documents (${all.length}) <small>/ दस्तावेज़</small>`;
@@ -589,7 +604,7 @@ function setGuide(){const g=$('#guide');let r=null;if(mode=='id')r=85.6/54;else 
   if(!r){g.style.display='none';return}const b=$('.vwrap').getBoundingClientRect();let w=b.width*.82,h=w/r;if(h>b.height*.75){h=b.height*.75;w=h*r}g.style.cssText+=`;display:block;width:${w}px;height:${h}px`}
 function hint(){$('#hint').textContent=mode=='id'?(idSides==2?(idFront?'Back side / पीछे की तरफ़':'Front side / आगे की तरफ़'):'ID card / आईडी कार्ड'):mode=='photo'?(photoSize?`Photo ${photoSize[0]} ${photoSize[5]}`:''):mode=='book'?'Book: 2 pages / किताब — दो पेज':mode=='sign'?'Signature / हस्ताक्षर':'Document / दस्तावेज़'}
 function dlg(html){$('#dlgIn').innerHTML=html;$('#dlg').classList.add('on')}const closeDlg=()=>$('#dlg').classList.remove('on');
-function idDialog(){dlg(`<div class="hd2">ID Card<button id="dx">✕</button></div>
+function idDialog(){dlg(`<div class="hd2">ID Card<button id="dx" aria-label="close">✕</button></div>
 <div class="idopt"><h3>Single side ID card</h3><div class="r"><div class="ic">🪪</div><p>Make a one side ID card ready for print.<br><small>एक तरफ़ का कार्ड, प्रिंट के लिए</small></p></div><button class="dbtn" data-sd="1">Select</button><div style="clear:both"></div></div>
 <div class="idopt"><h3>Two side ID card</h3><div class="r"><div class="ic">🪪<br>▭</div><p>Make a 2 side ID card ready for print (front + back on one A4).<br><small>आगे-पीछे दोनों, एक A4 पर</small></p></div><button class="dbtn" data-sd="2">Select</button><div style="clear:both"></div></div>`);
   $('#dx').onclick=()=>{closeDlg();setMode('doc')};document.querySelectorAll('[data-sd]').forEach(b=>b.onclick=()=>{idSides=+b.dataset.sd;idFront=null;closeDlg();hint();setGuide()})}
@@ -619,7 +634,9 @@ function processCapture(src){
   if(mode=='sign')return [mkPage(src,detect(src),'bw')];
   return [mkPage(src,detect(src),defF())]}
 async function addCanvas(src){const ps=processCapture(src);spages.push(...ps);$('#scount').textContent=spages.length||'';return ps}
-async function addFiles(fs){if(!cur)newDoc();st('Processing… / प्रोसेस हो रहा है…',0);try{for(const f of fs)await addCanvas(srcCanvas(await loadImg(f)));await saveCur();st(`✅ ${fs.length} image(s) added`)}catch(e){console.error(e);st('❌ '+e.message,6000)}
+async function addFiles(fs){if(!fs.length)return;if(!cur)newDoc();st('Processing… / प्रोसेस हो रहा है…',0);let ok=0,bad=0;
+  for(const f of fs){try{await addCanvas(srcCanvas(await loadImg(f)));ok++}catch(e){console.warn(e);bad++}}// one unreadable file no longer drops the others
+  try{await saveCur()}catch(e){console.error(e)}st(bad?`✅ ${ok} image(s) added · ❌ ${bad} could not be read / नहीं पढ़ी जा सकीं`:`✅ ${ok} image(s) added`,bad?6000:3500)
   if(!$('#cam').classList.contains('on'))go('scan');else drawScan()}
 $('#sf').onchange=()=>{addFiles([...$('#sf').files]);$('#sf').value=''};$('#sfc').onchange=()=>{addFiles([...$('#sfc').files]);$('#sfc').value=''};
 $('#fabCam').onclick=()=>{if(view!='scan')newDoc();openCam()};$('#fabGal').onclick=()=>{if(view!='scan')newDoc();$('#sf').click()};
@@ -643,11 +660,13 @@ $('#setBtn').onclick=()=>sheet('Camera settings / सेटिंग्स',[['�
 $('#vid').onclick=async e=>{const r=e.target.getBoundingClientRect(),f=$('#fring');f.style.left=e.clientX-r.left+'px';f.style.top=e.clientY-r.top+'px';f.style.display='block';setTimeout(()=>f.style.display='none',900);
   if(!track||!(caps.focusMode||[]).length)return;const c={pointsOfInterest:[{x:(e.clientX-r.left)/r.width,y:(e.clientY-r.top)/r.height}]};const fm=caps.focusMode;
   if(fm.includes('single-shot'))c.focusMode='single-shot';else if(fm.includes('continuous'))c.focusMode='continuous';try{await track.applyConstraints({advanced:[c]})}catch(err){}};
-async function openCam(){if(!cur)newDoc();if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return $('#sfc').click();
+let camOpening=false;
+async function openCam(){if(camOpening||$('#cam').classList.contains('on'))return;camOpening=true;try{await openCam1()}finally{camOpening=false}}
+async function openCam1(){if(!cur)newDoc();if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return $('#sfc').click();
   try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false});$('#vid').srcObject=stream;
     $('#cam').classList.add('on');$('#scount').textContent=spages.length||'';$('#autoBtn').classList.toggle('on',autoOn);setMode(mode,false);await setupCaps();autoLoop()}
   catch(e){$('#sfc').click()}}
-const camOff=async()=>{clearTimeout(autoT);if(torchOn&&track)track.applyConstraints({advanced:[{torch:false}]}).catch(()=>{});if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null;
+const camOff=async()=>{if(!$('#cam').classList.contains('on'))return;clearTimeout(autoT);if(torchOn&&track)track.applyConstraints({advanced:[{torch:false}]}).catch(()=>{});if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null;
   $('#cam').classList.remove('on');$('#steady').style.display='none';closeDlg();await saveCur();if(spages.length)go('scan');else{cur=null;go('home')}};
 $('#camX').onclick=camOff;$('#camOk').onclick=camOff;
 function tiny(v){const c=cv(64,48),g=c.getContext('2d',{willReadFrequently:true});g.drawImage(v,0,0,64,48);const d=g.getImageData(0,0,64,48).data,o=new Uint8Array(64*48);for(let i=0;i<o.length;i++)o[i]=(d[i*4]+d[i*4+1]+d[i*4+2])/3;return o}
@@ -688,7 +707,7 @@ let RES=null;
 async function showResult(blob,name){RES={blob,name};$('#resN').textContent=name;$('#resS').textContent=(blob.size/1024>1024?(blob.size/1048576).toFixed(1)+' MB':Math.max(1,Math.round(blob.size/1024))+' KB')+' · Downloads';
   const pv=$('#resPv');pv.innerHTML='';$('#res').classList.add('on');
   try{const doc=await pdfjsLib.getDocument({data:await blob.arrayBuffer()}).promise,pg=await doc.getPage(1),v=pg.getViewport({scale:1}),k=Math.min(2,600/v.width),vv=pg.getViewport({scale:k}),c=document.createElement('canvas');
-    c.width=vv.width;c.height=vv.height;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await pg.render({canvasContext:g,viewport:vv}).promise;if(RES&&RES.blob===blob)pv.appendChild(c)}
+    c.width=vv.width;c.height=vv.height;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await pg.render({canvasContext:g,viewport:vv}).promise;doc.destroy();if(RES&&RES.blob===blob)pv.appendChild(c)}
   catch(e){pv.innerHTML='<div style="padding:40px 30px;font-size:40px">📄</div>'}}
 $('#resX').onclick=()=>$('#res').classList.remove('on');
 const pdfFile=()=>new File([RES.blob],RES.name,{type:'application/pdf'});
@@ -700,7 +719,7 @@ async function sharePdf(app){const f=pdfFile();
   catch(e){if(e&&e.name=='AbortError')return;console.warn('share failed',e)}
   rawDl(RES.blob,RES.name);const msg=`I made a PDF with File Badlo: "${RES.name}". It is downloaded in my Downloads folder; I will attach it here.`,m=encodeURIComponent(msg);
   const url={wa:/Android|iPhone|iPad/i.test(navigator.userAgent)?'whatsapp://send?text='+m:'https://wa.me/?text='+m,ms:'fb-messenger://share?link='+encodeURIComponent(location.href.split('#')[0])+'&app_id=',tg:'https://t.me/share/url?url='+encodeURIComponent(location.href.split('#')[0])+'&text='+m,sm:'sms:?body='+m}[app];
-  st('📥 Saved to Downloads: '+safeName(RES.name)+' — attach it in the app / ऐप में अटैच करें',6000);if(url)setTimeout(()=>{location.href=url},700)}
+  st('📥 Saved to Downloads: '+safeName(RES.name)+' — attach it in the app / ऐप में अटैच करें',6000);if(url){if(/^https?:/.test(url))window.open(url,'_blank','noopener');else setTimeout(()=>{location.href=url},700)}}
 $('#resF').onclick=()=>($('#status').style.display='none',sheet)('Share PDF / शेयर करें',[['<b>W</b>','WhatsApp','व्हाट्सऐप',()=>sharePdf('wa'),'s-wa'],['<b>m</b>','Messenger','फ़ेसबुक मैसेंजर',()=>sharePdf('ms'),'s-ms'],['<b>✈</b>','Telegram','टेलीग्राम',()=>sharePdf('tg'),'s-tg'],['<b>💬</b>','Messages','मैसेज (SMS)',()=>sharePdf('sm'),'s-sm'],['⋯','More…','और ऐप्स',()=>sharePdf('more')]]);
 // Save to: Downloads, or a user-chosen location via File System Access (showSaveFilePicker: Chrome desktop; Chrome Android 132+ where exposed)
 async function saveToFolder(){const f=pdfFile();
@@ -730,12 +749,32 @@ async function runOcr(imgs){const o=$('#otext');o.value='';st('OCR starting… /
   try{const w=await getWorker($('#olang').value);for(let i=0;i<imgs.length;i++){st(`OCR page ${i+1}/${imgs.length}…`,0);const r=await w.recognize(imgs[i]);o.value+=(imgs.length>1?`--- Page ${i+1} ---\n`:'')+r.data.text.trim()+'\n\n'}
   st('✅ Text ready / टेक्स्ट तैयार')}catch(e){console.error(e);st('❌ OCR error: '+e.message,6000)}}
 $('#obtnr').onclick=async()=>{const fs=[...$('#ocf').files];if(!fs.length)return st('Pick a file / फ़ाइल चुनें');const imgs=[];
-  for(const f of fs){if(ext(f.name)=='pdf'||f.type=='application/pdf'){const doc=await pdfjsLib.getDocument({data:await readBuf(f)}).promise;
-      for(let p=1;p<=doc.numPages;p++){const pg=await doc.getPage(p),v=pg.getViewport({scale:2}),c=cv(v.width,v.height),g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await pg.render({canvasContext:g,viewport:v}).promise;imgs.push(c)}}
-    else imgs.push(srcCanvas(await loadImg(f)))}runOcr(imgs)};
-$('#ocopy').onclick=async()=>{const t=$('#otext').value;try{await navigator.clipboard.writeText(t)}catch(e){$('#otext').select();document.execCommand('copy')}st('📋 Copied / कॉपी हो गया')};
+  try{for(const f of fs){if(ext(f.name)=='pdf'||f.type=='application/pdf'){const doc=await pdfjsLib.getDocument({data:await readBuf(f)}).promise;
+      for(let p=1;p<=doc.numPages;p++){const pg=await doc.getPage(p),v=pg.getViewport({scale:2}),c=cv(v.width,v.height),g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);await pg.render({canvasContext:g,viewport:v}).promise;imgs.push(c)}doc.destroy()}
+    else imgs.push(srcCanvas(await loadImg(f)))}}catch(e){console.warn(e);return st('❌ Cannot read file / फ़ाइल नहीं पढ़ी जा सकी: '+e.message,6000)}await runOcr(imgs)};
+$('#ocopy').onclick=async()=>{const t=$('#otext').value;if(!t.trim())return st('No text to copy / कॉपी के लिए टेक्स्ट नहीं');try{await navigator.clipboard.writeText(t)}catch(e){$('#otext').select();document.execCommand('copy')}st('📋 Copied / कॉपी हो गया')};
 $('#otxt').onclick=()=>dl(new Blob([$('#otext').value],{type:'text/plain'}),'ocr.txt');
-addEventListener('popstate',()=>{});
+// Android back gesture / browser back / Esc: close the top-most layer instead of leaving the app
+function backStep(){const on=x=>$(x).classList.contains('on');
+  if(on('#sheet')){closeSheet();return true}
+  if(on('#dlg')){const x=$('#dlgIn #dx');x?x.click():closeDlg();return true}
+  if(on('#ed')){$('#edX').click();return true}
+  if(on('#crop')){$('#cropX').click();return true}
+  if(vOn()){closeViewer();return true}
+  if(on('#res')){$('#resX').click();return true}
+  if(on('#cam')){camOff();return true}
+  if(on('#drawer')){$('#drawer').classList.remove('on');return true}
+  if($('#ab').classList.contains('srch')){$('#ab').classList.remove('srch');$('#q').value='';listDocs();return true}
+  if(view!='home'){$('#abL').click();return true}
+  return false}
+history.replaceState({fb:0},'');history.pushState({fb:1},'');
+addEventListener('popstate',()=>{if(backStep())history.pushState({fb:1},'');else history.back()});
+addEventListener('keydown',e=>{if(e.key!='Escape'||e.target.closest('input,textarea,[contenteditable="true"]'))return;backStep()});
+$('#resPv').addEventListener('keydown',e=>{if(e.key=='Enter'||e.key==' '){e.preventDefault();$('#resPv').click()}});
+// one run at a time for buttons that build/download files (double taps made duplicate files)
+const busy=fn=>{let b=false;return async function(...a){if(b)return;b=true;try{return await fn.apply(this,a)}finally{b=false}}};
+['#mbtn','#obtn','#abtn','#obtnr','#edOk'].forEach(x=>{const el=$(x);el.onclick=busy(el.onclick)});document.querySelectorAll('[data-s]').forEach(b=>b.onclick=busy(b.onclick));
+exportPdf=busy(exportPdf);exportJpg=busy(exportJpg);runOcr=busy(runOcr);
 go('home');
 if('serviceWorker' in navigator&&location.protocol.startsWith('http')){const had=!!navigator.serviceWorker.controller;let rl=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!rl&&!sessionStorage.fbReloaded){rl=true;sessionStorage.fbReloaded=1;location.reload()}});

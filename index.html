@@ -66,6 +66,7 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 #guide{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:2px dashed #fff;border-radius:8px;box-shadow:0 0 0 2000px #0005;pointer-events:none;display:none}
 #camNote{position:absolute;top:8px;left:8px;right:8px;text-align:center;color:#eee;font-size:12px;background:#0008;padding:5px 8px;border-radius:8px;display:none}
 #hint{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:14px;text-shadow:0 1px 3px #000}
+#sflash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:200}#sflash.go{animation:sfl .28s ease-out}@keyframes sfl{0%{opacity:.85}100%{opacity:0}}.shut.busy{animation:sbz .8s linear infinite;opacity:.75}@keyframes sbz{50%{transform:scale(.9)}}
 #steady{position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);background:#000a;color:#fff;padding:12px 18px;border-radius:14px;font-size:16px;font-weight:700;display:none;text-align:center}#steady.ok{background:#1e88e5cc}
 #fring{position:absolute;width:64px;height:64px;margin:-32px 0 0 -32px;border:2px solid #4fc3f7;border-radius:50%;display:none;pointer-events:none;animation:fi .3s}
 .modes{display:flex;overflow-x:auto;gap:4px;padding:0 30%;scrollbar-width:none;flex:none;border-top:3px solid transparent}.modes::-webkit-scrollbar{display:none}
@@ -113,7 +114,7 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 #vtrack{position:absolute;top:0;bottom:0;left:0;width:300%;display:flex;will-change:transform}#vtrack .vs{position:relative;width:33.3333%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden}
 #vtrack .vs img{width:100%;height:auto;max-height:100%;object-fit:contain;background:#fff;-webkit-user-drag:none;pointer-events:none}#vtrack .vs img.e{visibility:hidden}#vimg{transform-origin:0 0}#vT{transition:opacity .14s}#vT.f{opacity:0}
 </style></head><body>
-<header class="ab" id="ab"><button id="abL" aria-label="menu">☰</button><h1 id="abT">File Badlo <small id="ver">v13</small></h1><input id="q" type="search" placeholder="Search / खोजें">
+<header class="ab" id="ab"><button id="abL" aria-label="menu">☰</button><h1 id="abT">File Badlo <small id="ver">v14</small></h1><input id="q" type="search" placeholder="Search / खोजें">
 <button id="abS" aria-label="search">🔍</button><button id="abP" class="pdfi" aria-label="export pdf" style="display:none"><b>PDF</b></button><button id="abM" aria-label="more">⋮</button></header>
 <main>
 <section id="home" class="on"><h2 id="dcount">Documents (0) <small>/ दस्तावेज़</small></h2><div id="dlist"></div></section>
@@ -150,7 +151,7 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 </main>
 <div class="fab" id="fab"><button id="fabCam" aria-label="scan with camera">📷</button><i></i><button id="fabGal" aria-label="import from gallery">🖼️</button></div>
 <input type="file" id="sf" accept="image/*" multiple style="display:none"><input type="file" id="sfc" accept="image/*" capture="environment" style="display:none"><input type="file" id="sfn" accept="image/*" capture="environment" style="display:none">
-<div id="drawer"><div class="bg"></div><div class="pn"><div class="top"><b>📁 File Badlo</b> <small style="opacity:.8">v13</small><div class="h" style="color:#cfd8dc">Scan · Convert · Edit — offline</div></div>
+<div id="drawer"><div class="bg"></div><div class="pn"><div class="top"><b>📁 File Badlo</b> <small style="opacity:.8">v14</small><div class="h" style="color:#cfd8dc">Scan · Convert · Edit — offline</div></div>
 <ul class="acts"><li><button data-go="home"><i>🏠</i><div>Documents<small>दस्तावेज़</small></div></button></li>
 <li><button data-go="conv"><i>🔄</i><div>Converter<small>फ़ाइल बदलें</small></div></button></li>
 <li><button data-go="pdf"><i>📑</i><div>PDF Tools<small>जोड़ें / क्रम / लिखें</small></div></button></li>
@@ -165,8 +166,8 @@ input[type=text],input[type=number],select,textarea{font-size:16px;padding:10px;
 <div class="vwrap"><video id="vid" playsinline muted autoplay></video><div id="cgrid"></div><div id="guide"></div><div id="camNote"></div><div id="hint"></div>
 <div id="steady">✋ Hold steady<br><small>स्थिर रखें</small></div><div id="fring"></div></div>
 <div class="modes" id="modes"><button data-m="photo">Photo</button><button data-m="id">ID Card</button><button data-m="doc" class="on">Document</button><button data-m="book">Book</button><button data-m="sign">Signature</button></div>
-<div class="cbot"><div class="cside"><button class="sm on" id="autoBtn" aria-label="auto capture (live camera)"><span>⏱️</span>AUTO</button><button class="sm" id="liveSnap" aria-label="live shot (in-app camera)"><span>🎞️</span>Live shot</button></div><button class="shut" id="snap" aria-label="phone camera">📷</button><div class="cside"><button class="sm" id="camGal" style="position:relative"><span>🖼️</span>Gallery</button><button class="sm" id="camOk" style="position:relative"><span>✅</span>Done<b id="scount"></b></button></div></div>
-<div class="shutL">Phone camera · फ़ोन कैमरा</div></div>
+<div class="cbot"><div class="cside"><button class="sm on" id="autoBtn" aria-label="auto capture (live camera)"><span>⏱️</span>AUTO</button><button class="sm" id="phoneApp" aria-label="open phone camera app"><span>📷</span>Phone app</button></div><button class="shut" id="snap" aria-label="capture">📷</button><div class="cside"><button class="sm" id="camGal" style="position:relative"><span>🖼️</span>Gallery</button><button class="sm" id="camOk" style="position:relative"><span>✅</span>Done<b id="scount"></b></button></div></div>
+<div class="shutL">Tap to capture · फ़ोटो लें</div><div id="sflash"></div></div>
 <div id="ed" class="ov"><div class="eb"><button id="edX">✕ Cancel</button><b id="edT">Edit / एडिट</b><button id="edOk">✓ Save</button></div>
 <div id="estage"><canvas id="ecv"></canvas></div>
 <div class="rotbar" id="efineBar"><span>Straighten</span><input type="range" id="efine" min="-45" max="45" step="0.5" value="0" aria-label="fine rotation"><span id="efineV">0°</span></div><div id="etool"><button data-e="rect" class="on"><span>⬚</span>Free crop</button><button data-e="quad"><span>◇</span>Perspective</button><button data-e="rotl"><span>⟲</span>Left</button><button data-e="rot"><span>⟳</span>Right</button><button data-e="auto"><span>🪄</span>Auto edges</button><button data-e="reset"><span>↺</span>Reset</button></div></div>
@@ -390,7 +391,7 @@ let view='home';
 function go(t){view=t;document.querySelectorAll('main>section').forEach(x=>x.classList.toggle('on',x.id==t));$('#drawer').classList.remove('on');
   const home=t=='home';$('#abL').textContent=home?'☰':'←';$('#abP').style.display=t=='scan'?'':'none';$('#abS').style.display=(home||t=='scan')?'':'none';$('#abM').style.display=(home||t=='scan')?'':'none';
   $('#fab').style.display=(home||t=='scan')?'':'none';$('#ab').classList.remove('srch');$('#q').value='';
-  $('#abS').setAttribute('aria-label',t=='scan'?'OCR text':'search');$('#abT').innerHTML=home?'File Badlo <small id="ver">v13</small>':t=='scan'?esc(cur?cur.name:'Scan'):({conv:'Converter',pdf:'PDF Tools',ocr:'OCR Text',edit:'Editor',files:'Exported files'})[t];
+  $('#abS').setAttribute('aria-label',t=='scan'?'OCR text':'search');$('#abT').innerHTML=home?'File Badlo <small id="ver">v14</small>':t=='scan'?esc(cur?cur.name:'Scan'):({conv:'Converter',pdf:'PDF Tools',ocr:'OCR Text',edit:'Editor',files:'Exported files'})[t];
   scrollTo(0,0);if(home)listDocs();if(t=='files')showRecent();if(t=='scan')drawScan()}
 $('#abL').onclick=()=>{if(view=='home')$('#drawer').classList.add('on');else{if(view=='scan')saveCur();go('home')}};
 $('#drawer .bg').onclick=()=>$('#drawer').classList.remove('on');
@@ -657,6 +658,7 @@ function camNote(t){const n=$('#camNote');n.textContent=t;n.style.display=t?'blo
 async function setupCaps(){track=stream.getVideoTracks()[0];caps=(track.getCapabilities&&track.getCapabilities())||{};torchOn=false;
   const fm=caps.focusMode||[],fb=$('#focusBtn'),tb=$('#torchBtn');tb.style.visibility=caps.torch?'visible':'hidden';tb.classList.add('off');tb.classList.remove('on');
   if(fm.includes('continuous')){fb.disabled=false;focusCont=true;fb.classList.add('on');try{await track.applyConstraints({advanced:[{focusMode:'continuous'}]})}catch(e){}camNote('')}
+  for(const k of['exposureMode','whiteBalanceMode'])if((caps[k]||[]).includes('continuous'))try{await track.applyConstraints({advanced:[{[k]:'continuous'}]})}catch(e){}
   else{fb.disabled=true;fb.classList.remove('on');camNote('Autofocus control not supported on this camera / इस कैमरे पर focus control उपलब्ध नहीं');setTimeout(()=>camNote(''),4000)}}
 $('#focusBtn').onclick=async()=>{const fm=caps.focusMode||[];focusCont=!focusCont;$('#focusBtn').classList.toggle('on',focusCont);st(focusCont?'Focus: Auto (continuous)':'Tap to focus / टैप करके focus');
   try{await track.applyConstraints({advanced:[{focusMode:focusCont?'continuous':(fm.includes('single-shot')?'single-shot':'manual')}]})}catch(e){}};
@@ -674,7 +676,16 @@ async function openCam(){if(camOpening||$('#cam').classList.contains('on'))retur
 async function openCam1(){if(!cur)newDoc();if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return $('#sfc').click();
   try{await startStream();$('#cam').classList.add('on');$('#scount').textContent=spages.length||'';$('#autoBtn').classList.toggle('on',autoOn);setMode(mode,false)}
   catch(e){$('#sfc').click()}}
-async function startStream(){stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:4096},height:{ideal:4096}},audio:false});$('#vid').srcObject=stream;await setupCaps();autoLoop()}
+const VQ={width:{ideal:4096},height:{ideal:3072},aspectRatio:{ideal:4/3}};
+// choose the main back camera (not ultra-wide / tele) when the device list allows it
+async function pickBackCam(cur){try{const ds=(await navigator.mediaDevices.enumerateDevices()).filter(d=>d.kind=='videoinput'&&d.label);
+  const back=ds.filter(d=>/back|rear|environment|facing back/i.test(d.label)),bad=d=>/ultra|wide|0\.5|tele|depth|macro/i.test(d.label);if(back.length<2)return null;
+  const main=back.find(d=>/camera2 0\b/i.test(d.label))||back.find(d=>!bad(d))||null;return main&&main.deviceId!==cur?main.deviceId:null}catch(e){return null}}
+async function startStream(){const open=v=>navigator.mediaDevices.getUserMedia({video:v,audio:false});
+  stream=await open(LS.fbCamId?{deviceId:{exact:LS.fbCamId},...VQ}:{facingMode:{ideal:'environment'},...VQ}).catch(()=>open({facingMode:{ideal:'environment'},...VQ}));
+  const cur=stream.getVideoTracks()[0].getSettings().deviceId,id=await pickBackCam(cur);
+  if(id){try{const s2=await open({deviceId:{exact:id},...VQ});stream.getTracks().forEach(t=>t.stop());stream=s2;LS.fbCamId=id}catch(e){}}
+  $('#vid').srcObject=stream;await setupCaps();autoLoop()}
 const camOff=async()=>{if(!$('#cam').classList.contains('on'))return;clearTimeout(autoT);if(torchOn&&track)track.applyConstraints({advanced:[{torch:false}]}).catch(()=>{});if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null;
   $('#cam').classList.remove('on');$('#steady').style.display='none';closeDlg();await saveCur();if(spages.length)go('scan');else{cur=null;go('home')}};
 $('#camX').onclick=camOff;$('#camOk').onclick=camOff;
@@ -684,19 +695,26 @@ function sharp(c){const s=Math.min(1,400/Math.max(c.width,c.height)),w=Math.roun
   const d=g.getImageData(0,0,w,h).data,G=new Float32Array(w*h);for(let i=0;i<w*h;i++)G[i]=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;let n=0,m=0,m2=0;
   for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const i=y*w+x,L=G[i-1]+G[i+1]+G[i-w]+G[i+w]-4*G[i];m+=L;m2+=L*L;n++}m/=n;return m2/n-m*m}
 const frame=()=>Promise.race([new Promise(r=>{const v=$('#vid');v.requestVideoFrameCallback?v.requestVideoFrameCallback(()=>r()):setTimeout(r,50)}),new Promise(r=>setTimeout(r,80))]);
-let snapping=false;
+let snapping=false;const tmo=(p,ms)=>Promise.race([p,new Promise((_,j)=>setTimeout(()=>j(new Error('timeout')),ms))]);
+async function hiResPhoto(){const ic=new ImageCapture(track),o={};let pc={};try{pc=await tmo(ic.getPhotoCapabilities(),3000)}catch(e){}
+  if(pc.imageWidth&&pc.imageWidth.max){o.imageWidth=pc.imageWidth.max;o.imageHeight=pc.imageHeight.max}
+  const fl=pc.fillLightMode||[];if(torchOn?fl.includes('flash'):fl.includes('off'))o.fillLightMode=torchOn?'flash':'off';
+  if(pc.redEyeReduction==='controllable')o.redEyeReduction=false;
+  const fm=caps.focusMode||[];let refocus=false;if(focusCont&&fm.includes('single-shot')){try{await track.applyConstraints({advanced:[{focusMode:'single-shot'}]});refocus=true;await new Promise(r=>setTimeout(r,400))}catch(e){}}
+  window.__lastPhotoOpts=o;try{return await decodeImg(await tmo(ic.takePhoto(o),8000))}
+  finally{if(refocus)track.applyConstraints({advanced:[{focusMode:'continuous'}]}).catch(()=>{})}}
 async function stableCapture(v){const ind=$('#steady');ind.className='';ind.style.display='block';const t0=performance.now();let prev=tiny(v),calm=0;
   while(steadyOn&&performance.now()-t0<1500){await frame();const cur_=tiny(v),df=fdiff(cur_,prev);prev=cur_;if(df<4&&motion<0.6){if(++calm>=3)break}else calm=0}
   ind.className='ok';ind.innerHTML='📸 Capturing…<br><small>ले रहे हैं</small>';let best=null,bs=-1;
-  if(window.ImageCapture&&track&&track.readyState=='live'){try{best=await decodeImg(await new ImageCapture(track).takePhoto())}catch(e){console.warn('takePhoto failed, using video frame',e)}}
+  if(window.ImageCapture&&track&&track.readyState=='live'){try{best=await hiResPhoto()}catch(e){console.warn('takePhoto failed, using video frame',e)}}
   if(!best)for(let k=0;k<3;k++){if(k)await frame();const c=srcCanvas(v),s=sharp(c);if(s>bs){bs=s;best=c}}
-  setTimeout(()=>{ind.style.display='none';ind.className='';ind.innerHTML='✋ Hold steady<br><small>स्थिर रखें</small>'},300);return best}
+  return best}
 async function snap(){const v=$('#vid');if(!v.videoWidth||snapping||$('#dlg').classList.contains('on'))return;snapping=true;
-  try{const c=await stableCapture(v);navigator.vibrate&&navigator.vibrate(20);v.style.opacity=.3;setTimeout(()=>v.style.opacity=1,120);await addCanvas(c)}catch(e){console.error(e)}finally{snapping=false}}
-$('#liveSnap').onclick=snap;
+  const sb=$('#snap');try{const c=await stableCapture(v);navigator.vibrate&&navigator.vibrate(20);const f=$('#sflash');f.classList.remove('go');void f.offsetWidth;f.classList.add('go');sb.classList.add('busy');const ind=$('#steady');ind.className='ok';ind.innerHTML='⏳ Processing…<br><small>तैयार हो रहा है</small>';ind.style.display='block';await addCanvas(c);ind.style.display='none';ind.className='';ind.innerHTML='✋ Hold steady<br><small>स्थिर रखें</small>'}catch(e){console.error(e);const ind=$('#steady');ind.style.display='none';ind.className='';ind.innerHTML='✋ Hold steady<br><small>स्थिर रखें</small>'}finally{snapping=false;sb.classList.remove('busy')}}
+$('#snap').onclick=snap;
 let nativeOpen=false;
 function resumeLive(){if(!nativeOpen)return;nativeOpen=false;if($('#cam').classList.contains('on')&&!stream)startStream().catch(()=>{})}
-$('#snap').onclick=()=>{if($('#dlg').classList.contains('on')||snapping)return;nativeOpen=true;clearTimeout(autoT);if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null;$('#sfn').click()};
+$('#phoneApp').onclick=()=>{if($('#dlg').classList.contains('on')||snapping)return;nativeOpen=true;clearTimeout(autoT);if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;track=null;$('#sfn').click()};
 $('#sfn').onchange=async()=>{const fs=[...$('#sfn').files];$('#sfn').value='';if(fs.length)await addFiles(fs);resumeLive()};
 $('#sfn').addEventListener('cancel',resumeLive);addEventListener('focus',()=>setTimeout(()=>{if(nativeOpen&&!$('#sfn').files.length)resumeLive()},1500));
 // AUTO: in Document/Book/Signature mode, shoot automatically when a page is held steady (~1.2s), at most every 3s
